@@ -1,0 +1,15 @@
+{
+  "config_version": 1,
+  "authorized_project_ids": ["fastcode-sample"],
+  "external_python_body_authorized": true,
+  "model": "gpt-6-sol",
+  "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+  "max_business_seconds": 180,
+  "max_gateway_requests": 2,
+  "max_body_bytes": 98304,
+  "max_blocks": 32,
+  "max_message_bytes": 393216,
+  "return_reserve_seconds": 15,
+  "unknown_supplier_internal_sends_and_cost_accepted": true,
+  "authorization_basis": "2026-10-24 current client approval: bounded FastCode Python bodies through the existing gateway; Roo integration authorized; no target or gateway edits, no outer replay, no proposal acceptance or archival"
+}

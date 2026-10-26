@@ -1,0 +1,15 @@
+{
+  "config_version": 1,
+  "projects": {
+    "fastcode-sample": {
+      "root": "/home/ecs-user/project/FastCode",
+      "include": ["."],
+      "exclude": [".git", ".venv", "venv", "__pycache__", "node_modules", ".pytest_cache", ".mypy_cache", "dist", "build"],
+      "max_entries": 10000,
+      "max_file_bytes": 1048576,
+      "max_total_bytes": 16777216,
+      "max_seconds": 10,
+      "return_bytes": 24576
+    }
+  }
+}
