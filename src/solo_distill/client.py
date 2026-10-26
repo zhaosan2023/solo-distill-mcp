@@ -25,7 +25,12 @@ class ClientError(Exception):
 
 
 class StdioClient:
-    def __init__(self, root: Path, *, online: bool, deadline: float):
+    def __init__(self, root: Path, *, online: bool, deadline: float, v2: bool = False):
+        if v2 and not online:
+            raise ClientError("v2_requires_explicit_online_authorization")
+        self.raw_responses: dict[str, bytes] = {}
+        self.last_frame: bytes | None = None
+        self.negotiated_protocol: str | None = None
         self.started = time.monotonic()
         self.deadline = deadline
         self.stderr = bytearray()
@@ -35,7 +40,8 @@ class StdioClient:
         self.exit_code: int | None = None
         self.cleanup = "not_started"
         self.selector = selectors.DefaultSelector()
-        command = [sys.executable, "-B", "-S", "-m", "solo_distill.server",
+        command = [sys.executable, "-B", "-S", "-m",
+                   "solo_distill.server_v2" if v2 else "solo_distill.server",
                    "--config", str(root / "config" / "projects.json")]
         if online:
             command.extend(["--distillation-config", str(root / "config" / "distillation.json")])
@@ -108,8 +114,10 @@ class StdioClient:
                     if response_key in self.responses:
                         raise ClientError("duplicate_response_identity")
                     self.responses[response_key] = value
+                    self.raw_responses[response_key] = bytes(line) + b"\n"
                 if len(self.stdout) >= MAX_WIRE_BYTES:
                     raise ClientError("unterminated_response_wire_budget")
+        self.last_frame = self.raw_responses.pop(key)
         return self.responses.pop(key)
 
     def initialize(self) -> dict[str, Any]:
@@ -119,6 +127,9 @@ class StdioClient:
         initialized = self.receive(1)
         if "error" in initialized:
             raise ClientError("initialization_rejected")
+        self.negotiated_protocol = initialized.get("result", {}).get("protocolVersion")
+        if self.negotiated_protocol != "2024-11-05":
+            raise ClientError("protocol_version_not_negotiated")
         self.send({"jsonrpc": "2.0", "method": "notifications/initialized"})
         self.send({"jsonrpc": "2.0", "id": 2, "method": "tools/list"})
         return self.receive(2)

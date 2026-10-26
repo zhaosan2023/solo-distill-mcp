@@ -252,5 +252,11 @@ def run(scenario):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="已获准真实网关集成；不是 Roo 验收")
     parser.add_argument("--scenario", choices=["A", "B"], required=True)
+    parser.add_argument("--v2", action="store_true", help="显式获准 V2 单次 A；V1 默认不变")
     options = parser.parse_args()
+    if options.v2:
+        if options.scenario != "A":
+            parser.error("本轮 V2 仅授权场景 A")
+        from live_v2_driver import run as run_v2
+        raise SystemExit(run_v2())
     raise SystemExit(run(options.scenario))
