@@ -116,7 +116,12 @@ def consume_frame(raw, raw_files, *, protocol_version, request_id, scenario,
             raise ValueError("invalid_publication_fields")
         if type(project_id) is not str or not project_id or type(policy_id) is not str or not policy_id:
             raise ValueError("expected_core_binding_required")
-        core = SealedCore(canonical(report["core"]))
+        from .codec_v2 import ENCODING, unpack_core
+        packed = report["core"]
+        encoding = ENCODING if type(packed) is dict and "encoding" in packed else "json"
+        if encoding != "json" and scenario != "A":
+            raise ValueError("compact_transport_A_only")
+        core = SealedCore(canonical(unpack_core(packed, strict_load)), encoding)
         value = authenticate_seal(core, raw_files, policy_id=policy_id)
         package = value["package"]
         if package["scenario"] != scenario or package["project_id"] != project_id or report["status"] != package["status"] or result["isError"] != (package["status"] in {"blocked", "failed"}):

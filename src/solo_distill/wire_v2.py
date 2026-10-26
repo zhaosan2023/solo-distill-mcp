@@ -30,8 +30,15 @@ def response_id(value):
     return value
 
 
-def encode_report(report, request_id):
+def encode_report(report, request_id, *, wire_encoding="json"):
     # Every JSON layer is encoded exactly once; the trailing LF is part of the frame.
+    if wire_encoding != "json":
+        from .codec_v2 import ENCODING, pack_core
+        if (wire_encoding != ENCODING or report.get("contract_version") != 2
+                or report.get("kind") != "sealed_knowledge"
+                or report["core"]["package"]["scenario"] != "A"):
+            raise ValueError("unsupported_wire_encoding")
+        report = {**report, "core": pack_core(report["core"])}
     response = {"jsonrpc": "2.0", "id": request_id, "result": {
         "content": [{"type": "text", "text": canonical(report).decode("utf-8")}],
         "isError": report["status"] in {"blocked", "failed"}}}
@@ -97,7 +104,8 @@ def core_report(core, observations):
 def reserved_size(core):
     # 128 NUL characters maximize admitted JSON ID escaping (768 bytes).
     # A <=512-byte observation object can expand to at most 1024 outer bytes.
-    return len(encode_report(core_report(core, {}), "\x00" * 128)) + 1024
+    return len(encode_report(core_report(core, {}), "\x00" * 128,
+                             wire_encoding=core.wire_encoding)) + 1024
 
 
 @dataclass(frozen=True)
@@ -118,9 +126,11 @@ def publish(core, admission, *, observations=None):
     observations = {} if observations is None else observations
     if type(observations) is not dict or len(canonical(observations)) > MAX_OBSERVATION_BYTES:
         raise AdmissionRejected("observations_over_limit")
-    encoded = encode_report(core_report(core, observations), admission.request_id)
+    encoded = encode_report(core_report(core, observations), admission.request_id,
+                            wire_encoding=core.wire_encoding)
     if len(encoded) > admission.budget:
-        encoded = encode_report(core_report(core, {}), admission.request_id)
+        encoded = encode_report(core_report(core, {}), admission.request_id,
+                                wire_encoding=core.wire_encoding)
     if len(encoded) > admission.budget:
         return FrozenFrame(encode_report(blocked_report(), admission.request_id), admission, False)
     return FrozenFrame(encoded, admission, True)

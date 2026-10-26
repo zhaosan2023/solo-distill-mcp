@@ -47,6 +47,8 @@ def serve_v2(server, input_fd, output_fd):
     cancelled = threading.Event()
     failed = threading.Event()
     output_lock = threading.Lock()
+    phase_lock = threading.Lock()
+    publishing = threading.Event()
     worker = None
     active_id = None
     buffer = bytearray()
@@ -66,6 +68,10 @@ def serve_v2(server, input_fd, output_fd):
                     response = {**response, "id": identity}
                 frame = FrozenFrame(encode(response) + b"\n",
                                     Admission("2024-11-05", "A", identity, 22016), False)
+            # Input EOF ends request intake, not an already started bounded
+            # response publication. Explicit cancellation still reaches the writer.
+            with phase_lock:
+                publishing.set()
             with output_lock:
                 receipt = FrameWriter(output_fd).send(frame, deadline=time.monotonic() + 10,
                                                      cancelled=cancelled)
@@ -75,11 +81,15 @@ def serve_v2(server, input_fd, output_fd):
                     "request_id": request_id, "rpc_id": message["id"], "written": receipt.written,
                     "frame_sha256": hashlib.sha256(frame.data).hexdigest(),
                     "knowledge_delivered": frame.knowledge_delivered, "status": receipt.status})
-        except Exception:
+        except Exception as exception:
             failed.set()
             cancelled.set()
             server.distiller.cancel()
-            print("V2 发布或证据保存失败；门禁阻塞", file=sys.stderr, flush=True)
+            # Bounded diagnostics contain only a type and a writer's fixed reason,
+            # never source bodies, credentials or arbitrary exception messages.
+            reason = getattr(exception, "reason", "publication_or_persistence_failure")
+            print(f"V2 发布或证据保存失败；门禁阻塞：{type(exception).__name__}:{reason}",
+                  file=sys.stderr, flush=True)
 
     try:
         with selectors.DefaultSelector() as selector:
@@ -92,6 +102,10 @@ def serve_v2(server, input_fd, output_fd):
                     continue
                 raw = os.read(input_fd, 65537)
                 if not raw:
+                    with phase_lock:
+                        if not publishing.is_set():
+                            cancelled.set()
+                            server.distiller.cancel()
                     break
                 buffer.extend(raw)
                 while b"\n" in buffer:
@@ -118,6 +132,7 @@ def serve_v2(server, input_fd, output_fd):
                         break
                     if isinstance(message, dict) and message.get("method") == "tools/call":
                         active_id = message.get("id")
+                        publishing.clear()
                         worker = threading.Thread(target=dispatch, args=(message,), daemon=False)
                         worker.start()
                     else:
@@ -126,8 +141,10 @@ def serve_v2(server, input_fd, output_fd):
                     failed.set()
     finally:
         if worker is not None:
-            cancelled.set()
-            server.distiller.cancel()
+            with phase_lock:
+                if failed.is_set() or not publishing.is_set():
+                    cancelled.set()
+                    server.distiller.cancel()
             worker.join(timeout=12)
             if worker.is_alive():
                 failed.set()

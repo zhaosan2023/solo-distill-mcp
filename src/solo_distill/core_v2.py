@@ -120,8 +120,19 @@ def canonical_package(package):
 
 
 def slice_package(package, raw_files, roots):
-    """Transitive typed closure. Complete owners pull all authenticated child aliases."""
+    """Authenticate both sides of the public slicing boundary."""
     validate_package(package, raw_files)
+    result = _slice_validated_package(package, roots)
+    validate_package(result, raw_files)
+    return result
+
+
+def _slice_validated_package(package, roots):
+    """Private coordinate transform of an already authenticated local package.
+
+    Trial slices are never published directly. form_core authenticates its input
+    once and authenticates the final selected package again before returning it.
+    """
     by_id = {table: {item["id"]: i for i, item in enumerate(package[table])} for table in TABLES}
     keep = {table: set() for table in TABLES}
     pending = []
@@ -222,14 +233,13 @@ def slice_package(package, raw_files, roots):
         for support in item["supports"]:
             support["index"] = maps[support["table"]][support["index"]]
     result["coverage"]["body_units"] = len(result["owners"])
-    result = canonical_package(finalize(result))
-    validate_package(result, raw_files)
-    return result
+    return canonical_package(finalize(result))
 
 
 @dataclass(frozen=True)
 class SealedCore:
     payload: bytes
+    wire_encoding: str = "json"
 
     @property
     def document(self):
@@ -245,24 +255,36 @@ class SealedCore:
         return self.document["core_id"]
 
 
-def make_seal(package, raw_files, policy_id):
+def make_seal(package, raw_files, policy_id, *, wire_encoding="json"):
     if type(policy_id) is not str or not policy_id or len(policy_id.encode()) > 128:
         raise ValueError("invalid_policy_identity")
     # Canonicalization is a coordinate transform, never a forgery repair path.
     validate_package(package, raw_files)
     package = canonical_package(package)
     validate_package(package, raw_files)
+    return _seal_validated_package(package, raw_files, policy_id, wire_encoding)
+
+
+def _seal_validated_package(package, raw_files, policy_id, wire_encoding):
+    """Private cost trial; the public sealing boundary still authenticates syntax."""
     document = {"render_version": RENDER_VERSION, "input_id": input_identity(raw_files),
                 "policy_id": policy_id, "scope": sorted(raw_files), "package": package,
                 "wire_limit": LIMITS[package["scenario"]]}
     document["core_id"] = digest("core-v2", document)
-    return SealedCore(canonical(document))
+    core = SealedCore(canonical(document), wire_encoding)
+    inspect_seal(core)
+    return core
 
 
 def inspect_seal(core):
     if type(core) is not SealedCore or type(core.payload) is not bytes:
         raise ValueError("invalid_seal")
+    if (type(core.wire_encoding) is not str
+            or core.wire_encoding not in {"json", "zlib-base64-core-v2-1"}):
+        raise ValueError("unsupported_core_encoding")
     value = core.document
+    if core.wire_encoding != "json" and value["package"]["scenario"] != "A":
+        raise ValueError("compact_transport_A_only")
     if set(value) != {"render_version", "input_id", "policy_id", "scope", "package", "wire_limit", "core_id"} or value["render_version"] != RENDER_VERSION or canonical(value) != core.payload:
         raise ValueError("invalid_core_fields_or_encoding")
     unsigned = {key: item for key, item in value.items() if key != "core_id"}
@@ -283,10 +305,13 @@ def authenticate_seal(core, raw_files, *, policy_id=None):
     return value
 
 
-def form_core(package, raw_files, *, required_sources=None, optional_groups=(), policy_id="lifecycle-v2-1"):
+def form_core(package, raw_files, *, required_sources=None, optional_groups=(),
+              policy_id="lifecycle-v2-1", wire_encoding="json"):
     """Reserve the worst admitted ID and observations BEFORE stable optional selection."""
     from .wire_v2 import reserved_size
     validate_package(package, raw_files)
+    if type(policy_id) is not str or not policy_id or len(policy_id.encode()) > 128:
+        raise ValueError("invalid_policy_identity")
     if required_sources is None:
         required_sources = [item["id"] for item in package["sources"]]
     if len(set(required_sources)) != len(required_sources):
@@ -299,19 +324,26 @@ def form_core(package, raw_files, *, required_sources=None, optional_groups=(), 
             raise ValueError("invalid_optional_group")
         seen.add(group_id)
         groups.append((group_id, list(references)))
-    # Validate even omitted groups; malformed optional data is not silently repaired.
-    for _, references in groups:
-        slice_package(package, raw_files, roots + references)
-    selected = slice_package(package, raw_files, roots)
+    # Authenticate every reference, including omitted groups, without repeatedly
+    # reparsing all input files. The entire source package was authenticated above.
+    by_id = {table: {item["id"] for item in package[table]} for table in TABLES}
+    for table, reference in roots + [ref for _, refs in groups for ref in refs]:
+        if table not in TABLES or reference not in by_id[table]:
+            raise ValueError("unknown_slice_root")
+    selected = _slice_validated_package(package, roots)
     if not selected["sources"]:
         raise CoreBlocked("minimum_required_sources_missing")
-    core = make_seal(selected, raw_files, policy_id)
+    core = _seal_validated_package(selected, raw_files, policy_id, wire_encoding)
     if reserved_size(core) > LIMITS[package["scenario"]]:
         raise CoreBlocked("minimum_required_core_over_budget")
     for _, references in sorted(groups):
-        candidate = slice_package(package, raw_files, roots + references)
-        sealed = make_seal(candidate, raw_files, policy_id)
+        candidate = _slice_validated_package(package, roots + references)
+        sealed = _seal_validated_package(candidate, raw_files, policy_id, wire_encoding)
         if reserved_size(sealed) <= LIMITS[package["scenario"]]:
             roots += references
-            core = sealed
-    return core
+            selected, core = candidate, sealed
+    # No trial seal escapes: reauthenticate the exact final package and identity.
+    authenticated = make_seal(selected, raw_files, policy_id, wire_encoding=wire_encoding)
+    if authenticated.payload != core.payload or reserved_size(authenticated) > LIMITS[package["scenario"]]:
+        raise CoreBlocked("final_core_trial_conflict")
+    return authenticated

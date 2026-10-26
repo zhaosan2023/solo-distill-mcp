@@ -1,15 +1,18 @@
 """Explicit A-only engineering V2 path; never dispatched by the V1 server.
 
 Selection consumes syntax and the versioned lifecycle policy, not evaluation
-anchors. Targets remain data. Failure is persisted and never triggers replay.
+answers. Targets remain data. Failure is persisted and never triggers replay.
 """
 from __future__ import annotations
 
 import copy
 import hashlib
+import re
+from dataclasses import replace
 import threading
 import time
 
+from .codec_v2 import ENCODING
 from .core_v2 import CoreBlocked, form_core
 from .distillation import Distiller, INPUT_SCHEMA as V1_SCHEMA, SYSTEM_PROMPT, utf8_json
 from .evidence import EvidenceBlocked
@@ -31,27 +34,86 @@ INPUT_SCHEMA["properties"]["dimensions"]["items"]["properties"]["evidence"]["enu
 INPUT_SCHEMA["properties"]["dimensions"]["items"]["properties"].pop("selector")
 
 
-def select_inventory(reader):
-    """The existing policy selects bodies before any generation or evaluation."""
+def query_tokens(text):
+    """Versioned lexical navigation, not frozen-answer or runtime inference."""
+    words = set(re.findall(r"[a-z][a-z0-9]*", text.lower()))
+    families = ({"query", "question", "search"}, {"retrieve", "retrieval", "retriever"},
+                {"generate", "generation", "generator", "answer"},
+                {"parse", "parser", "parsing"}, {"load", "loading", "loader"},
+                {"persist", "persistence", "save", "saving"},
+                {"error", "errors", "exception", "exceptions"},
+                {"filter", "filters", "filtering"}, {"repo", "repository", "repositories"})
+    for family in families:
+        if words & family:
+            words |= family
+    return words
+
+
+def source_priority(package, source, question):
+    unit = package["units"][source["unit"]]
+    path = package["files"][source["file"]]["path"]
+    tokens = query_tokens(question)
+    name = query_tokens(unit["qualified_name"] or "")
+    filename = query_tokens(path.rsplit("/", 1)[-1])
+    return (-len(name & tokens), -len(filename & tokens), path,
+            unit["raw_start"], unit["raw_end"], source["id"])
+
+
+def core_selection(package, question):
+    """One focused complete source is explicit; remaining typed groups are optional.
+
+    Required obligations and every support still enter the transitive closure in
+    form_core. No generation feedback is used to change this stable source order.
+    """
+    sources = sorted(package["sources"], key=lambda s: source_priority(package, s, question))
+    if not sources:
+        raise EvidenceBlocked("zero_v2_syntax_units")
+    required = [sources[0]["id"]]
+    groups = []
+    for rank, source in enumerate(sources):
+        references = [("sources", source["id"])]
+        references += [("role_proofs", proof["id"]) for proof in package["role_proofs"]
+                       if proof["unit"] == source["unit"]]
+        groups.append((f"{rank:06d}-{source['id']}", references))
+    return {"required_sources": required, "optional_groups": groups, "wire_encoding": ENCODING}
+
+
+def select_inventory(reader, question=""):
+    """Read complete leaves, rank from the question, then apply lifecycle quotas."""
     reader.tick()
     units = reader.inventory()
     if not units:
         raise EvidenceBlocked("zero_v2_syntax_units")
+    paths = {unit["id"]: path for path, unit in reader.units.values()}
+    tokens = query_tokens(question)
+    # Avoid selecting a whole class just to obtain methods already represented
+    # as independent complete units. Condition origins are added by build_package.
+    leaves = [unit for unit in units if unit["ast_type"] != "ClassDef" or not any(
+        other["id"] != unit["id"] and paths[other["id"]] == paths[unit["id"]]
+        and other["syntax_path"][:len(unit["syntax_path"])] == unit["syntax_path"]
+        for other in units)]
+    def rank(unit):
+        path = paths[unit["id"]]
+        name = query_tokens(unit["qualified_name"] or "")
+        filename = query_tokens(path.rsplit("/", 1)[-1])
+        return (-len(name & tokens), -len(filename & tokens),
+                unit["kind"] not in {"definition", "main_guard"},
+                path, unit["raw_start"], unit["raw_end"], unit["id"])
+    focused = sorted(leaves, key=rank)[:48]
     inventory = build_package(reader.report["project_id"], reader.report["snapshot_id"],
-                              reader.raw_files, [unit["id"] for unit in units])
+                              reader.raw_files, [unit["id"] for unit in focused])
     inventory = attach_roles(inventory, reader.raw_files)
     inventory["relations"] = extract_relations(inventory, reader.raw_files)
-    candidates = candidates_from_package(inventory, reader.raw_files)
+    priorities = {unit["id"]: len(focused) - i for i, unit in enumerate(focused)}
+    candidates = tuple(replace(item, signal=priorities.get(item.id, 0) * 8 + item.signal)
+                       for item in candidates_from_package(inventory, reader.raw_files))
     reader.tick()
     selection = Scheduler(candidates, stopped=lambda: reader.cancelled.is_set()
         or time.monotonic() >= reader.deadline).select({},
         optional=[item.id for item in candidates], adjacency=determined_graph(inventory))
     if selection.status != "selected":
         raise EvidenceBlocked(selection.reason or "selection_failed")
-    package = reader.read(list(selection.owners))
-    # All selected sources are mandatory at publication; do not hide missing
-    # anchors by repeatedly reselecting after observing evaluation feedback.
-    return package, selection
+    return reader.read(list(selection.owners)), selection
 
 
 def add_proposal(package, candidate, dimensions, raw_files):
@@ -132,7 +194,9 @@ class LiveV2Distiller(Distiller):
                 raise EvidenceBlocked("snapshot_not_ready")
             scanner.deadline = deadline - 15
             reader = V2EvidenceReader(scanner, structure, deadline - 15, cancelled)
-            package, selection = select_inventory(reader)
+            navigation_question = arguments["question"] + " " + " ".join(
+                dimension["question"] for dimension in arguments["dimensions"])
+            package, selection = select_inventory(reader, navigation_question)
             trace["selection"] = {"owners": list(selection.owners), "counts": list(selection.counts),
                                   "body_bytes": selection.body_bytes, "borrowed": selection.borrowed}
             trace["scope"] = sorted(reader.raw_files)
@@ -142,7 +206,18 @@ class LiveV2Distiller(Distiller):
                 for source in package["sources"]]
             # Check the complete mandatory structural representation before POST.
             # Generation can add size, never make an oversized minimum feasible.
-            form_core(package, reader.raw_files)
+            slicing = core_selection(package, navigation_question)
+            preliminary = form_core(package, reader.raw_files, **slicing)
+            # Only authenticated, budget-admitted bodies may support generation;
+            # all scanned files remain in the package and its input identity.
+            package = preliminary.document["package"]
+            trace["core_selection"] = {"required_sources": slicing["required_sources"],
+                "optional_groups": [group[0] for group in slicing["optional_groups"]],
+                "wire_encoding": ENCODING, "policy": "query-leaves-v2-1"}
+            trace["source_bodies"] = [{"source_id": source["id"],
+                "text": body_text(reader.raw_files[package["files"][source["file"]]["path"]],
+                                  package["files"][source["file"]], package["units"][source["unit"]])}
+                for source in package["sources"]]
             reader.tick()
             payload = {"operation": "compression", "question": arguments["question"],
                        "dimensions": arguments["dimensions"], "sources": [
@@ -164,7 +239,7 @@ class LiveV2Distiller(Distiller):
             trace["model_outputs"].append({"stage": "compression", "answer": answer, "candidate": candidate})
             package = add_proposal(package, candidate, arguments["dimensions"], reader.raw_files)
             reader.verify()
-            core = form_core(package, reader.raw_files)
+            core = form_core(package, reader.raw_files, **core_selection(package, navigation_question))
             trace["core"] = core.document
             frame = publish(core, admission, observations={"gateway_requests": len(trace["gateway_requests"]),
                             "elapsed_ms": int((time.monotonic() - started) * 1000)})

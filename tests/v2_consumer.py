@@ -85,6 +85,36 @@ def core_check(value, raw_files, project_id, policy_id):
     return package
 
 
+def expand_core(value):
+    """Independent transport decoder; no production codec imports."""
+    if type(value) is not dict or "encoding" not in value:
+        return value
+    if set(value) != {"encoding", "decoded_bytes", "data"} or value["encoding"] != "zlib-base64-core-v2-1":
+        raise ValueError("core_encoding")
+    length = value["decoded_bytes"]
+    data = value["data"]
+    if type(length) is not int or not 0 < length <= 1048576 or type(data) is not str or len(data) > 1399468:
+        raise ValueError("core_decode_budget")
+    import base64
+    import binascii
+    import zlib
+    try:
+        compressed = base64.b64decode(data.encode("ascii"), validate=True)
+        if base64.b64encode(compressed).decode("ascii") != data:
+            raise ValueError("base64_encoding")
+        stream = zlib.decompressobj()
+        decoded = stream.decompress(compressed, length + 1)
+        if len(decoded) != length or stream.unconsumed_tail or stream.unused_data or not stream.eof:
+            raise ValueError("compressed_stream")
+        core = load(decoded)
+        restricted_v2(core)
+        if dump(core) != decoded:
+            raise ValueError("core_noncanonical")
+        return core
+    except (binascii.Error, UnicodeError, zlib.error) as error:
+        raise ValueError("core_compression") from error
+
+
 def receive(raw, raw_files, *, request_id, scenario, return_bytes, project_id=None,
             policy_id=None, protocol_version="2024-11-05", legacy_validator=None):
     if protocol_version != "2024-11-05" or type(scenario) is not str or scenario not in {"A", "B"}:
@@ -127,7 +157,9 @@ def receive(raw, raw_files, *, request_id, scenario, return_bytes, project_id=No
             raise ValueError("publication_fields")
         if type(project_id) is not str or not project_id or type(policy_id) is not str or not policy_id:
             raise ValueError("expected_binding")
-        core = report["core"]
+        if type(report["core"]) is dict and "encoding" in report["core"] and scenario != "A":
+            raise ValueError("compact_A_only")
+        core = expand_core(report["core"])
         package = core_check(core, raw_files, project_id, policy_id)
         if package["scenario"] != scenario or package["status"] != report["status"]:
             raise ValueError("publication_status_or_scenario")
