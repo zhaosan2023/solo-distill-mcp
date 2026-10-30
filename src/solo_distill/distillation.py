@@ -88,6 +88,29 @@ def utf8_json(value: Any) -> bytes:
                       separators=(",", ":")).encode("utf-8")
 
 
+def navigation_pages(records: list[dict[str, Any]], *, target=MAX_SKELETON_BYTES,
+                     telemetry=None):
+    """Stable, complete local navigation pages; a giant record is never truncated."""
+    if type(target) is not int or target <= 0:
+        raise ValueError("invalid_navigation_target")
+    pages, current, size = [], [], 2
+    for record in records:
+        cost = len(utf8_json(record)) + (1 if current else 0)
+        if current and size + cost > target:
+            pages.append(current)
+            current, size = [], 2
+            cost = len(utf8_json(record))
+        current.append(record)
+        size += cost
+    if current:
+        pages.append(current)
+    if telemetry is not None:
+        telemetry.skeleton(len(records), len(utf8_json(records)))
+        if len(pages) > 1:
+            telemetry.strategies.append("complete_navigation_pages")
+    return pages
+
+
 def tool_response(report: dict[str, Any], request_id: Any) -> dict[str, Any]:
     """The exact escaped MCP envelope is the Pin's delivery budget unit."""
     return {"jsonrpc": "2.0", "id": request_id, "result": {

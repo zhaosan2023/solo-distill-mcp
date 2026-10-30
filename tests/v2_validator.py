@@ -42,7 +42,7 @@ def decode(raw, raw_files):
     return value
 
 
-def binding_resolver(package, raw_files):
+def binding_resolver(package, raw_files, *, parsed_trees=None):
     """Independent lexical binding oracle; never imports the production graph."""
     from collections import Counter
     public = {(u["file"], tuple(u["syntax_path"])): i for i, u in enumerate(package["units"])}
@@ -51,7 +51,8 @@ def binding_resolver(package, raw_files):
     for file_index, file in enumerate(package["files"]):
         module = file["path"].removesuffix(".py").replace("/", ".").removesuffix(".__init__")
         modules.setdefault(module, []).append(file_index)
-        tree = ast.parse(raw_files[file["path"]], feature_version=(3, 12))
+        tree = (ast.parse(raw_files[file["path"]], feature_version=(3, 12))
+                if parsed_trees is None else parsed_trees[file_index])
         local = {(): {"parent": None, "counts": Counter(), "values": {}, "unsafe": set(), "class": False}}
 
         def record(scope, name, value=None, guarded=False):
@@ -186,6 +187,7 @@ def authenticate(package, raw_files):
     records = {}
     condition_records = {}
     file_seen = set()
+    parsed_trees = {}
     for file_index, file in enumerate(package["files"]):
         shape(file, {"id", "path", "sha256", "encoding", "parse_status"})
         path = file["path"]
@@ -207,6 +209,7 @@ def authenticate(package, raw_files):
             prefix = lines[row - 1].encode()[:col].decode()
             return [row, len(prefix)], bom + len("".join(lines[:row - 1]).encode(codec)) + len(prefix.encode(codec))
         tree = ast.parse(raw, filename=path, feature_version=(3, 12))
+        parsed_trees[file_index] = tree
         def visit(node, route, scope, conditions, owner, top=False):
             definition = isinstance(node, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef))
             if definition or top and isinstance(node, ast.stmt):
@@ -347,7 +350,13 @@ def authenticate(package, raw_files):
         check(fact["level"] != "direct_static", "promoted_prose")
         for table in ("sources", "relations", "conditions"):
             references(fact[table], table)
-    resolve_binding = binding_resolver(package, raw_files) if package["relations"] else None
+    resolve_binding = (binding_resolver(package, raw_files, parsed_trees=parsed_trees)
+                       if package["relations"] else None)
+    condition_prefixes = {}
+    for index, condition in enumerate(package["conditions"]):
+        file_index = package["units"][condition["unit"]]["file"]
+        prefix = tuple(condition["syntax_path"] + [condition["field"]])
+        condition_prefixes.setdefault((file_index, prefix), []).append(index)
     for relation in package["relations"]:
         shape(relation, {"id", "from_unit", "to_unit", "layer", "direction", "conditions", "sources", "reason", "site"})
         shape(relation["site"], {"syntax_path", "start", "end", "expression"})
@@ -369,7 +378,7 @@ def authenticate(package, raw_files):
             check(relation["reason"] is None, "relation_reason")
         origin = package["units"][relation["from_unit"]]
         file = package["files"][origin["file"]]
-        node = ast.parse(raw_files[file["path"]], feature_version=(3, 12))
+        node = parsed_trees[origin["file"]]
         try:
             for part in site["syntax_path"]:
                 node = node[part] if type(part) is int else getattr(node, part)
@@ -383,11 +392,12 @@ def authenticate(package, raw_files):
         check(origin["syntax_path"] == site["syntax_path"][:len(origin["syntax_path"])] and
               relation["sources"] == [relation["from_unit"]], "site_source")
         active = list(origin["conditions"])
-        for index, condition in enumerate(package["conditions"]):
-            condition_unit = package["units"][condition["unit"]]
-            prefix = condition["syntax_path"] + [condition["field"]]
-            if condition_unit["file"] == origin["file"] and site["syntax_path"][:len(prefix)] == prefix and index not in active:
-                active.append(index)
+        route = tuple(site["syntax_path"])
+        matched = set()
+        for length in range(len(route) + 1):
+            matched.update(condition_prefixes.get((origin["file"], route[:length]), ()))
+        inherited = set(active)
+        active.extend(index for index in sorted(matched) if index not in inherited)
         check(relation["conditions"] == active, "relation_condition_closure")
         if relation["layer"] == "call":
             check(relation["to_unit"] == resolve_binding(origin["file"], site["syntax_path"]), "forged_binding_target")

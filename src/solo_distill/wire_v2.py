@@ -57,7 +57,13 @@ class Admission:
     request_id: str | int
     return_bytes: int
 
+    transport: object | None = None
+
     def __post_init__(self):
+        if self.transport is not None:
+            from .adaptive_wire import TransportCapabilities
+            if type(self.transport) is not TransportCapabilities or self.scenario != "A":
+                raise AdmissionRejected("unsupported_adaptive_transport_or_scenario")
         if self.protocol_version != PROTOCOL_VERSION or self.scenario not in LIMITS:
             raise AdmissionRejected("unsupported_offline_protocol_or_scenario")
         response_id(self.request_id)
@@ -68,7 +74,8 @@ class Admission:
 
     @property
     def budget(self):
-        return min(LIMITS[self.scenario], self.return_bytes)
+        ceiling = LIMITS[self.scenario] if self.transport is None else self.transport.max_frame_bytes
+        return min(ceiling, self.return_bytes)
 
 
 def decode_input(raw):
@@ -113,13 +120,36 @@ class FrozenFrame:
     data: bytes
     admission: Admission
     knowledge_delivered: bool
+    telemetry: object | None = None
 
     def __post_init__(self):
         if type(self.data) is not bytes or not self.data.endswith(b"\n") or len(self.data) > self.admission.budget:
             raise ValueError("invalid_frozen_frame")
 
 
-def publish(core, admission, *, observations=None):
+@dataclass(frozen=True)
+class FrozenTransfer:
+   frames: tuple[bytes, ...]
+   admission: Admission
+   knowledge_delivered: bool
+   telemetry: object | None = None
+
+   def __post_init__(self):
+       caps = self.admission.transport
+       if (caps is None or not caps.chunking or type(self.frames) is not tuple
+               or not 2 <= len(self.frames) <= caps.max_chunks + 1
+               or any(type(raw) is not bytes or not raw.endswith(b"\n")
+                      or b"\n" in raw[:-1] or len(raw) > self.admission.budget
+                      for raw in self.frames)
+               or sum(map(len, self.frames)) > caps.max_transfer_bytes):
+           raise ValueError("invalid_frozen_transfer")
+
+   @property
+   def data(self):
+       return b"".join(self.frames)
+
+
+def publish(core, admission, *, observations=None, telemetry=None):
     value = inspect_seal(core)
     if value["package"]["scenario"] != admission.scenario:
         raise AdmissionRejected("scenario_conflict")
@@ -128,6 +158,34 @@ def publish(core, admission, *, observations=None):
         raise AdmissionRejected("observations_over_limit")
     encoded = encode_report(core_report(core, observations), admission.request_id,
                             wire_encoding=core.wire_encoding)
+    from .telemetry import POLICY
+    adaptive = value["policy_id"] == POLICY
+    if adaptive:
+        from .adaptive_wire import chunk_frames
+        if admission.transport is None or core.wire_encoding != "json":
+            raise AdmissionRejected("adaptive_transport_not_explicitly_negotiated")
+        caps = admission.transport
+        if len(encoded) > caps.max_decoded_bytes:
+            raise AdmissionRejected("transport_decode_limit")
+        if telemetry is not None:
+            telemetry.encoded_bytes = len(encoded)
+            telemetry.capabilities = caps.document()
+        if len(encoded) <= admission.budget:
+            if len(encoded) > caps.max_transfer_bytes:
+                raise AdmissionRejected("transport_cumulative_limit")
+            frame = FrozenFrame(encoded, admission, True, telemetry)
+            frames = (encoded,)
+        else:
+            frames = chunk_frames(encoded, value, admission)
+            frame = FrozenTransfer(frames, admission, True, telemetry)
+        if telemetry is not None:
+            telemetry.strategies.append("negotiated_chunking" if len(frames) > 1
+                                        else "negotiated_single_frame")
+            for raw in frames:
+                telemetry.frame(raw)
+        return frame
+    if admission.transport is not None:
+        raise AdmissionRejected("legacy_core_adaptive_transport_conflict")
     if len(encoded) > admission.budget:
         encoded = encode_report(core_report(core, {}), admission.request_id,
                                 wire_encoding=core.wire_encoding)
@@ -177,13 +235,14 @@ class FrameWriter:
         if self.used:
             raise DeliveryBlocked("frame_replay_forbidden", 0)
         self.used = True
-        if type(frame) is not FrozenFrame or type(deadline) not in (float, int) or not 0 < deadline - time.monotonic() <= 30:
+        if type(frame) not in (FrozenFrame, FrozenTransfer) or type(deadline) not in (float, int) or not 0 < deadline - time.monotonic() <= 30:
             raise DeliveryBlocked("invalid_frame_or_deadline", 0)
         written = 0
+        data = frame.data
         try:
             with selectors.DefaultSelector() as selector:
                 selector.register(self.fd, selectors.EVENT_WRITE)
-                while written < len(frame.data):
+                while written < len(data):
                     if cancelled.is_set():
                         raise DeliveryBlocked("cancelled", written)
                     remaining = deadline - time.monotonic()
@@ -192,7 +251,7 @@ class FrameWriter:
                     if not selector.select(min(remaining, 0.01)):
                         continue
                     try:
-                        count = os.write(self.fd, memoryview(frame.data)[written:])
+                        count = os.write(self.fd, memoryview(data)[written:])
                     except (BlockingIOError, InterruptedError):
                         continue
                     if count <= 0:

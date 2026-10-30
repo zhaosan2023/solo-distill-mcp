@@ -12,7 +12,7 @@ import stat
 import time
 import tokenize
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Callable
 
 
 class InputError(ValueError):
@@ -243,7 +243,8 @@ def parse_structure(path: str, raw: bytes) -> dict[str, Any]:
     encoding, _ = tokenize.detect_encoding(io.BytesIO(raw).readline)
     text = raw.decode(encoding)
     digest = hashlib.sha256(raw).hexdigest()
-    tree = ast.parse(text, filename=path)
+    from .snapshot_v2 import parsed_tree
+    tree = parsed_tree(raw, path)
     visitor = StructureVisitor(path, digest)
     visitor.visit(tree)
     return {"content_sha256": digest, "line_count": len(text.splitlines()),
@@ -466,41 +467,28 @@ def serialized_size(value: Any) -> int:
     return len(json.dumps(value, ensure_ascii=True, separators=(",", ":")).encode("utf-8"))
 
 
-def bounded_result(report: dict[str, Any], budget: int) -> dict[str, Any]:
-    if serialized_size(report) <= budget:
-        return report
-    compact = {key: value for key, value in report.items() if key != "entries"}
-    compact["entries"] = []
-    omissions = []
-    for entry in report["entries"]:
-        reduced = {key: value for key, value in entry.items() if key not in {"symbols", "imports", "calls"}}
-        counts = {key: len(entry.get(key, [])) for key in ("symbols", "imports", "calls")}
-        if any(counts.values()):
-            reduced["omitted_records"] = counts
-            omissions.append({"path": entry["path"], "reason": "return_budget_structure_omitted"})
-        compact["entries"].append(reduced)
-    compact["unfinished"] = [*report["unfinished"], *omissions]
-    if compact["status"] == "complete":
-        compact["status"] = "partial"
-    if serialized_size(compact) <= budget:
-        return compact
-    minimum = {
-        "contract_version": 1, "kind": "repository_structure", "status": "blocked",
-        "project_id": report["project_id"], "snapshot_id": report["snapshot_id"],
-        "coverage": report["coverage"], "freshness": report["freshness"],
-        "inventory_complete": report["inventory_complete"],
-        "unfinished": [{"path": ".", "reason": "return_budget_cannot_preserve_manifest_and_obligations"}],
-        "unreturned_entry_count": len(report["entries"]),
-        "unreturned_obligation_count": len(compact["unfinished"]),
-        "return_bytes": budget,
-        "observations": report["observations"],
-    }
-    if serialized_size(minimum) > budget:
-        raise InputError("返回预算不足以保存阻塞结果")
-    return minimum
+MAX_RETURN_BYTES = 24576
 
 
-def extract(projects: dict[str, Project], arguments: Any) -> dict[str, Any]:
+def bounded_result(report: dict[str, Any], budget: int, *,
+                   measure: Callable[[dict[str, Any]], int] = serialized_size,
+                   hard_limit: int = MAX_RETURN_BYTES,
+                   budget_unit: str = "report_json_bytes") -> dict[str, Any]:
+    """Preserve mandatory evidence before optional call-site degradation.
+
+    Scanner's raw evidence remains unchanged for internal consumers. The offline
+    delivery copy uses an explicit lossless encoding when provenance factoring
+    is needed. A partial optional tier is not a mandatory-core failure.
+    """
+    from .priority_v1 import deliver
+    return deliver(report, budget, measure=measure,
+                   hard_limit=hard_limit, budget_unit=budget_unit)
+
+
+def extract(projects: dict[str, Project], arguments: Any, *,
+            measure: Callable[[dict[str, Any]], int] = serialized_size,
+            budget_unit: str = "report_json_bytes") -> dict[str, Any]:
     project, include, seconds, budget = validate_request(projects, arguments)
     report = Scanner(project, include, seconds).run()
-    return bounded_result(report, budget)
+    return bounded_result(report, budget, measure=measure,
+                          hard_limit=project.return_bytes, budget_unit=budget_unit)

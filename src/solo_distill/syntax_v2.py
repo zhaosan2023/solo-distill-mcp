@@ -71,12 +71,18 @@ class Coordinates:
 
 
 def extract_units(path: str, raw: bytes) -> dict[str, Any]:
+    from .snapshot_v2 import cached_units
+    return cached_units(path, raw, _extract_units)
+
+
+def _extract_units(path: str, raw: bytes) -> dict[str, Any]:
     from .extractor import relative_path
     path = relative_path(path)
     if path == ".":
         raise ValueError("source_path_not_file")
     coordinates = Coordinates(raw)
-    tree = ast.parse(coordinates.text, filename=path, feature_version=(3, 12))
+    from .snapshot_v2 import parsed_tree
+    tree = parsed_tree(raw, path)
     digest = hashlib.sha256(raw).hexdigest()
     file_id = identity("file-v2", [path, digest, PARSER_VERSION])
     units: list[dict[str, Any]] = []

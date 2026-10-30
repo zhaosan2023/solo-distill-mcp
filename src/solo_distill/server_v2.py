@@ -13,7 +13,7 @@ from .distillation import load_policy
 from .extractor import InputError, load_projects
 from .live_v2 import INPUT_SCHEMA, TOOL_NAME, LiveV2Distiller
 from .server import Server, decode, encode, error
-from .wire_v2 import Admission, FrameWriter, FrozenFrame
+from .wire_v2 import Admission, FrameWriter, FrozenFrame, FrozenTransfer
 
 
 class V2Server(Server):
@@ -58,7 +58,7 @@ def serve_v2(server, input_fd, output_fd):
             response = server.dispatch(message, cancelled)
             if response is None:
                 return
-            if isinstance(response, FrozenFrame):
+            if isinstance(response, (FrozenFrame, FrozenTransfer)):
                 frame = response
             else:
                 identity = response.get("id")
@@ -72,15 +72,32 @@ def serve_v2(server, input_fd, output_fd):
             # response publication. Explicit cancellation still reaches the writer.
             with phase_lock:
                 publishing.set()
-            with output_lock:
-                receipt = FrameWriter(output_fd).send(frame, deadline=time.monotonic() + 10,
-                                                     cancelled=cancelled)
-            if isinstance(response, FrozenFrame):
+            telemetry = frame.telemetry
+            try:
+                if telemetry is None:
+                    with output_lock:
+                        receipt = FrameWriter(output_fd).send(frame, deadline=time.monotonic() + 10,
+                                                             cancelled=cancelled)
+                else:
+                    with telemetry.stage("write"), output_lock:
+                        receipt = FrameWriter(output_fd).send(frame, deadline=time.monotonic() + 10,
+                                                             cancelled=cancelled)
+                    telemetry.output(receipt.written, receipt.status)
+            except Exception as publication_error:
+                if telemetry is not None:
+                    telemetry.output(getattr(publication_error, "written", 0), "blocked")
+                    server.distiller.persist_scratch(message["params"]["arguments"]["request_id"] + ".telemetry",
+                                                     telemetry.snapshot())
+                raise
+            if isinstance(response, (FrozenFrame, FrozenTransfer)):
                 request_id = message["params"]["arguments"]["request_id"]
                 server.distiller.persist_scratch(request_id + ".delivery", {
                     "request_id": request_id, "rpc_id": message["id"], "written": receipt.written,
                     "frame_sha256": hashlib.sha256(frame.data).hexdigest(),
                     "knowledge_delivered": frame.knowledge_delivered, "status": receipt.status})
+                if telemetry is not None:
+                    # Post-write receipt, separate from the frozen authenticated core.
+                    server.distiller.persist_scratch(request_id + ".telemetry", telemetry.snapshot())
         except Exception as exception:
             failed.set()
             cancelled.set()

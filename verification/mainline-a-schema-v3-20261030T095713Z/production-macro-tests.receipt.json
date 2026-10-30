@@ -1,0 +1,27 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "evidence_kind": "client_returned_command_result",
+  "source_tool_result_id": "call_47047959d903a421a09e96ea",
+  "command": "printf '%s\\n' '定向验证生产宏观索引与独立 Oracle：覆盖完整字段、三图、生成式属性及篡改负控；仅解析测试夹具，不访问网关、不执行来源、不安装依赖。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_macro test_schema_v3_production_macro </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "actual_exit_code": 0,
+  "tests_run": 25,
+  "skipped": 0,
+  "unittest_reported_seconds": "0.850",
+  "total_process_seconds": null,
+  "result_summary": "Ran 25 tests in 0.850s; OK；全部列出的测试结果为 ok。",
+  "scope": "独立宏观 Oracle 与生产宏观索引的完整字段差分、三类拓扑、40 组生成式样本、身份绑定、编码坐标、求值阶段、重复位点、未知分派、篡改负控和取消传播。",
+  "common_failure_risk": "两端共享 Python 标准库 AST；差分通过不消除解析器共同失效风险。",
+  "not_proven": [
+    "Schema 3.0 完整生产调用链及跨层版本矩阵兼容",
+    "局部闭包 Oracle、包外核心选择独立性和四维语义",
+    "完整定向离线门禁及旧协议回归",
+    "三次冷预检、内部证据落盘截止和实际进程总耗时",
+    "唯一在线业务、真实 POST 计量和完整流式接收",
+    "真实人工语义复读及宿主行为",
+    "治理生成器兼容、治理交付、ADR 转正和安全归档"
+  ],
+  "controller_coverage": "尚未证明覆盖当前任务；平台任务记录仍为唯一进度入口。",
+  "note": "本文件仅保存已返回的局部测试证据，不是完整阶段通过证明或另一份进度账本。"
+}

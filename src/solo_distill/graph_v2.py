@@ -26,7 +26,8 @@ def extract_relations(package: dict, raw_files: dict[str, bytes]) -> list[dict]:
     file_records = {}
     records = []
     for file_index, file in enumerate(package["files"]):
-        tree = ast.parse(Coordinates(raw_files[file["path"]]).text, feature_version=(3, 12))
+        from .snapshot_v2 import parsed_tree
+        tree = parsed_tree(raw_files[file["path"]], file["path"])
         scopes = {(): {"parent": None, "counts": Counter(), "bindings": {}, "unsafe": set()}}
         records_for_file = []
 
@@ -139,6 +140,11 @@ def extract_relations(package: dict, raw_files: dict[str, bytes]) -> list[dict]:
             return binding[1], None
         return None, reason or "import_target_not_selected"
 
+    condition_prefixes = defaultdict(list)
+    for index, condition in enumerate(package["conditions"]):
+        file_index = units[condition["unit"]]["file"]
+        prefix = tuple(condition["syntax_path"] + [condition["field"]])
+        condition_prefixes[file_index, prefix].append(index)
     relations = []
     for file_index, node, route, scope, owner in records:
         target, reason = None, "dynamic_attribute_dispatch"
@@ -169,13 +175,10 @@ def extract_relations(package: dict, raw_files: dict[str, bytes]) -> list[dict]:
                 "end": [node.end_lineno, node.end_col_offset], "expression": text}
         conditions = list(units[owner]["conditions"])
         # Calls inside a selected complete unit inherit lexical branch origins.
-        for index, condition in enumerate(package["conditions"]):
-            origin = units[condition["unit"]]
-            if origin["file"] != file_index:
-                continue
-            branch_route = condition["syntax_path"] + [condition["field"]]
-            if route[:len(branch_route)] == branch_route and index not in conditions:
-                conditions.append(index)
+        matched = set()
+        for length in range(len(route) + 1):
+            matched.update(condition_prefixes.get((file_index, tuple(route[:length])), ()))
+        conditions.extend(index for index in sorted(matched) if index not in conditions)
         relation = {"id": identity("relation-v2", [units[owner]["id"], site, layer,
                      None if target is None else units[target]["id"], conditions, reason]),
                     "from_unit": owner, "to_unit": target, "layer": layer,

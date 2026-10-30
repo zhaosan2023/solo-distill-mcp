@@ -1,0 +1,16 @@
+{
+  "evidence_kind": "bounded_transcription_of_actual_client_command_receipt",
+  "client_receipt_id": "call_c778bf5185755ef4a65b4593",
+  "output_artifact_id": "cmd-1793198862092.txt",
+  "command": "PYTHONPATH=src:tests timeout -k 2s 30s python3 -B -m unittest -v test_adaptive_backpressure.ReadingTests test_adaptive_backpressure.SchedulingTests test_adaptive_backpressure.TelemetryTests test_adaptive_backpressure.TransportTests test_adaptive_backpressure.IntegrationTests.test_adaptive_brownfield_pages_all_definitions_and_authenticated_relations test_brownfield </dev/null",
+  "working_directory": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 31,
+  "elapsed_seconds": 5.304,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "summary": "Ran 31 tests in 5.304s; OK",
+  "evidence_scope": "targeted local offline fixtures; not the FastCode source runtime or real Roo host",
+  "implicit_dependency_installation": false
+}

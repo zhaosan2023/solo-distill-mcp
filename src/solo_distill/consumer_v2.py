@@ -60,7 +60,7 @@ class Consumed:
 
 def consume_frame(raw, raw_files, *, protocol_version, request_id, scenario,
                   return_bytes, project_id=None, policy_id=None,
-                  legacy_validator=None, cancelled=None):
+                  legacy_validator=None, cancelled=None, transport=None):
     """Count the received wire, then version-decode and independently authenticate.
 
     No disk reads, writes, source imports, network, timers or implicit dispatch.
@@ -72,8 +72,16 @@ def consume_frame(raw, raw_files, *, protocol_version, request_id, scenario,
     response_id(request_id)
     if type(raw) is not bytes or type(return_bytes) is not int or return_bytes < 1:
         raise ValueError("invalid_consumer_input")
-    # Legacy A keeps 24,576; only an explicitly decoded V2 uses 22,016.
-    if len(raw) > min(return_bytes, 24576 if scenario == "A" else 12288):
+    manifest_report = None
+    if transport is not None:
+        from .adaptive_wire import TransportCapabilities, reassemble
+        from .telemetry import POLICY
+        if type(transport) is not TransportCapabilities or scenario != "A" or policy_id != POLICY:
+            raise ValueError("adaptive_consumer_binding_required")
+        raw, manifest_report = reassemble(raw, transport, request_id=request_id,
+            frame_budget=return_bytes, cancelled=cancelled)
+    # Legacy A keeps 24,576; only explicitly negotiated adaptive A can exceed it.
+    elif len(raw) > min(return_bytes, 24576 if scenario == "A" else 12288):
         raise ValueError("wire_over_budget")
     if not raw.endswith(b"\n") or b"\n" in raw[:-1]:
         raise ValueError("invalid_frame_boundary")
@@ -92,6 +100,8 @@ def consume_frame(raw, raw_files, *, protocol_version, request_id, scenario,
             raise ValueError("invalid_version")
         version = report["contract_version"]
         if version == 1:
+            if transport is not None:
+                raise ValueError("adaptive_transport_cannot_reinterpret_v1")
             if legacy_validator is None:
                 raise ValueError("legacy_validator_required")
             legacy_validator(report, raw_files)
@@ -103,7 +113,7 @@ def consume_frame(raw, raw_files, *, protocol_version, request_id, scenario,
             return Consumed(1, report.get("status", "unknown"), legacy_bytes)
         if version != 2:
             raise ValueError("unsupported_version")
-        if len(raw) > min(return_bytes, 22016 if scenario == "A" else 12288):
+        if transport is None and len(raw) > min(return_bytes, 22016 if scenario == "A" else 12288):
             raise ValueError("v2_wire_over_budget")
         if report.get("kind") == "publication_blocked":
             expected = {"contract_version": 2, "kind": "publication_blocked", "status": "blocked",
@@ -121,11 +131,38 @@ def consume_frame(raw, raw_files, *, protocol_version, request_id, scenario,
         encoding = ENCODING if type(packed) is dict and "encoding" in packed else "json"
         if encoding != "json" and scenario != "A":
             raise ValueError("compact_transport_A_only")
+        if transport is not None and encoding != "json":
+            raise ValueError("adaptive_transport_requires_json_core")
         core = SealedCore(canonical(unpack_core(packed, strict_load)), encoding)
         value = authenticate_seal(core, raw_files, policy_id=policy_id)
         package = value["package"]
         if package["scenario"] != scenario or package["project_id"] != project_id or report["status"] != package["status"] or result["isError"] != (package["status"] in {"blocked", "failed"}):
             raise ValueError("publication_binding_or_status_conflict")
+        if transport is None:
+            from .telemetry import POLICY
+            if value["policy_id"] == POLICY:
+                raise ValueError("adaptive_core_without_transport_negotiation")
+        if manifest_report is not None:
+            manifest = manifest_report["manifest"]
+            expected = {"project_id": package["project_id"], "snapshot_id": package["snapshot_id"],
+                        "input_id": value["input_id"], "core_id": value["core_id"],
+                        "policy_id": value["policy_id"], "contract_version": 2}
+            if (any(type(manifest[key]) is not type(item) or manifest[key] != item
+                    for key, item in expected.items()) or manifest_report["status"] != package["status"]):
+                raise ValueError("reassembled_core_manifest_conflict")
+        if transport is not None:
+            from .syntax_v2 import extract_units
+            expected_units = {unit["id"] for path, source in raw_files.items()
+                              for unit in extract_units(path, source)["units"]}
+            if (not expected_units or {unit["id"] for unit in package["units"]} != expected_units
+                    or {file["path"] for file in package["files"]} != set(raw_files)):
+                raise ValueError("adaptive_structural_denominator_incomplete")
+            from .graph_v2 import extract_relations
+            expected_relations = extract_relations(package, raw_files)
+            if ({item["id"]: item for item in package["relations"]}
+                    != {item["id"]: item for item in expected_relations}
+                    or len(package["relations"]) != len(expected_relations)):
+                raise ValueError("adaptive_relationship_denominator_incomplete")
         check_cancel(cancelled)
         return Consumed(2, package["status"], canonical(package), core)
     except (KeyError, TypeError, IndexError) as error:

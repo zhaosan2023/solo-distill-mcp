@@ -1,0 +1,22 @@
+{
+  "evidence_kind": "bounded_transcription_of_actual_client_command_receipts",
+  "status": "PUBLICATION_READBACK_PASSED",
+  "working_directory": "/home/ecs-user/project/solo-distill-mcp",
+  "publication_command": "PYTHONPATH=src:tests timeout -k 2s 30s python3 -B verification/.scratch/mainline_b_steps56_20261028.py publish </dev/null",
+  "publication_client_receipt_id": "call_af44cae44b08b4892236c525",
+  "publication_exit_code": 0,
+  "readback_command": "PYTHONPATH=src:tests timeout -k 2s 30s python3 -B verification/.scratch/mainline_b_steps56_20261028.py readback </dev/null",
+  "readback_client_receipt_id": "call_311ea87df31ac461a39e507d",
+  "readback_exit_code": 0,
+  "destination": "_bmad-output/blueprints/mainline-b-20261028",
+  "file_count": 63,
+  "links_checked": 256,
+  "release_manifest_sha256": "1c79ca5532d2af12a9735fed6d675503705f88dfa692d203b81e02fde285947c",
+  "all_files_readback_hash_matched": true,
+  "candidate_and_old_assets_preserved": true,
+  "model_requests": 0,
+  "source_writes": 0,
+  "business_semantics": "NOT_VERIFIED",
+  "stdio": "NOT_VERIFIED",
+  "Roo": "NOT_VERIFIED"
+}

@@ -1,8 +1,10 @@
 """Fixed loopback model transport. No SDK retries, redirects or target imports."""
 from __future__ import annotations
 
+import base64
 import http.client
 import json
+import hashlib
 import socket
 import threading
 import time
@@ -44,9 +46,17 @@ def candidate_json(text: str) -> Any:
     return strict_json(stripped)
 
 
+def encode_request(messages: list[dict[str, str]]) -> bytes:
+    """Exact network request encoding, with no connection or other I/O."""
+    return json.dumps({"model": MODEL, "messages": messages, "stream": True},
+                      ensure_ascii=False, allow_nan=False,
+                      separators=(",", ":")).encode("utf-8")
+
+
 class Gateway:
     """One HTTP request per call; upstream recovery belongs to the existing gateway."""
-    def __init__(self):
+    def __init__(self, *, capture_stream: bool = False):
+        self.capture_stream = capture_stream
         self._lock = threading.Lock()
         self._connection: http.client.HTTPConnection | None = None
         self._socket: socket.socket | None = None
@@ -84,9 +94,9 @@ class Gateway:
             if value <= 0:
                 raise GatewayError("gateway_deadline_exhausted", observation)
             return value
-        payload = json.dumps({"model": MODEL, "messages": messages, "stream": True}, ensure_ascii=False,
-                             allow_nan=False, separators=(",", ":")).encode("utf-8")
+        payload = encode_request(messages)
         observation["message_bytes"] = len(payload)
+        observation["message_sha256"] = hashlib.sha256(payload).hexdigest()
         if len(payload) > MAX_MESSAGE_BYTES:
             raise GatewayError("message_budget_exhausted", observation)
         connection = http.client.HTTPConnection("127.0.0.1", 8080,
@@ -94,6 +104,7 @@ class Gateway:
         with self._lock:
             self._connection = connection
         answer: list[str] = []
+        captured = bytearray() if self.capture_stream else None
         try:
             remaining()
             connection.request("POST", "/v1/chat/completions", body=payload,
@@ -170,6 +181,8 @@ class Gateway:
                     transport_socket.settimeout(min(60.0, remaining()))
                 remaining()
                 chunk = response.read1(65536)
+                if captured is not None:
+                    captured.extend(chunk)
                 remaining()
                 if not chunk:
                     raise GatewayError("stream_ended_without_done", observation)
@@ -203,6 +216,10 @@ class Gateway:
             raise GatewayError(reason, observation) from exception
         finally:
             observation["elapsed_seconds"] = round(time.monotonic() - started, 6)
+            if captured is not None:
+                observation["raw_sse_base64"] = base64.b64encode(captured).decode("ascii")
+                observation["raw_sse_bytes"] = len(captured)
+                observation["raw_sse_sha256"] = hashlib.sha256(captured).hexdigest()
             connection.close()
             with self._lock:
                 self._connection = None
