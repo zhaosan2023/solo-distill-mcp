@@ -1,0 +1,28 @@
+{
+  "kind": "acceptance_entry_registration_not_execution_receipt",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "request_id": "mainline-a-schema-v3-20261030T095713Z-live-syntax-20261102T085352Z",
+  "authorization_scope": "当前授权的新窗口产物包外可信双消费、四维与原13项锚点验收及必要隔离正负控；不新开在线窗口、不替代真实人工。",
+  "binding_policy": "本文件仅补充已经保存并原生检查的实际验收入口，不修改已退出在线窗口绑定的计划版本6、ADR修订16、执行契约修订17及其原字节，不改变验收条件、期限或授权。原绑定仍由验收入口独立复核。",
+  "assets": [
+    "verification/.scratch/mainline_a_schema_v3_syntax_acceptance_20261102.py",
+    "tests/test_schema_v3_syntax_acceptance_20261102.py"
+  ],
+  "native_inspection_results": [
+    "call_adc18932870556c027698dd8",
+    "call_e83bb8c48556ee87df53b105"
+  ],
+  "cwd": ".",
+  "controls_command": "env PYTHONPATH=src:tests:verification/.scratch timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_syntax_acceptance_20261102 test_schema_v3_minimal_acceptance_20261102 </dev/null",
+  "consume_command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_syntax_acceptance_20261102.py consume </dev/null",
+  "reconcile_command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_syntax_acceptance_20261102.py reconcile </dev/null",
+  "order": [
+    "登记成功回执及原生检查",
+    "隔离正负控与复用辅助函数回归实际退出0、非零命中、零失败错误必需跳过",
+    "独立30秒包外可信双消费，保存并复核真实退出与原字节证据",
+    "独立30秒四维与原13项锚点定位对账，保存并复核真实退出与原字节证据",
+    "真实人工逐结论及锚点语义审核，不由模型冒充",
+    "全部绑定必需门禁通过后才推进阶段6/7"
+  ],
+  "boundary": "命令串行、前台同步、标准输入封闭；不联网、不启动服务或网关、不操作Git、不安装依赖、不执行或写入来源、不改变生产实现或旧minimal验收入口。失败不推进依赖；超时、缺证据、缺必需人工保持BLOCKED。控制器覆盖未证明，进度仅平台任务记录。登记不是测试或验收通过证明。"
+}

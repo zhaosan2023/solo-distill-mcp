@@ -1,0 +1,22 @@
+{
+  "kind": "isolated_acceptance_controls_actual_client_receipt_reference",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "request_id": "mainline-a-schema-v3-20261030T095713Z-live-syntax-20261102T085352Z",
+  "plan_contract_version": 6,
+  "adr_revision": 16,
+  "execution_contract_revision": 17,
+  "command": "env PYTHONPATH=src:tests:verification/.scratch timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_syntax_acceptance_20261102 test_schema_v3_minimal_acceptance_20261102 </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tool_results": ["call_86e022169388135ce23ab8f4"],
+  "tests_run": 30,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "unittest_reported_seconds": 0.047,
+  "key_output": "Ran 30 tests in 0.047s; OK",
+  "registration": "verification/mainline-a-schema-v3-20261030T095713Z/phase5-syntax-acceptance.entry-registration.json",
+  "scope": "当前验收支撑16项隔离正负控及旧minimal辅助函数与旧绑定14项回归；固定调用方版本传递、绑定变化拒绝、完整来源和入站对比、双消费依赖边界、共享计数与原尝试证据复核。",
+  "not_proven": ["本窗口真实包外可信双消费", "四维与原13项锚点验收", "真实人工语义审核", "宿主加载", "阶段6/7完成"],
+  "boundary": "本回执引用已收到的真实客户端退出及完整测试输出；模拟依赖边界通过不替代真实消费或人工。本文件不是第二进度账本，不改变在线窗口原绑定，不触发业务重测。"
+}

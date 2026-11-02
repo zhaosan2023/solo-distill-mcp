@@ -1,0 +1,29 @@
+{
+  "kind": "failed_consumption_actual_client_receipt_reference",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "request_id": "mainline-a-schema-v3-20261030T095713Z-live-syntax-20261102T085352Z",
+  "status": "BLOCKED",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_syntax_acceptance_20261102.py consume </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 137,
+  "actual_command_tool_result": "call_b44c5093b40b15a2702824b5",
+  "key_output": "Killed",
+  "configured_process_limit_seconds": 30,
+  "actual_elapsed_seconds": null,
+  "termination_origin": "not_proven_by_client_output",
+  "failure_stage": "unknown_no_stage_output",
+  "trusted_dual_consumption": "not_proven",
+  "partial_acceptance_assets": "not_inspected",
+  "cleanup_of_descendants": "not_independently_verified",
+  "preserved_success_evidence": {
+    "online_exit_tool_result": "call_9e2e7276cc8f9a23e9e7fa1e",
+    "acceptance_controls_exit_tool_result": "call_86e022169388135ce23ab8f4"
+  },
+  "blocked_dependencies": [
+    "four_dimensions_and_original_13_anchor_reconciliation",
+    "real_human_conclusion_and_anchor_semantic_review",
+    "phase6_governance_delivery",
+    "phase7_final_reconciliation_and_authorized_promotion_and_archive"
+  ],
+  "boundary": "仅保存已收到的真实失败回执；退出137和Killed不足以单独区分期限强杀、资源强杀或其他终止来源。不得登记消费通过、放宽30秒门禁、自动重跑或启动第二在线窗口；只读检查相关调用链，不修改在线输出、旧证据、绑定契约、ADR状态或活动源。当前进度仅平台任务记录，本文件不是第二进度账本。"
+}

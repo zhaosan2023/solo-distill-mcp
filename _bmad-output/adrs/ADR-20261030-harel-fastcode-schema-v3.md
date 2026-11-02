@@ -5,7 +5,7 @@ contract_version: 6
 adr_revision: 16
 current_plan_contract_version: 5
 proposed_package_contract_version: 3
-status: PROPOSED
+status: ACCEPTED
 scenario: structural
 impact_tier: major_architecture_refactor
 requires_adr: true

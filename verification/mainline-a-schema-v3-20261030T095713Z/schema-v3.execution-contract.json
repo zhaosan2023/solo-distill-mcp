@@ -1,6 +1,6 @@
 {
   "contract_id": "mainline-a-schema-v3-execution-contract-1",
-  "contract_revision": 17,
+  "contract_revision": 18,
   "plan_id": "mainline-a-v2-scenario-a-20261029",
   "plan_contract_version": 6,
   "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
@@ -8,6 +8,21 @@
   "adr_revision": 16,
   "purpose": "获准实现的字段、版本组合和验收契约；不是运行回执、进度账本或通过证明。",
   "session_id": null,
+  "closing_acceptance_override": {
+    "authorization": "2026-11-02 当前用户明确替代人工必需门禁，授权仅同步活动计划及执行契约该条件；保留人工未执行的真实标记，继续生成治理蓝图、最终对账及条件满足后的转正归档。",
+    "scope": "仅当前语法恢复产物及阶段6/7；不新增ADR修订、不修改历史回执、不请求模型或增加网络调用。",
+    "precedence": "当前用户授权优先于本文件保留的历史人工必需条款及关联ADR历史条件；其他必需门禁不变。",
+    "required_acceptance": ["包外可信生产及独立双消费一致，真实外层退出0", "四维结构义务满足，原13项锚点正文完整覆盖且无缺项，真实外层退出0", "治理独立蓝图预算、路径、引用、来源及独占保存复读", "最终证据对账及安全归档"],
+    "human_review_required": false,
+    "human_semantic_review": "not_performed_not_proven",
+    "limitations": "替代门禁不表示真实人工审核、完整业务语义正确、Roo宿主加载或来源安装已经证明。",
+    "prior_evidence_contract_revision": 17,
+    "prior_evidence_policy": "原在线、消费、对账回执保持其冻结绑定及原字节，最终对账只关联当前验收替代授权；不为状态保存重跑未受影响阶段。",
+    "consume_process_seconds": 90,
+    "reconciliation_process_seconds": 90,
+    "adr_revision": 16,
+    "session_id": null
+  },
   "syntax_recovery_contract": {
     "authorization": "2026-11-02 当前用户授权该最小扩展：先同步并复核绑定契约，补充独立正负控和受影响回归；通过后仅执行一个新的独占恢复窗口。语法错误、非法来源候选和允许的上游错误共享最多3次总重试、600秒绝对期限及180秒软观测；不修补输出、不放宽其他门禁，全部必需验收通过后推进阶段6/7。",
     "precedence": "仅新增当前固定语法恢复窗口；历史窗口、分类、标记、请求、资产和回执保持原义。三处契约同步并原生复读先于实施。",
@@ -939,7 +954,7 @@
     "legacy": "旧生成 API 和主线 B 全部已存在输出保持原义及原字节；新布局只由显式新生成入口启用。"
   },
   "completion_gates": {
-    "human_semantic_review": "真实人工逐结论源码复读及 13 项锚点证据必需；模型审阅或 Oracle 退出码不代替人工，不伪造 reviewer_kind 或身份。",
+    "human_semantic_review": "本次按closing_acceptance_override由用户明确以可信双消费、四维结构及13锚点完整覆盖替代人工必需门禁；真实人工未执行且未证明，不伪造身份、reviewer_kind或人工通过。",
     "host": "工程 stdio 客户端不证明 Roo 加载；实际必需且获准宿主验收另行取证，未证明的能力如实披露。",
     "adr_promotion": "全部绑定必需门禁通过后，仅本次 ADR 转正为 ACCEPTED；缺证据保留 PROPOSED。",
     "archive": "全计划完成后独占保存含时间及计划标识的完整归档，原生复读并复核活动源标识及内容版本后才退休实际活动源；保存失败或源变化保留源。",
