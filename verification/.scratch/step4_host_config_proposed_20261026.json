@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "solo-distill-offline": {
+      "command": "/usr/bin/python3",
+      "args": [
+        "-B",
+        "-m",
+        "solo_distill.server",
+        "--config",
+        "/home/ecs-user/project/solo-distill-mcp/config/projects.json"
+      ],
+      "env": {
+        "PYTHONPATH": "/home/ecs-user/project/solo-distill-mcp/src",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}

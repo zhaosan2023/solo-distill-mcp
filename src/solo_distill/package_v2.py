@@ -19,6 +19,20 @@ def contains(parent: dict, child: dict) -> bool:
             and child["raw_end"] <= parent["raw_end"])
 
 
+def containing_selected(units, selected):
+    """Map each unit to its outermost selected syntactic ancestor in O(depth)."""
+    by_route = {tuple(units[index]["syntax_path"]): index for index in selected}
+    result = {}
+    for index, unit in enumerate(units):
+        route = tuple(unit["syntax_path"])
+        for length in range(len(route) + 1):
+            parent = by_route.get(route[:length])
+            if parent is not None and contains(units[parent], unit):
+                result[index] = parent
+                break
+    return result
+
+
 def build_package(project_id: str, snapshot_id: str, raw_files: dict[str, bytes],
                   selected: list[str], *, scenario: str = "A") -> dict[str, Any]:
     parsed = {path: extract_units(path, raw) for path, raw in sorted(raw_files.items())}
@@ -38,11 +52,14 @@ def build_package(project_id: str, snapshot_id: str, raw_files: dict[str, bytes]
             if origin not in wanted:
                 wanted.add(origin)
                 pending.append(origin)
-    owners = [(path, index) for key in sorted(wanted) for path, index in [available[key]]]
-    owners = [(path, index) for path, index in owners if not any(
-        other_path == path and other_index != index and contains(
-            parsed[path]["units"][other_index], parsed[path]["units"][index])
-        for other_path, other_index in owners)]
+    wanted_by_path = {}
+    for key in wanted:
+        path, index = available[key]
+        wanted_by_path.setdefault(path, set()).add(index)
+    containment = {path: containing_selected(value["units"], wanted_by_path.get(path, set()))
+                   for path, value in parsed.items()}
+    owners = [(path, index) for path, selected_indexes in wanted_by_path.items()
+              for index in selected_indexes if containment[path][index] == index]
     owners.sort(key=lambda pair: (pair[0], parsed[pair[0]]["units"][pair[1]]["raw_start"]))
     package = {"contract_version": 2, "kind": "knowledge_package", "parser_version": PARSER_VERSION,
                "project_id": project_id, "snapshot_id": snapshot_id, "scenario": scenario,
@@ -53,8 +70,7 @@ def build_package(project_id: str, snapshot_id: str, raw_files: dict[str, bytes]
         file_map[path] = len(package["files"])
         package["files"].append(value["file"])
         for index, unit in enumerate(value["units"]):
-            if any(owner_path == path and contains(value["units"][owner_index], unit)
-                   for owner_path, owner_index in owners):
+            if index in containment[path]:
                 unit_map[path, index] = len(package["units"])
                 package["units"].append({**unit, "file": file_map[path], "conditions": []})
     for path, index in owners:
@@ -79,8 +95,7 @@ def build_package(project_id: str, snapshot_id: str, raw_files: dict[str, bytes]
         unit = parsed[path]["units"][index]
         active = [condition_map[path, condition] for condition in unit["conditions"]]
         package["units"][public_index]["conditions"] = active
-        owner = next(owner_map[owner_path, owner_index] for owner_path, owner_index in owners
-                     if owner_path == path and contains(parsed[path]["units"][owner_index], unit))
+        owner = owner_map[path, containment[path][index]]
         package["sources"].append({"id": identity("source-v2", unit["id"]), "file": file_map[path],
             "unit": public_index, "owner": owner, "conditions": active})
     package["coverage"]["body_units"] = len(package["owners"])
@@ -173,6 +188,10 @@ def validate_package(package: Any, raw_files: dict[str, bytes]) -> None:
         require(file == value["file"], "file_identity_conflict")
         require(file["path"] not in parsed, "duplicate_file")
         parsed[file["path"]] = value
+    indexed_units = {path: {item["id"]: item for item in value["units"]}
+                     for path, value in parsed.items()}
+    indexed_conditions = {path: {item["id"]: item for item in value["conditions"]}
+                          for path, value in parsed.items()}
     unit_keys = {"id", "kind", "ast_type", "syntax_path", "qualified_name", "start", "end",
                  "char_start", "char_end", "raw_start", "raw_end", "conditions", "file"}
     actual_units = []
@@ -186,7 +205,7 @@ def validate_package(package: Any, raw_files: dict[str, bytes]) -> None:
         require(all(type(unit[key]) is int for key in ("raw_start", "raw_end")), "invalid_byte_position")
         require(type(unit["syntax_path"]) is list and all(type(part) in {str, int} for part in unit["syntax_path"]), "invalid_syntax_path")
         file = package["files"][unit["file"]]
-        expected = next((item for item in parsed[file["path"]]["units"] if item["id"] == unit["id"]), None)
+        expected = indexed_units[file["path"]].get(unit["id"])
         require(expected is not None and all(unit[key] == expected[key] for key in unit_keys - {"file", "conditions"}), "unit_identity_conflict")
         actual_units.append(expected)
     for owner in package["owners"]:
@@ -222,7 +241,7 @@ def validate_package(package: Any, raw_files: dict[str, bytes]) -> None:
         ref(item["source"], "sources")
         unit = package["units"][item["unit"]]
         file = package["files"][unit["file"]]
-        expected = next((value for value in parsed[file["path"]]["conditions"] if value["id"] == item["id"]), None)
+        expected = indexed_conditions[file["path"]].get(item["id"])
         require(expected is not None and all(item[key] == expected[key] for key in {"id", "syntax_path", "field", "branch", "scope"}) and
                 package["sources"][item["source"]]["unit"] == item["unit"] and
                 parsed[file["path"]]["units"][expected["unit"]]["id"] == unit["id"], "forged_condition")

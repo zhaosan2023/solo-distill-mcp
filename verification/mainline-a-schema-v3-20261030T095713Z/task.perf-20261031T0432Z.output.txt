@@ -1,0 +1,20 @@
+test_cancel_tick_propagates_without_network (test_schema_v3_task_oracle.TaskOracleTests.test_cancel_tick_propagates_without_network) ... ok
+test_complete_body_and_exact_post_hard_budgets (test_schema_v3_task_oracle.TaskOracleTests.test_complete_body_and_exact_post_hard_budgets) ... ok
+test_failure_precedence_and_unknowns_are_not_erased (test_schema_v3_task_oracle.TaskOracleTests.test_failure_precedence_and_unknowns_are_not_erased) ... ok
+test_frozen_post_source_alias_body_question_model_and_coverage_mutations_rejected (test_schema_v3_task_oracle.TaskOracleTests.test_frozen_post_source_alias_body_question_model_and_coverage_mutations_rejected) ... ok
+test_guard_owner_real_nested_alias_is_allowed (test_schema_v3_task_oracle.TaskOracleTests.test_guard_owner_real_nested_alias_is_allowed) ... ok
+test_invalid_model_fields_and_unsent_or_duplicate_source_ids_rejected (test_schema_v3_task_oracle.TaskOracleTests.test_invalid_model_fields_and_unsent_or_duplicate_source_ids_rejected) ... ok
+test_invalid_request_dimension_and_failure_shapes_rejected (test_schema_v3_task_oracle.TaskOracleTests.test_invalid_request_dimension_and_failure_shapes_rejected) ... ok
+test_long_unicode_prose_and_all_unknowns_preserved_and_detached (test_schema_v3_task_oracle.TaskOracleTests.test_long_unicode_prose_and_all_unknowns_preserved_and_detached) ... ok
+test_manual_four_dimensions_and_typed_sources (test_schema_v3_task_oracle.TaskOracleTests.test_manual_four_dimensions_and_typed_sources) ... ok
+test_missing_required_support_cannot_be_rehashed_as_complete (test_schema_v3_task_oracle.TaskOracleTests.test_missing_required_support_cannot_be_rehashed_as_complete) ... ok
+test_optional_missing_dimension_is_preserved_without_blocking (test_schema_v3_task_oracle.TaskOracleTests.test_optional_missing_dimension_is_preserved_without_blocking) ... ok
+test_post_duplicate_keys_float_noncanonical_and_nonbytes_rejected (test_schema_v3_task_oracle.TaskOracleTests.test_post_duplicate_keys_float_noncanonical_and_nonbytes_rejected) ... ok
+test_rehashed_identity_status_reference_and_obligation_forgery_rejected (test_schema_v3_task_oracle.TaskOracleTests.test_rehashed_identity_status_reference_and_obligation_forgery_rejected) ... ok
+test_required_omission_and_empty_candidate_derive_partial (test_schema_v3_task_oracle.TaskOracleTests.test_required_omission_and_empty_candidate_derive_partial) ... ok
+test_trusted_source_request_question_and_dimension_changes_rejected (test_schema_v3_task_oracle.TaskOracleTests.test_trusted_source_request_question_and_dimension_changes_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.371s
+
+OK

@@ -1,0 +1,128 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "新增无损表示的传输、完整源码双消费、隔离离线服务及受影响旧表示调用方定向回归；不是阶段四真实来源或在线验收",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "wire_encoding": "lz-json-v3-1",
+  "session_id": null,
+  "cwd": ".",
+  "validation_registration_success": "call_3998ec811351da8e3023edfe",
+  "groups": [
+    {
+      "client_tool_call_id": "call_5fe1875ec079be6acbb2f32b",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_lz_wire.LzWireTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 14,
+      "reported_unittest_seconds": 1.673,
+      "key_output": "Ran 14 tests in 1.673s; OK"
+    },
+    {
+      "client_tool_call_id": "call_79ec70e263d37b391db680bb",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_lz_wire.LzServiceTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 2,
+      "reported_unittest_seconds": 0.434,
+      "key_output": "Ran 2 tests in 0.434s; OK"
+    },
+    {
+      "client_tool_call_id": "call_1ca7e05be898b36284737b05",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_subtree_wire.SubtreeWireTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 12,
+      "reported_unittest_seconds": 1.399,
+      "key_output": "Ran 12 tests in 1.399s; OK"
+    },
+    {
+      "client_tool_call_id": "call_ab426c8f6bd41ae1049b6802",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_subtree_wire.SubtreeServiceTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 2,
+      "reported_unittest_seconds": 0.522,
+      "key_output": "Ran 2 tests in 0.522s; OK"
+    },
+    {
+      "client_tool_call_id": "call_eb2bea76c554999a98e7446e",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_representation_wire.RepresentationWireTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 8,
+      "reported_unittest_seconds": 0.583,
+      "key_output": "Ran 8 tests in 0.583s; OK"
+    },
+    {
+      "client_tool_call_id": "call_beefd9d66de962c5397539cc",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_representation_wire.RepresentationServiceTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 2,
+      "reported_unittest_seconds": 0.430,
+      "key_output": "Ran 2 tests in 0.430s; OK"
+    },
+    {
+      "client_tool_call_id": "call_0116a6dc71f2d800e23e6d61",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_wire_oracle </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 15,
+      "reported_unittest_seconds": 0.498,
+      "key_output": "Ran 15 tests in 0.498s; OK"
+    },
+    {
+      "client_tool_call_id": "call_707c4ea0545c453257f48c46",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_wire test_schema_v3_publish_api </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 45,
+      "reported_unittest_seconds": 2.176,
+      "key_output": "Ran 45 tests in 2.176s; OK"
+    },
+    {
+      "client_tool_call_id": "call_edcee21130a0aa0269caa3b9",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_stdio.ServiceBoundaryTests test_schema_v3_stdio.StdioIntegrationTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 6,
+      "reported_unittest_seconds": 0.514,
+      "key_output": "Ran 6 tests in 0.514s; OK"
+    }
+  ],
+  "total_test_executions": 106,
+  "counting_scope": "九组真实运行的测试执行数之和；包含导入测试类的重复执行，不宣称 106 个互不重复用例",
+  "failures": 0,
+  "errors": 0,
+  "skipped_tests": 0,
+  "timing_scope": "各组 unittest 报告的测试耗时，不是客户端总耗时或真实来源冷预检耗时",
+  "source_inspection": {
+    "new_wire_tests_readback": "call_a10b49f0b3d3139fbbe7dbe0",
+    "production_wire_changes_readback": "call_2220cabe660bb79bfd3c4afc",
+    "independent_wire_changes_readback": "call_0e91e775db916450416a2a71",
+    "service_read": "call_853e9db1f786579653ed47dc",
+    "consumer_read": "call_055a430b2dcf86b6e382f47c",
+    "client_read": "call_a1bccccbdc6b3fb0ac16fa4d",
+    "service_fixture_read": "call_da7b36683c68ddc79fd98ff1",
+    "existing_subtree_enum_update_success": "call_e3cfa5290e3d10cc68be560b"
+  },
+  "covered": [
+    "新增显式编码单帧和分片完整发布与独立编码字节一致，生产和独立消费者完整对象一致",
+    "正确协商到达两个新解码器，未知及跨版本编码拒绝且不回退",
+    "全部旧表示原字节、旧入口版本边界及既有断言保留",
+    "单帧、累计传输、实际解码帧和通知数四项硬限等值通过及降低拒绝",
+    "封闭头部、重复键、非整数 JSON、长度、摘要、Base64、截断及越界令牌和非规范表示负控",
+    "逐通知及唯一最终清单绑定协商版本，包外来源、原始生成和失败冲突拒绝",
+    "完整结构、核心和任务身份、失败与未知及取消传播",
+    "隔离真实离线 stdio 的服务枚举、客户端消费、完整投递、服务自然退出 0、无剩余输出、无网关请求和来源原字节不变断言通过"
+  ],
+  "common_failure_risk": "仍共享公开规则和 Python 标准库 AST、JSON、Base64、SHA-256；差分通过不消除此风险",
+  "not_proven": [
+    "新增表示冷链六份完整原字节保存复读",
+    "阶段四支撑新绑定的运行行为",
+    "真实来源容量及耗时",
+    "三个真实新进程冷预检",
+    "本实例唯一在线业务",
+    "历史服务拒绝根因及原服务自然退出",
+    "真实人工逐结论源码复读和 13 项锚点审核",
+    "宿主加载"
+  ],
+  "dependency_scope": "新增表示生产编解码、传输、双消费、服务与客户端定向门禁已通过；可继续获准冷链资产和阶段四支撑适配，尚未解除真实冷预检和在线前置门禁",
+  "preservation_boundary": "保留原实例、全部旧表示、主线 B、历史失败、硬限和期限；不新建在线接纳，不自动重发",
+  "controller_coverage": "未获证明；当前任务进度只使用平台任务记录引用真实回执"
+}

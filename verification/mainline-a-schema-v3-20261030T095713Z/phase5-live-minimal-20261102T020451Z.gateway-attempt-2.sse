@@ -1,0 +1,398 @@
+: ping
+
+: ping
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"{\n"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" \""},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"summary"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"\":"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" \""},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"The"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" supplied"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" source"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" bodies"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" show"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" a"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" possible"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" path"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" from"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" code"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"_qa"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" through repository"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" readiness,"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" index loading"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", Fast"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"Code.query"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", retrieval"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", generation,"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" and optional session"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" persistence. This"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" is a static"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" map, not"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" evidence that the"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" read-only sample ran"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", that its indexes"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" are valid, or"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" that an adaptation would work"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":".\",\n  \"conclusions"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"\": [\n    {\n     "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" \"dimension_id\": \"query"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"_flow\",\n     "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" \"text\": \"code_"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"qa calls _ensure_repos_ready"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":","},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" then _ensure_loaded, and returns"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" an error string if either reports failure"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":". It passes the resulting repository names to"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" FastCode.query as repo_filter. FastCode"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":".query separately rejects queries when repo"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"_indexed is false; that check is outside its"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" exception handler. The bodies"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" of both readiness helpers and the code"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" that sets repo_indexed were not supplied"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":".\",\n      \"source_ids\": [\n        \"3bde"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"ac89956"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"f17801807b9abaeba7a998c39"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"e5"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"ab56d7a6549998c3e2c916"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"f"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"566\",\n        \"3c55fe0f547e22c501"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"9fbc6f09e537128205c4c3869"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"ffd8eae3d0a204694f60c\"\n      ]\n   "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" },\n    {\n      \"dimension_id\": \"query_flow\",\n      \"text\": \"When"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" the retriever has agency mode enabled and an iterative agent exists,"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" FastCode.query constructs a minimal ProcessedQuery instead of calling query_processor.process. Otherwise it calls query"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"_processor.process with dialogue summaries and LLM enhancement requested."},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" It then calls retriever.retrieve and answer_generator.generate. This branch condition does"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" not inspect the per-call use_agency_mode argument, although that argument is passed to retrieve; without retrieve"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"'s body, their interaction cannot be settled.\",\n      \"source_ids\": [\n        \""},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"3c55fe0f547e22c5019fbc6f09e537128205c4c386"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"9ffd8eae3d0a204694f60c\"\n      ]\n    },\n    {\n      \"dimension_id\": \""},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"query_flow\",\n      \"text\": \"The supplied agency helper reconstructs"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" a ProcessedQuery and calls iterative_agent.retrieve_with_iteration; it returns the original results if the agent is absent or"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" the helper catches an exception. The supplied"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" standard-retrieval helper instead calls semantic search, optional pseudocode search, keyword search, combination, reranking,"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" and diversification before limiting results. Its general-filters"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" stage is commented out. These helpers establish possible callee behavior, not which branch"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" retrieve actually takes.\",\n      \"source_ids\": [\n        \"e7510cca5235adc213f163d7d613"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"0ce424c3c74615346a2a807d73fcddc3627c\",\n       "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" \"aee35ad795f8361d1540282746cc49ad71792226fd14bd6c913d0d8a881"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"55e45\"\n      ]\n    },\n    {\n      \"dimension_id\": \"query_flow\",\n      \"text\": \"Semantic search embeds the"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" search text, uses a nonempty filtered vector store when available or the full store otherwise"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", passes repo_filter to the store, and additionally checks returned repository names when repo_filter is set. Separate helpers"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" implement language, type"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", and path filtering and a final repository filter, but their supplied bodies do not establish that retrieve calls them. In particular"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", the supplied standard-retrieval helper does not apply its general filters.\",\n      \"source_ids\": [\n        \"c4c8a"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"1aae4e8162a15519af3e047c6c6950e9881997bcb98432ee4e2f3"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"aeaa66\",\n        \"42e32ad5d9ffdb60e15ef62b7fcc5804da659c2f141295"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"52fead458bfdec396e\",\n        \"ff351f4dfda0da31e1e6f6f083b5adb368"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"0d261d105c6e41f7abf63a8caa8648\",\n        \"aee35ad795f8361d"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"1540282746cc49ad71792226fd14bd6c913d0d8a88155e45\"\n      ]\n"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"    },\n    {\n      \"dimension_id\": \"query_flow\",\n      \"text\": \"FastCode.query gives generation the"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" original question, retrieved elements, processed-query information, full dialogue history from _get_full_dialogue_history, and an"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" optional prompt_builder. It gives retrieval recent summaries instead."},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" The supplied _truncate_context delegates to truncate_to_tokens, but no supplied generate body"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" establishes whether or how it builds and truncates this context"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":".\",\n      \"source_ids\": [\n        \"3c55fe0f547e22c5019fbc6f09e537128205c4"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"c3869ffd8eae3d0a204694f60c\",\n        \"6e88811451cda"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"06d0d7c8b87b79fde3880f897677a4c59d2e8b445cb70fabc30"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"\"\n      ]\n    },\n    {\n      \"dimension_id\": \"state_ownership\",\n      \"text\": \"code_qa gets a"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" FastCode instance, creates an"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" eight-character UUID-derived session ID if none was provided, and passes that ID even when multi_turn is false. FastCode.query"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" loads recent summaries only when both multi-turn mode and a session ID are present, but attempts to"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" save a dialogue turn whenever a session ID is present. Thus the caller selects the session ID and repository filter"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", while FastCode.query owns the shown history lookup and save attempt"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":".\",\n      \"source_ids\": [\n        \"3bdeac89956f17801807b9abaeba7a998c39e5ab56"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"d7a6549998c3e2c916f566\",\n        \"3c55fe0f547e22c5019fbc6"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"f09e537128205c4c3869ffd8eae3d0a204694f60c\"\n"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"      ]\n    },\n    {\n      \"dimension_id\": \"state_ownership\",\n      \"text\": \"FastCode.query disables"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" query-result caching in the shown body. For a session, it extracts the generated answer, summary, and formatted sources, converts"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" source and metadata values to JSON-serializable forms, and calls cache_manager.save_dialogue_turn. It ignores that"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" method's boolean return and logs a saved turn regardless. save_dialog"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"ue_turn returns false when caching is disabled or an exception is caught; it does not check the return of its internal"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" set call before returning true.\",\n      \"source_ids\": [\n        \"3c55fe0f547e22c5019fbc6"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"f09e537128205c4c3869ffd8eae3d0a204694f60c\",\n       "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" \"18bd1442ebf14ca13388be94fcc2884400bbcbd9d893e24058b"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"3934245f40f20\"\n      ]\n    },\n    {\n      \"dimension_id\": \"state_ownership\",\n      \"text\": \"Index readiness"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" involves distinct in-memory and filesystem evidence"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":": FastCode.query checks repo_indexed, while the"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" supplied _is_repo_indexed helper checks only for a named FA"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"ISS file and metadata file. File existence alone does not establish that"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" an index loads or matches the active FastCode instance. The supplied BM"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"25 loader can separately return false for a missing file or caught loading error"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":".\",\n      \"source_ids\": [\n        \"3c55fe0f547e22c5019fbc6"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"f09e537128205c4c3869ffd8eae3d0a204694f60c\",\n       "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" \"ec940072e8ca2e7ae26e6b4d4b6f08d448095dc31cab91ba93a"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"21f36f649ba64\",\n        \"4decc2a0e8c44e82edc968fa7174d9b55"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"c483338ae066fb588e6a5985dfbc0d5\"\n      ]\n    },\n    {\n      \"dimension_id\": \"failure_bound"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"aries\",\n      \"text\": \"Inside its try block, FastCode.query converts exceptions into"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" a dictionary containing answer, query, and error. Its initial"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" not-indexed RuntimeError is outside that block. code_qa reads answer"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" and sources from the returned dictionary without checking error, and appends a session ID; a returned text response therefore"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" does not prove successful retrieval or generation.\",\n      \"source_ids\": [\n        \"3c55fe0f547e22c5019fbc6f"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"09e537128205c4c3869ffd8eae3d0a204694f60c\",\n        \"3bdeac89956"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"f17801807b9abaeba7a998c39e5ab56d7a6549998c3e2c916f566"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"\"\n      ]\n    },\n    {\n      \"dimension_id\": \"failure_boundaries\",\n      \"text\": \"The supplied non-streaming OpenAI and Anthropic"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" helpers return an error string when their client is absent, but raise caught provider or response"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"-validation exceptions again. The streaming helpers instead yield error text for an absent client or caught exception. A consumer"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" must not treat all returned or yielded text as a successful"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" answer; the supplied bodies do not show how generate interprets these outcomes.\",\n"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"      \"source_ids\": [\n        \"64e53597abdf83d3827430a880cb98d05ad1364d9d46"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"aca28b995d8e140a279e\",\n        \"7dbc6309168db0b0fdf"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"528caeb2dd6ee65b604ae89d35cd3160bb3c9816f8c96\",\n        \"e3e"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"2f3413e163267a24a860ef94e98e87a611a4880628e0555a534f94402de"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"10\",\n        \"4c2bdef3d031d1e22c45de1bec93f183c88aa6aa935f8"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"cf5357a8fc871f31fd0\"\n      ]\n    },\n    {\n      \"dimension_id\": \"failure_boundaries\",\n      \"text\":"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" \"The iterative-agent bodies define adaptive iteration and line budgets and stopping"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" checks for confidence, iteration count, line count, stagnation, and estimated cost"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":". The standard-retrieval helper caps its result list"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" at retriever.max_results. These are source-level limits"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", not proof that every possible query follows those paths. No"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" supplied body establishes an end-to-end input length"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" or generation prompt-size limit.\",\n      \"source_ids\": [\n        \"2ef330ac97d04d"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"38853a9467f4213be4500b760d8383eca353a816ec620057d3\",\n        \"71c90e"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"ccc173fe2e7a60c010d59f94b243712c53b4c6fa75c4d"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"7f5bc3e59063f\",\n        \"aee35ad795f8361d1540282746cc49ad71792226fd"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"14bd6c913d0d8a88155e45\",\n        \"6e88811451cda06d0d7c8b"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"87b79fde3880f897677a4c59d2e8b445cb70fabc30\"\n      ]\n    },\n    {\n     "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" \"dimension_id\": \"scope_and_verification\",\n      \"text\": \"Loading a local repository is not inherently read-only: load_from_path either uses"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" the directory directly when it is already at the workspace destination, or"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" prepares a destination and copies the working tree, including untracked files, with symlinks preserved. Preparing an"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" occupied destination calls a backup"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" helper. Index persistence can write FAISS and metadata files. The backup helper"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"'s behavior and the exact loading/indexing path used by the sample are not supplied.\",\n"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"      \"source_ids\": [\n        \"3ea8337a4cc79f1c2bcb7141801a9fd23b61a"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"3ed19eae6baa193e997c63c4aad\",\n        \"f30079af74f72d"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"237599ee302df22093afc8fcfcef16cff1f5f54a8adeaf237a\",\n        \"0d086"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"4e396269bcb455b2662e28f479a30dc0df"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"72b55b79a038c4703d11862ec\"\n      ]\n    },\n    {\n      \"dimension_id\": \"scope_and_verification\",\n"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"      \"text\": \"For incremental indexing, index_files reads each supplied file, skips"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" it if content or parse_file returns None, indexes parsed elements, and generates embeddings for accumulated elements. A supplied parser fragment"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" handles C/C++ class or struct and function node types, and a"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" call-extractor helper accommodates dictionary or list capture formats. These fragments do not establish the complete"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" supported-language set, parse_file behavior, or compatibility with the installed parser versions.\",\n      \"source_ids\": [\n        \"2dff45803c5c"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"2609981a1dac4cbdcbf1f712a465199acef081018a2e"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"3712cfde\",\n        \"0f334d8bfb5143c931de53abbbd397724b70f1e06f"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"be22cc7356345bd765261b\",\n        \"0c7aa1f17802658fd8f479572794f6eb000"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"95f3eb6e7a55d17ced456b50ed1b5\"\n      ]\n    },\n   "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" {\n      \"dimension_id\": \"scope_and_verification\",\n      \"text\": \"The supplied entry points offer distinct"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" navigation boundaries: api.py and web_app.py each expose load-and-index routes, while mcp_server.py exposes code_qa and"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" a force-reindex route. They must not be treated as one verified deployment or substituted for"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" missing helper definitions. The supplied coverage reports 81 parsed files, 40 skipped files, and zero"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" failed files out of 121 counted files; that is source-coverage"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" information, not execution or test evidence.\",\n      \"source_ids\": [\n        \"a97fd76745148e7c4cf04cd0fc6"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"ef8a3f759b783ada1e4e66578165b20428ad0\",\n        \"bf5ad0bb"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"99510cba813d2d42a8710b83d3aa511312a6634a9634a133c36be794\",\n"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"        \"3bdeac89956f17801807b9abaeba7a998c39e5ab56d7a6549998c"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"3e2c916f566\",\n        \"539e660bfb0243dfa94d4a024e7f"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"03bf6acbdc2c921ddad4825fe586ba7f10e6\"\n      ]\n    }\n"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"  ],\n  \"unknowns\": [\n    \"The bodies of _ensure_repos_ready, _ensure_loaded, index_repository"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", the code setting repo_indexed, and the complete retriever.retrieve implementation were not supplied; actual readiness"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" and branch selection cannot be verified.\",\n    \"The bodies of QueryProcessor.process, AnswerGenerator.generate, prompt construction, _get"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"_full_dialogue_history, and truncate_to_tokens were not supplied; effective input and context limits"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" remain unverified.\",\n    \"The complete parser initialization,"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" language registry, parse_file implementation, and dependency versions were not supplied; full parser"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":" support and static syntax compatibility cannot be established from these excerpts"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":".\",\n    \"No test entry point or test result was supplied. No target code was executed, so compilation"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":", persistence, retrieval isolation, generation quality, and runtime compatibility remain un"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{"content":"verified.\"\n  ]\n}"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-a51573bd-a2a3-42c2-98eb-ae926e6e54a8","object":"chat.completion.chunk","created":1793586667,"model":"gpt-6-sol","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}
+
+data: [DONE]
+

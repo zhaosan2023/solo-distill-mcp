@@ -1,0 +1,17 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "scope": "new_cold_request_transfer_regression_only",
+  "client_result_reference": "call_39dc1191587fa3bb8ed15a36",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_cold_retry.ColdRetryTests </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "actual_exit_code": 0,
+  "tests_run": 5,
+  "test_seconds": 0.546,
+  "failures": 0,
+  "skipped": 0,
+  "checks": ["oversized_external_witness_preserved", "caller_conflict_rejected", "live_rejected", "input_limit_not_relaxed", "new_isolated_stdio_full_witness_two_consumers_six_artifacts", "independent_selection_conflict_before_launch"],
+  "prior_offline_groups_rerun": false,
+  "real_source_samples_covered": false,
+  "online_covered": false
+}

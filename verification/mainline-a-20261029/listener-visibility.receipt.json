@@ -1,0 +1,23 @@
+{
+  "receipt_version": 1,
+  "phase": "listener_visibility_diagnostic",
+  "status": "insufficient_evidence",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "command": "timeout -k 2s 15s bash -c 'id; ss -ltnp \"sport = :8080\"; python3 -B - <<'\"'\"'PY'\"'\"'\nimport json, os\nfrom pathlib import Path\ncounts = {\"processes_seen\": 0, \"fd_directories_readable\": 0, \"fd_directories_denied\": 0, \"processes_disappeared_or_other_error\": 0}\nfor p in Path(\"/proc\").iterdir():\n    if not p.name.isdigit():\n        continue\n    counts[\"processes_seen\"] += 1\n    try:\n        list((p / \"fd\").iterdir())\n        counts[\"fd_directories_readable\"] += 1\n    except PermissionError:\n        counts[\"fd_directories_denied\"] += 1\n    except OSError:\n        counts[\"processes_disappeared_or_other_error\"] += 1\nprint(json.dumps({\"effective_uid\": os.geteuid(), \"visibility\": counts}))\nPY' </dev/null",
+  "actual_exit_code": 0,
+  "effective_uid": 1000,
+  "listening_address": "127.0.0.1:8080",
+  "ss_process_identity_returned": false,
+  "visibility": {
+    "processes_seen": 156,
+    "fd_directories_readable": 33,
+    "fd_directories_denied": 123,
+    "processes_disappeared_or_other_error": 0
+  },
+  "related_health_receipt": "verification/mainline-a-20261029/health.receipt.json",
+  "conclusion": "监听端口可见，但当前读取结果没有返回拥有者 PID 和进程启动时间。存在进程描述符权限拒绝，不能将其中某个拒绝项直接认定为网关进程，也不能推断网关已重启。当前实施计划中的拥有者身份核验门禁缺证据。",
+  "gateway_restart_operations_requested": 0,
+  "gateway_write_operations_requested": 0,
+  "privilege_escalation_requested": false,
+  "evidence_basis": "实际客户端退出回执及关键输出的结构化摘录；不是重新执行或程序独立认证"
+}

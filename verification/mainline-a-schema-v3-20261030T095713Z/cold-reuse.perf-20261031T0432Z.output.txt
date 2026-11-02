@@ -1,0 +1,17 @@
+test_independent_snapshot_matches_uncached_complete_core_and_isolates_mutation (test_schema_v3_cold_reuse.ColdReuseTests.test_independent_snapshot_matches_uncached_complete_core_and_isolates_mutation) ... ok
+test_oracle_tree_keys_bind_path_bytes_and_scope_does_not_survive_failure (test_schema_v3_cold_reuse.ColdReuseTests.test_oracle_tree_keys_bind_path_bytes_and_scope_does_not_survive_failure) ... ok
+test_parent_and_service_parse_once_per_source_and_keep_two_consumers (test_schema_v3_cold_reuse.ColdReuseTests.test_parent_and_service_parse_once_per_source_and_keep_two_consumers) ... ok
+test_conflicting_witness_and_live_are_rejected (test_schema_v3_cold_retry.ColdRetryTests.test_conflicting_witness_and_live_are_rejected) ... ok
+test_independent_conflict_blocks_before_service_launch (test_schema_v3_cold_retry.ColdRetryTests.test_independent_conflict_blocks_before_service_launch) ... ok
+test_new_real_stdio_path_keeps_full_witness_and_two_consumers (test_schema_v3_cold_retry.ColdRetryTests.test_new_real_stdio_path_keeps_full_witness_and_two_consumers) ... ok
+test_other_request_fields_cannot_bypass_input_limit (test_schema_v3_cold_retry.ColdRetryTests.test_other_request_fields_cannot_bypass_input_limit) ... ok
+test_oversized_witness_stays_external_without_mutation (test_schema_v3_cold_retry.ColdRetryTests.test_oversized_witness_stays_external_without_mutation) ... ok
+test_cancel_and_existing_sample_reject_before_launch (test_schema_v3_cold_chain.ColdChainTests.test_cancel_and_existing_sample_reject_before_launch) ... ok
+test_independent_failure_never_saves_success (test_schema_v3_cold_chain.ColdChainTests.test_independent_failure_never_saves_success) ... ok
+test_real_stdio_independent_consumption_six_artifacts_and_exit (test_schema_v3_cold_chain.ColdChainTests.test_real_stdio_independent_consumption_six_artifacts_and_exit) ... ok
+test_save_failure_preserves_scene_without_pass_receipt (test_schema_v3_cold_chain.ColdChainTests.test_save_failure_preserves_scene_without_pass_receipt) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 2.240s
+
+OK

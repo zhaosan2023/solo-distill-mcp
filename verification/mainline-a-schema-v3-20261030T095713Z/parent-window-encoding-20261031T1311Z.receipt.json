@@ -1,0 +1,55 @@
+{
+  "receipt_version": 1,
+  "status": "diagnostic_completed_not_preflight_acceptance",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "session_id": null,
+  "client_tool_call_id": "call_3f4ec51582d05e30a28d4c2c",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_parent_window_20261031.py </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "observed_elapsed_seconds": 12.882458334002877,
+  "request_source": "verification/mainline-a-schema-v3-20261030T095713Z/preflight-1.selection-reuse-20261031T1234Z.request.json",
+  "frozen_file_count": 81,
+  "source_bytes": 1144162,
+  "stages_seconds": {
+    "binding": 0.0019171699968865141,
+    "parent_prepare": 8.15381262000301,
+    "independent_selection": 4.672775453000213,
+    "source_verify": 0.018413275000057183
+  },
+  "preparation_stage_seconds": {
+    "authenticate": 0.548871891995077,
+    "build": 2.6619315550051397,
+    "encode": 0.28631388599751517,
+    "index": 0.6935916990041733,
+    "read": 0.5993227889994159,
+    "scan": 0.7361089850019198,
+    "selection": 2.043813953991048,
+    "source_verify": 0.01721759700740222
+  },
+  "remaining_before_service_seconds": 14.136125125995022,
+  "complete_selection_and_post_equal": true,
+  "production_syntax": {
+    "parse_calls": 81,
+    "indexed_files": 81,
+    "structure_builds": 1,
+    "lifetime": "current_operation_only_no_historical_green_state"
+  },
+  "independent_syntax": {
+    "parse_calls": 81,
+    "inventory_builds": 81,
+    "core_builds": 0,
+    "production_expectations_shared": false,
+    "lifetime": "current_operation_only_no_cross_process_cache"
+  },
+  "service_processes_started": 0,
+  "gateway_requests": 0,
+  "preflight_samples_started": 0,
+  "online_admissions": 0,
+  "timing_scope": "single_process_measurement_overhead_included_not_original_failure",
+  "not_proven": ["稳定耗时收益", "三次真实冷预检及逐样本六份原字节凭证", "原服务拒绝根因及自然退出", "唯一在线业务", "人工语义审核", "治理验收及最终闭环"],
+  "receipt_origin": "依据真实客户端回执保存；非控制器生成，不提供程序防篡改保证。"
+}

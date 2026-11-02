@@ -1,0 +1,46 @@
+{
+  "receipt_version": 1,
+  "status": "pass_targeted_regressions_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 15,
+  "adr_revision": 14,
+  "session_id": null,
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "runs": [
+    {
+      "source_client_receipt": "call_cdedf1ad9a43a71420dfabf1",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_selection_coverage.ProductionCoverageTests test_schema_v3_selection_coverage.CoveragePreparationTests test_schema_v3_selection_coverage.CoverageBoundaryTests -v </dev/null",
+      "cwd": ".",
+      "actual_exit_code": 0,
+      "tests_run": 32,
+      "runner_elapsed_seconds": 0.573,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "key_output": "Ran 32 tests in 0.573s; OK",
+      "scope": "显式新选择版本的生产差分、准备传播、任务认证、服务离线预检、发布及包外可信双消费隔离回归。"
+    },
+    {
+      "source_client_receipt": "call_6950aa35843b3ceb52d6f62d",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_task test_schema_v3_task_oracle test_schema_v3_publish_api test_schema_v3_decode_reuse -v </dev/null",
+      "cwd": ".",
+      "actual_exit_code": 0,
+      "tests_run": 36,
+      "runner_elapsed_seconds": 2.918,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "key_output": "Ran 36 tests in 2.918s; OK",
+      "scope": "受影响的旧任务与独立任务认证、发布接口、解码复用及跨调用重新认证回归。"
+    }
+  ],
+  "total_tests_run": 68,
+  "limitations": [
+    "本记录引用真实客户端回执；不表示本文件已成功保存或复读，须等待文件工具回执。",
+    "新覆盖恢复的独占接纳、在线驱动及冷预检适配尚未完成或验证。",
+    "不证明新版本真实在线生成、stop/DONE、四维及原13项锚点对账或人工审核通过。",
+    "历史在线与历史双消费通过不继承为新选择版本通过。",
+    "阶段5尚未验收；阶段6/7不准入，ADR保持PROPOSED，活动计划及历史资产保留。"
+  ]
+}

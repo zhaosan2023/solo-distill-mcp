@@ -1,0 +1,20 @@
+{
+  "receipt_role": "固定独立正负控运行证据，不是当前进度账本，不证明生产恢复或在线验收",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 16,
+  "execution_contract_revision": 17,
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_candidate_syntax_oracle.CandidateSyntaxOracleTests test_schema_v3_candidate_oracle.CandidateOracleTests </dev/null",
+  "cwd": ".",
+  "tool_results": ["call_91b6a6e32f1d82b207aba02a"],
+  "actual_exit_code": 0,
+  "tests_run": 15,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "reported_test_seconds": 0.094,
+  "key_output": "Ran 15 tests in 0.094s; OK",
+  "coverage": ["完整合法候选及既有合法围栏", "语法错误整份拒收且保留解析位置与原输出", "重复键、非有限数、非法围栏不归类为语法重试", "非法来源及未发送别名整份拒收", "候选形状与可信请求冲突硬门禁"],
+  "independence_limit": "独立解析预期不导入生产解析器或恢复器；独立与生产均使用标准库JSON解析，存在共同失效风险。此回执不替代生产、调用方、实际在线与人工验证。",
+  "controller_coverage": "not_proven_platform_task_record_used"
+}

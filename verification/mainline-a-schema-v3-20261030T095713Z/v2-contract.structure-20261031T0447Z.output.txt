@@ -1,0 +1,21 @@
+test_decorated_async_class_and_real_parent_alias (test_v2_contract.PublicContractTests.test_decorated_async_class_and_real_parent_alias) ... ok
+test_duplicate_keys_nonfinite_and_unsupported_version (test_v2_contract.PublicContractTests.test_duplicate_keys_nonfinite_and_unsupported_version) ... ok
+test_failure_precedence_and_no_not_applicable_escape (test_v2_contract.PublicContractTests.test_failure_precedence_and_no_not_applicable_escape) ... ok
+test_invalid_keys_identities_indices_types_and_enums_rejected (test_v2_contract.PublicContractTests.test_invalid_keys_identities_indices_types_and_enums_rejected) ... ok
+test_latin1_bom_crlf_and_non_ascii_coordinates (test_v2_contract.PublicContractTests.test_latin1_bom_crlf_and_non_ascii_coordinates) ... ok
+test_main_guard_forms_are_versioned_not_guessed (test_v2_contract.PublicContractTests.test_main_guard_forms_are_versioned_not_guessed) ... ok
+test_nested_try_loop_with_and_match_conditions (test_v2_contract.PublicContractTests.test_nested_try_loop_with_and_match_conditions) ... ok
+test_role_tags_do_not_satisfy_unrelated_or_stronger_obligations (test_v2_contract.PublicContractTests.test_role_tags_do_not_satisfy_unrelated_or_stronger_obligations) ... ok
+test_same_line_statements_have_distinct_exact_offsets (test_v2_contract.PublicContractTests.test_same_line_statements_have_distinct_exact_offsets) ... ok
+test_selected_conditional_definition_reserves_complete_origin (test_v2_contract.PublicContractTests.test_selected_conditional_definition_reserves_complete_origin) ... ok
+test_stale_bytes_forged_class_header_and_sibling_alias_rejected (test_v2_contract.PublicContractTests.test_stale_bytes_forged_class_header_and_sibling_alias_rejected) ... ok
+test_v1_decoding_returns_existing_representation_unchanged (test_v2_contract.PublicContractTests.test_v1_decoding_returns_existing_representation_unchanged) ... ok
+test_authorized_batch_reads_top_import_and_method_without_execution (test_v2_contract.V2ReaderTests.test_authorized_batch_reads_top_import_and_method_without_execution) ... ok
+test_changed_snapshot_cancel_and_zero_selection_block (test_v2_contract.V2ReaderTests.test_changed_snapshot_cancel_and_zero_selection_block) ... ok
+test_oversize_complete_unit_commits_no_partial_package (test_v2_contract.V2ReaderTests.test_oversize_complete_unit_commits_no_partial_package) ... ok
+test_secret_literal_never_becomes_body_evidence (test_v2_contract.V2ReaderTests.test_secret_literal_never_becomes_body_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.168s
+
+OK

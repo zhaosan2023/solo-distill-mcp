@@ -12,11 +12,18 @@ from .evidence import EvidenceBlocked, suspicious_literal
 from .extractor import Scanner, open_root, signature
 from .package_v2 import build_package, finalize, validate_package
 from .syntax_v2 import Coordinates, extract_units, identity
+from .telemetry import BudgetTelemetry, POLICY
 
 
 def syntax_roles(raw: bytes, unit: dict) -> list[tuple[str, str]]:
+    from .snapshot_v2 import cached_roles
+    return cached_roles(raw, unit, _syntax_roles)
+
+
+def _syntax_roles(raw: bytes, unit: dict) -> list[tuple[str, str]]:
     """Roles certify listed syntax signals, NOT runtime ownership or semantics."""
-    tree = ast.parse(Coordinates(raw).text, feature_version=(3, 12))
+    from .snapshot_v2 import parsed_tree
+    tree = parsed_tree(raw)
     node: Any = tree
     for part in unit["syntax_path"]:
         node = node[part] if type(part) is int else getattr(node, part)
@@ -60,7 +67,14 @@ def attach_roles(package: dict, raw_files: dict[str, bytes]) -> dict:
 
 class V2EvidenceReader:
     """One authorized snapshot batch, protected by existing descriptor traversal."""
-    def __init__(self, scanner: Scanner, report: dict, deadline: float, cancelled: Any):
+    def __init__(self, scanner: Scanner, report: dict, deadline: float, cancelled: Any,
+                 *, budget_policy="legacy", telemetry=None):
+        if budget_policy not in {"legacy", POLICY}:
+            raise ValueError("unknown_budget_policy")
+        self.adaptive = budget_policy == POLICY
+        self.telemetry = telemetry if telemetry is not None else (BudgetTelemetry(
+            project_id=report["project_id"], snapshot_id=report["snapshot_id"])
+            if self.adaptive else None)
         self.scanner, self.report = scanner, report
         self.deadline, self.cancelled = deadline, cancelled
         self.raw_files: dict[str, bytes] = {}
@@ -73,6 +87,8 @@ class V2EvidenceReader:
 
     def inventory(self) -> list[dict]:
         self.tick()
+        if self.units:
+            return [copy.deepcopy(unit) for _, unit in self.units.values()]
         descriptor = open_root(self.scanner.project.root)
         raw_files, units = {}, {}
         try:
@@ -86,7 +102,8 @@ class V2EvidenceReader:
                 raw, version = self.scanner.read_bytes(descriptor, path, self.scanner.project.max_file_bytes)
                 if version != self.scanner.versions[path] or hashlib.sha256(raw).hexdigest() != entry["content_sha256"]:
                     raise EvidenceBlocked("source_changed")
-                if suspicious_literal(ast.parse(raw)):
+                from .snapshot_v2 import parsed_tree
+                if suspicious_literal(parsed_tree(raw, path)):
                     raise EvidenceBlocked("possible_literal_secret")
                 raw_files[path] = raw
                 for unit in extract_units(path, raw)["units"]:
@@ -102,8 +119,13 @@ class V2EvidenceReader:
             self.inventory()
         proposed = attach_roles(build_package(self.report["project_id"], self.report["snapshot_id"],
             self.raw_files, selected, scenario=scenario), self.raw_files)
-        if len(proposed["owners"]) > 32 or sum(item["body_bytes"] for item in proposed["owners"]) > 98304:
+        if not self.adaptive and (len(proposed["owners"]) > 32 or sum(item["body_bytes"] for item in proposed["owners"]) > 98304):
             raise EvidenceBlocked("required_complete_body_budget")
+        if self.adaptive:
+            self.telemetry.bodies({item["id"]: item["body_bytes"] for item in proposed["owners"]})
+            self.telemetry.protect([item["id"] for item in proposed["units"]
+                                   if item["kind"] == "definition"], "core_interface")
+            self.telemetry.protect([item["id"] for item in proposed["conditions"]], "syntax_invariant")
         self.package = proposed
         return copy.deepcopy(proposed)
 

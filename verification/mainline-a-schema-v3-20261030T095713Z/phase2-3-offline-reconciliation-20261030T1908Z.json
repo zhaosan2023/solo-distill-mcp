@@ -1,0 +1,151 @@
+{
+  "report_version": 1,
+  "report_kind": "bounded_phase_evidence_reconciliation",
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "session_id": null,
+  "scope": "本会话获准的服务、客户端、冷预检调用链及阶段 2／3 定向离线证据对账；不是全计划验收、进度账本或控制器生成状态。",
+  "conclusion": "阶段 2 的相关实现与阶段 3 的定向离线技术门禁已有对应通过证据，原先调用链及期限负控缺口已补齐。新增运行边界初次执行早于契约登记的流程偏差原样披露，不追认为事先登记。后续健康、真实三样本、在线、独立业务消费、人工与治理交付仍不在本次完成范围。",
+  "evidence_basis": "本实例既有命令回执的原生复读、会话内真实客户端执行结果及相关源码检查；未为对账重新运行已通过组，未重新执行历史任务。",
+  "binding_readback": {
+    "plan": "_bmad-output/mainline-a-v2-scenario-a-20261029.md",
+    "plan_readback_result": "call_8ac153669b3e6abe1458d011",
+    "registration_link_correction_readback_result": "call_5002a45462a8e730503f6942",
+    "execution_contract": "verification/mainline-a-schema-v3-20261030T095713Z/schema-v3.execution-contract.json",
+    "execution_contract_readback_results": ["call_362323e9022df10f54d1aa90", "call_06023cc7ab61b26229d9113a"],
+    "adr": "_bmad-output/adrs/ADR-20261030-harel-fastcode-schema-v3.md",
+    "adr_readback_result": "call_165542bb16959a667d446617",
+    "adr_status_observed": "PROPOSED",
+    "authorization_interpretation": "当前用户的明确工程授权及活动计划 v6 优先；ADR 修订 2 内的旧文档刷新授权不作为当前工程授权，也不静默改写其历史语境。"
+  },
+  "source_inspection": {
+    "server_registration_and_dispatch": "src/solo_distill/server_v3.py:25",
+    "service_preparation": "src/solo_distill/service_v3.py:167",
+    "production_selection": "src/solo_distill/preparation_v3.py:153",
+    "service_publication": "src/solo_distill/service_v3.py:197",
+    "client_call_and_consumption": "src/solo_distill/client.py:144",
+    "cold_chain_independent_consumption_and_save": "verification/.scratch/mainline_a_schema_v3_cold_chain_20261030.py:57",
+    "shared_writer_deadline_guard": "src/solo_distill/wire_v2.py:238",
+    "writer_deadline_adaptation": "src/solo_distill/server_v3.py:75",
+    "limitations": "源码检查只支持列出的接口及调用边界；不证明真实 Roo 加载、实际来源规模下性能或任意环境兼容。"
+  },
+  "coverage_evidence": [
+    {
+      "target": "符号、三图、局部闭包、封印、任务证据、生产与独立传输、显式发布、治理生成器及相关旧路径",
+      "receipt": "phase2-implemented-assets-tests.receipt.json",
+      "actual_exit_code": 0,
+      "tests_run": 203,
+      "required_skips": 0,
+      "scope_note": "仅已列出的离线夹具资产；与其他回执的继承用例重叠，不累计为独立测试总数。"
+    },
+    {
+      "target": "八组串行选择、宏观、局部及受影响旧接口回归",
+      "receipts": ["selection-legacy-recheck.receipt.json", "selection-v3-production-recheck.receipt.json", "macro-oracle-serial-recheck.receipt.json", "selection-oracle-serial-recheck.receipt.json", "production-local-serial-recheck.receipt.json", "v2-contract-serial-recheck.receipt.json", "v2-consumer-serial-recheck.receipt.json", "v2-scheduler-serial-recheck.receipt.json"],
+      "actual_exit_codes": [0, 0, 0, 0, 0, 0, 0, 0],
+      "tests_run_by_command": [27, 20, 13, 16, 11, 16, 18, 22],
+      "required_skips_by_command": [0, 0, 0, 0, 0, 0, 0, 0],
+      "scope_note": "保留原串行回执；历史汇总超时不改写为通过。"
+    },
+    {
+      "target": "来源冻结、秘密检查、变化拒绝、解析失败、零命中、取消与期限，以及扫描器回归",
+      "receipts": ["source-evidence-tests.receipt.json", "extractor-regression-tests.receipt.json"],
+      "actual_exit_codes": [0, 0],
+      "tests_run_by_command": [18, 15],
+      "required_skips_by_command": [0, 0]
+    },
+    {
+      "target": "软性观测、27 秒边界、六份原字节独占保存、fsync、复读及保存失败",
+      "receipt": "preflight-policy-tests.receipt.json",
+      "actual_exit_code": 0,
+      "tests_run": 17,
+      "required_skips": 0,
+      "scope_note": "时钟边界为注入时钟；真实耗时另由长期限负控证明，26.72 秒仅为历史策略输入。"
+    },
+    {
+      "target": "共用准备链、独立选择与核心差分、精确 POST 顺序、解析复用及来源副作用边界",
+      "receipt": "preparation-call-539fcdafd1a77ea3ee32d00d.receipt.json",
+      "actual_exit_code": 0,
+      "tests_run": 14,
+      "required_skips": 0
+    },
+    {
+      "target": "显式服务注册、旧入口拒绝、实际离线 stdio 分片、双消费、投递回执及自然退出",
+      "receipt": "stdio-integration-call-1851c1dc843b8f4f72a94cf5.receipt.json",
+      "actual_exit_code": 0,
+      "tests_run": 6,
+      "required_skips": 0,
+      "scope_note": "隔离来源，不是实际在线或宿主验收。"
+    },
+    {
+      "target": "完整冷预检调用链、独立冻结选择、双消费、六份保存复读及失败现场",
+      "receipt": "cold-chain-call-8ea44d5ab53c4830969ec88e.receipt.json",
+      "actual_exit_code": 0,
+      "tests_run": 4,
+      "required_skips": 0,
+      "scope_note": "隔离样本，不计入本实例三次真实来源预检。"
+    },
+    {
+      "target": "真实 27 秒内部保存超限拒绝",
+      "receipt": "internal-deadline-call-6f1bd1277de5bd7fc0431ee7.receipt.json",
+      "actual_exit_code": 0,
+      "tests_run": 1,
+      "required_skips": 0,
+      "observed_internal_elapsed_seconds": 27.0202917730021,
+      "scope_note": "预期拒绝断言通过；超限操作没有成功回执，失败现场保留，不登记成功冷预检。"
+    },
+    {
+      "target": "真实 30 秒外层强杀及实际退出配对复核",
+      "receipt": "process-deadline-call-b83e7446ad280c7a42ec2c7e.receipt.json",
+      "timeout_actual_exit_code": 137,
+      "termination_signal": 9,
+      "external_time_display_seconds": "30.00",
+      "post_exit_verification_exit_code": 0,
+      "worker_pid_absent": true,
+      "source_unchanged": true,
+      "success_receipt_absent": true,
+      "failure_scene_retained": true,
+      "scope_note": "驱动保存段负控；服务在注入前已退出。两位小数计时不证明无调度误差或绝对实时退出保证。"
+    },
+    {
+      "target": "180 秒假生成业务窗口、30 秒写入适配、真实管道取消和 EOF、客户端坏流及短窗口不合作服务进程退出",
+      "receipt": "runtime-boundary-call-77069f43a73c9a463b8a1f59.receipt.json",
+      "initial_command_exit_code": 1,
+      "initial_tests_run": 9,
+      "initial_failures": 1,
+      "unaffected_passes_retained": 5,
+      "affected_revalidation_exit_code": 0,
+      "affected_revalidation_tests_run": 4,
+      "affected_revalidation_required_skips": 0,
+      "scope_note": "保留初次失败，不把退出 1 改写为整组通过；修复后仅重验受影响服务类。客户端四项及不合作进程一项保留原逐项通过证据。"
+    }
+  ],
+  "repair_accounting": {
+    "file": "src/solo_distill/server_v3.py",
+    "line": 75,
+    "write_result": "call_1297d2d2d7b4db35c12e872e",
+    "readback_result": "call_b55d920ed7f11ae1b06403ec",
+    "cause": "共享写入器拒绝尚余超过 30 秒的单次期限，原服务直接传入约 180 秒业务期限导致发布拒绝。",
+    "change": "发布期限取宿主期限、业务期限和当前单调时钟加 30 秒的最小值；不缩短整体业务窗口，不改共享写入器。",
+    "impact_evidence": "受影响的四项新增服务边界实际退出 0；本次一行修改不改变客户端重组、选择、封印或保存策略接口，不以进度保存触发其重测。"
+  },
+  "procedural_deviation": {
+    "description": "新增运行边界初次命令及其受影响复验发生在活动计划补登记之前。",
+    "registration_write_result": "call_1cd3aa6cd4dc34207be0b667",
+    "link_correction_write_result": "call_3d747c66efb660504167fd38",
+    "disclosure": "已在活动计划证据纪律披露；补登记不能改变真实执行顺序。测试结果只能证明技术断言，不证明本项事先登记流程合规。"
+  },
+  "excluded_acceptance": [
+    "健康及统计端点与稳定监听 inode 绑定。",
+    "三个实际来源新进程冷预检的逐样本完整保存、计量及退出回执。",
+    "唯一实际在线业务、真实 HTTP POST、原始 SSE、生成输出及完整投递证据。",
+    "实际业务的独立双层消费、四维核验及 13 项参考锚点验收。",
+    "真实人工逐结论源码复读及身份可核对的审核证据。",
+    "本实例实际治理蓝图交付和必要且另获准的 Roo 宿主验收。",
+    "全计划最终对账、ADR 转正及活动计划安全归档。"
+  ],
+  "preservation_boundary": "未因本次对账重跑已通过前序组、改写旧失败为通过、访问网关、执行来源、占用真实三样本或在线接纳；不写事实基线，不转正 ADR，不归档活动源。",
+  "progress_authority": "平台任务记录及真实客户端回执；控制器覆盖未证明。本报告仅为有界证据对账，不生成第二份当前进度清单或防篡改保证。"
+}

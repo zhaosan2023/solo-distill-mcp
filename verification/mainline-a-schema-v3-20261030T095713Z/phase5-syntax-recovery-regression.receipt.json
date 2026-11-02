@@ -1,0 +1,20 @@
+{
+  "receipt_role": "固定语法恢复隔离回归证据，不是当前进度账本，不证明新接纳链、驱动或在线验收",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 16,
+  "execution_contract_revision": 17,
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_candidate_syntax_recovery.CandidateSyntaxRecoveryTests </dev/null",
+  "cwd": ".",
+  "tool_results": ["call_5e6000f855fa14eb44bb48b4"],
+  "actual_exit_code": 0,
+  "tests_run": 6,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "reported_test_seconds": 2.262,
+  "key_output": "Ran 6 tests in 2.262s; OK",
+  "coverage": ["生产与独立候选解析差分", "允许上游、来源与语法错误共用四次发送及同一绝对期限", "第四次成功与耗尽不发布", "同一精确请求及原始拒收输出隔离", "非法围栏、重复键、非有限数及候选形状不重试", "保存失败、取消、期限及来源变化停止下一次发送", "旧候选窗口保持解析错误硬拒绝", "隔离夹具的包外可信生产与独立双消费"],
+  "limits": "HTTP被模拟且传输回归隔离了接纳入口；不证明真实HTTP、真实stdio投递、完整新接纳链、驱动准入、真实人工或全计划完成。",
+  "controller_coverage": "not_proven_platform_task_record_used"
+}

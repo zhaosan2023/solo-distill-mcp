@@ -1,0 +1,18 @@
+test_all_model_text_unknowns_and_failures_are_preserved_and_detached (test_schema_v3_task.ProductionTaskTests.test_all_model_text_unknowns_and_failures_are_preserved_and_detached) ... ok
+test_cancel_tick_reaches_each_public_boundary (test_schema_v3_task.ProductionTaskTests.test_cancel_tick_reaches_each_public_boundary) ... ok
+test_changed_trusted_inputs_or_rehashed_structural_core_rejected (test_schema_v3_task.ProductionTaskTests.test_changed_trusted_inputs_or_rehashed_structural_core_rejected) ... ok
+test_exact_prompt_matches_independent_full_owner_view_and_gateway_encoder (test_schema_v3_task.ProductionTaskTests.test_exact_prompt_matches_independent_full_owner_view_and_gateway_encoder) ... ok
+test_invalid_candidate_and_unsent_sources_are_not_salvaged (test_schema_v3_task.ProductionTaskTests.test_invalid_candidate_and_unsent_sources_are_not_salvaged) ... ok
+test_invalid_request_questions_dimensions_failures_and_value_shapes_rejected (test_schema_v3_task.ProductionTaskTests.test_invalid_request_questions_dimensions_failures_and_value_shapes_rejected) ... ok
+test_missing_required_evidence_cannot_be_rehashed_as_complete (test_schema_v3_task.ProductionTaskTests.test_missing_required_evidence_cannot_be_rehashed_as_complete) ... ok
+test_post_tamper_duplicate_keys_noncanonical_and_types_rejected (test_schema_v3_task.ProductionTaskTests.test_post_tamper_duplicate_keys_noncanonical_and_types_rejected) ... ok
+test_production_does_not_call_independent_expected_task (test_schema_v3_task.ProductionTaskTests.test_production_does_not_call_independent_expected_task) ... ok
+test_prompt_metadata_budget_blocks_before_any_network (test_schema_v3_task.ProductionTaskTests.test_prompt_metadata_budget_blocks_before_any_network) ... ok
+test_real_nested_aliases_are_allowed_without_sibling_or_macro_reference (test_schema_v3_task.ProductionTaskTests.test_real_nested_aliases_are_allowed_without_sibling_or_macro_reference) ... ok
+test_rehashed_fields_namespaces_supports_states_and_duplicate_facts_rejected (test_schema_v3_task.ProductionTaskTests.test_rehashed_fields_namespaces_supports_states_and_duplicate_facts_rejected) ... ok
+test_required_optional_and_failure_statuses_match_independent_oracle (test_schema_v3_task.ProductionTaskTests.test_required_optional_and_failure_statuses_match_independent_oracle) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.780s
+
+OK

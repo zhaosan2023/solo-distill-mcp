@@ -1,0 +1,11 @@
+test_offline_chain_and_independent_publication_without_generation (test_schema_v3_stdio.ServiceBoundaryTests.test_offline_chain_and_independent_publication_without_generation) ... ok
+test_once_only_and_cancelled_no_success (test_schema_v3_stdio.ServiceBoundaryTests.test_once_only_and_cancelled_no_success) ... ok
+test_registration_is_explicit_extension_and_legacy_rejects_v3 (test_schema_v3_stdio.ServiceBoundaryTests.test_registration_is_explicit_extension_and_legacy_rejects_v3) ... ok
+test_wrong_versions_modes_scope_and_capabilities_fail_before_preparation (test_schema_v3_stdio.ServiceBoundaryTests.test_wrong_versions_modes_scope_and_capabilities_fail_before_preparation) ... ok
+test_offline_and_legacy_mode_selection_cannot_grant_live (test_schema_v3_stdio.StdioIntegrationTests.test_offline_and_legacy_mode_selection_cannot_grant_live) ... ok
+test_real_process_fragmented_call_complete_consumer_and_natural_exit (test_schema_v3_stdio.StdioIntegrationTests.test_real_process_fragmented_call_complete_consumer_and_natural_exit) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.491s
+
+OK

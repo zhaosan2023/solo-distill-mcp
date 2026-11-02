@@ -1,0 +1,39 @@
+{
+  "status": "pass_affected_recovery_and_driver_regression_not_online_acceptance",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 14,
+  "execution_contract_revision": 15,
+  "session_id": null,
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 58,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "tool_results": [
+    {
+      "tool_result_id": "call_d48fbc06d78c616d04f7922a",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_coverage_recovery.CoverageRecoveryTests test_schema_v3_coverage_driver.CoverageDriverTests -v </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 11,
+      "reported_seconds": 0.720,
+      "key_output": "Ran 11 tests in 0.720s; OK",
+      "scope": "新选择恢复身份、独占接纳、历史资产保护、明确版本、混合重试、精确POST、共享期限、隔离可信双消费及驱动正负控"
+    },
+    {
+      "tool_result_id": "call_401ee45ebf146a9c1112ad62",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_minimal_recovery.MinimalDriverTests test_schema_v3_extended_driver test_schema_v3_online_failure_preservation -v </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 47,
+      "reported_seconds": 2.058,
+      "key_output": "Ran 47 tests in 2.058s; OK",
+      "scope": "受影响历史恢复命名空间、共享期限、重试分类与耗尽、取消、旧资产保护、失败保存及正常流终止边界；47为实际发现数量，包含模块导入的既有测试类"
+    }
+  ],
+  "limitations": [
+    "仅记录已收到的两组真实客户端退出回执，不追认为其他前置验证通过。",
+    "隔离模拟网关，不占用真实在线接纳，不证明真实来源新冷预检、在线生成、人工语义审核或全计划完成。",
+    "控制器覆盖未证明，当前进度仍仅使用平台任务记录；此文件为验证证据而非第二进度账本。"
+  ]
+}

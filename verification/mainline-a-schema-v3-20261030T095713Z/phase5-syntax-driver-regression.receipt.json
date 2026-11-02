@@ -1,0 +1,35 @@
+{
+  "receipt_role": "固定语法恢复驱动隔离回归证据，不是当前进度账本，不证明真实工作区准入、在线业务或全计划验收",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 16,
+  "execution_contract_revision": 17,
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_candidate_syntax_driver.CandidateSyntaxDriverTests </dev/null",
+  "cwd": ".",
+  "tool_results": ["call_7057582b98ea4ff950f13e8f"],
+  "actual_exit_code": 0,
+  "tests_run": 8,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "reported_test_seconds": 0.817,
+  "key_output": "Ran 8 tests in 0.817s; OK",
+  "earlier_failures": {
+    "tool_results": ["call_09f199262bb3322c153808a2", "call_d6a1a174ba11d74fa96d698a", "call_eb48c3263f10eb40fa753acd", "call_91907bedd6d97b32a746ceaf"],
+    "actual_exit_codes": [1, 1, 1, 1],
+    "findings": ["原历史链部分标记、回执及保存资产缺失或变化未被驱动拒绝", "补充完整历史链复核后，隔离夹具缺少相应绑定及模块注册"],
+    "corrections": ["仅新语法恢复驱动先只读复核最小恢复历史链，再与候选链逐项核对并复核全部保存资产", "补全临时夹具历史绑定和模块注册，负控先通过合法基线再逐项破坏，保留全部原断言"]
+  },
+  "coverage": [
+    "显式命名空间、共享重试限制及旧模式复位",
+    "命令分发互斥且准入与在线不自动串联",
+    "完整历史链和新标记只读复核、独占接纳及旧资产原字节保护",
+    "历史资产缺失、变化、契约冲突及真实退出字段错误阻止接纳",
+    "必需回归缺失、零命中、跳过、错误修订及非零退出不得视为通过",
+    "混合尝试的原始SSE、来源与语法整份拒收记录及保存复读绑定",
+    "语法拒收记录篡改及必要保存失败不构成验收",
+    "失败保存保留原始语法拒收且不合成业务投递"
+  ],
+  "limits": "运行仅使用临时目录、隔离夹具及模拟HTTP；不证明真实工作区新准入、真实网关、真实stdio投递、冷样本当前来源、人工逐结论审核或全计划完成。全部必需受影响回归与新准入通过前，不执行新在线窗口。",
+  "controller_coverage": "not_proven_platform_task_record_used"
+}

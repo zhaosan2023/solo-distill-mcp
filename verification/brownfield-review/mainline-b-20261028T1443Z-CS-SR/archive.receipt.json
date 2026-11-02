@@ -1,0 +1,19 @@
+{
+  "evidence_kind": "bounded_transcription_of_actual_client_command_receipt",
+  "client_receipt_id": "call_3132115e26cb44c06e3bd7e8",
+  "command": "PYTHONPATH=src:tests timeout -k 2s 30s python3 -B verification/.scratch/mainline_b_steps56_20261028.py retire _bmad-output/archive/plans/20261028T145455Z-mainline-b-brownfield-distill-20261028.md </dev/null",
+  "working_directory": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "status": "ARCHIVE_SAVED_VERIFIED_ACTIVE_SOURCE_RETIRED",
+  "plan_id": "mainline-b-brownfield-distill-20261028",
+  "contract_version": 3,
+  "archive": "_bmad-output/archive/plans/20261028T145455Z-mainline-b-brownfield-distill-20261028.md",
+  "archive_sha256": "49d9b50d3d1fd4aaa75c05783ffd2f19034926b3010048f9b0ffce4d551f6be1",
+  "bytes": 10604,
+  "source_removed_after_exact_readback": true,
+  "ADR": "ACCEPTED",
+  "acceptance_scope": "five_file_offline_static_blueprint_only",
+  "business_semantics": "NOT_VERIFIED",
+  "stdio": "NOT_VERIFIED",
+  "Roo": "NOT_VERIFIED"
+}

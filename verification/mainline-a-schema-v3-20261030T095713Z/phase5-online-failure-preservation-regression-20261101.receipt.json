@@ -1,0 +1,23 @@
+{
+  "receipt_kind": "assistant_record_of_actual_client_result_not_controller_attestation",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 10,
+  "execution_contract_revision": 11,
+  "session_id": null,
+  "status": "pass",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_online_failure_preservation.FailurePreservationTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 3,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_test_seconds": 0.141,
+  "output_summary": "Ran 3 tests in 0.141s; OK",
+  "source_receipt": "client execute_command result call_3d36c4686e92d561d9dcb28f",
+  "scope": "在线驱动缺少投递回执时独立保存可用异常、传输、请求及接纳证据；保存失败如实记录且继续尝试其他资产；已有资产不覆盖。仅隔离夹具，不运行真实在线入口。",
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "evidence_boundary": "本次验证不能补回已经退出的真实恢复进程丢失的原始 SSE、模型输出、异常原因或实际 HTTP 尝试数。未执行第二个真实恢复窗口，未删除或重置任何真实接纳标记。",
+  "not_proven": ["真实恢复失败根因", "真实恢复 HTTP 尝试及重试次数", "在线正常 stop/DONE", "在线独立可信双消费", "四维及13项锚点", "真实人工语义", "治理交付", "全计划完成", "Roo宿主加载"]
+}

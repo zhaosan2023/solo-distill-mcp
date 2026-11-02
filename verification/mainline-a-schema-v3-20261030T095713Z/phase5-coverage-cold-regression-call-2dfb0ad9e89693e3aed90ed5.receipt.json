@@ -1,0 +1,47 @@
+{
+  "receipt_version": 1,
+  "status": "pass_targeted_cold_chain_regressions_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 15,
+  "adr_revision": 14,
+  "session_id": null,
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "runs": [
+    {
+      "source_client_receipt": "call_7c6928de09ecccb1a309da37",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_coverage_cold_chain test_schema_v3_cold_chain test_schema_v3_preflight_gates -v </dev/null",
+      "cwd": ".",
+      "actual_exit_code": 0,
+      "tests_run": 29,
+      "runner_elapsed_seconds": 2.401,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "key_output": "Ran 29 tests in 2.401s; OK",
+      "scope": "新选择版本的隔离冷链、可信版本传播、双消费、独占样本及旧样本保护；原冷链、取消、外层期限和保存复读回归。"
+    },
+    {
+      "source_client_receipt": "call_2dfb0ad9e89693e3aed90ed5",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_cold_retry test_schema_v3_cold_reuse test_schema_v3_lz_cold_chain test_schema_v3_representation_cold_chain test_schema_v3_subtree_cold_chain -v </dev/null",
+      "cwd": ".",
+      "actual_exit_code": 0,
+      "tests_run": 41,
+      "runner_elapsed_seconds": 9.476,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "key_output": "Ran 41 tests in 9.476s; OK",
+      "scope": "受影响的旧入站、完整外部见证、操作内复用及三种下行表示冷链兼容回归。"
+    }
+  ],
+  "total_tests_run": 70,
+  "counting_note": "实际运行命中数，包含继承测试和重复执行，不表示70个独立新增测试。",
+  "limitations": [
+    "仅引用已收到的真实客户端命令退出回执；本文件保存成功须由文件工具另行确认。",
+    "隔离夹具通过不证明当前真实来源的新版本冷预检通过。",
+    "新覆盖恢复的服务独占接纳与在线驱动适配仍未完成或验证。",
+    "不证明新在线产物、stop/DONE、四维及原13项锚点或真实人工审核通过。",
+    "阶段5尚未验收，阶段6/7未准入，ADR保持PROPOSED，活动源及历史资产保留。"
+  ]
+}

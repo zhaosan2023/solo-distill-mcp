@@ -1,0 +1,20 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_9d6a92d05a8e112b91ecd1f5",
+  "command": "PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_production_local test_schema_v3_local </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 20,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": 0.449,
+  "elapsed_scope": "unittest runner reported duration, not process wall time",
+  "key_output": "Ran 20 tests in 0.449s; OK",
+  "status": "pass",
+  "proof_scope": "production local syntax and independent local syntax oracle targeted fixtures and negative controls",
+  "not_proven": ["selection independence", "complete V3 call chain", "full offline gates", "cold preflight", "online business", "business semantics", "human semantic review", "host loading", "governance publication", "final completion"]
+}

@@ -128,7 +128,12 @@ class Server:
                 if params["name"] == DISTILL_TOOL:
                     report = self.distiller.distill(params["arguments"], cancelled, rpc_id=request_id)
                 else:
-                    report = extract(self.projects, params["arguments"])
+                    # Bound exactly once against the complete JSON-RPC frame,
+                    # including nested text escaping, request ID and final newline.
+                    report = extract(
+                        self.projects, params["arguments"],
+                        measure=lambda value: len(encode(tool_response(value, request_id))) + 1,
+                        budget_unit="jsonrpc_utf8_bytes_including_newline")
             except InputError as exception:
                 return error(request_id, -32602, str(exception))
             result = {"content": [{"type": "text", "text": encode(report).decode("utf-8")}],

@@ -10,6 +10,8 @@ from dataclasses import dataclass, field
 from fractions import Fraction
 from typing import Callable, Iterable
 
+from .telemetry import POLICY
+
 ALGORITHM_VERSION = "lifecycle-v2-1"
 MAX_STATES = 4096
 ROLE_ORDER = ("entry", "assembly", "state", "persistence", "boundary")
@@ -79,7 +81,12 @@ class SearchStopped(Exception):
 
 class Scheduler:
     def __init__(self, candidates: Iterable[Candidate], *, max_states: int = MAX_STATES,
-                 body_budget: int = 98304, stopped: Callable[[], bool] | None = None):
+                 body_budget: int = 98304, stopped: Callable[[], bool] | None = None,
+                 budget_policy="legacy", telemetry=None):
+        if budget_policy not in {"legacy", POLICY}:
+            raise ValueError("unknown_budget_policy")
+        self.adaptive = budget_policy == POLICY
+        self.telemetry = telemetry
         values = list(candidates)
         if len({item.id for item in values}) != len(values):
             raise ValueError("duplicate_candidate")
@@ -130,10 +137,10 @@ class Scheduler:
     def mandatory_fit(self, keys: set[str]):
         owners, aliases, required, counts, reserved, cost = self.accounting(keys, keys)
         borrowed = max(0, reserved["skeleton"] - 16)
-        if (reserved["context"] > 12 or reserved["exception"] > 4
+        if not self.adaptive and (reserved["context"] > 12 or reserved["exception"] > 4
                 or borrowed > 12 - reserved["context"]):
             return None, "policy_rejected"
-        if len(owners) > 32 or cost > self.body_budget:
+        if not self.adaptive and (len(owners) > 32 or cost > self.body_budget):
             return None, "capacity_proven"
         return (owners, aliases, required, counts, reserved, cost, borrowed), None
 
@@ -196,9 +203,19 @@ class Scheduler:
                              rejected_reasons=tuple(sorted(reasons)), proof_scope="none" if exhausted else "enumerated_alternatives")
         keys, chosen, fit = found
         owners, aliases, required, counts, reserved, cost, borrowed = fit
+        if self.adaptive and self.telemetry is not None:
+            if (reserved["context"] > 12 or reserved["exception"] > 4
+                    or borrowed > 12 - reserved["context"]):
+                self.telemetry.warn("quota_conflict", dict(reserved),
+                                    {"skeleton": 16, "context": 12, "exception": 4},
+                                    stage="schedule")
+            self.telemetry.observe("body_blocks", len(owners), stage="schedule")
+            self.telemetry.observe("body_bytes", cost, stage="schedule")
         required_keys = set(keys)
         original_reserved = reserved.copy()
-        limits = {"skeleton": 16 + borrowed, "context": 12 - borrowed, "exception": 4}
+        limits = {"skeleton": 16 + borrowed, "context": max(0, 12 - borrowed), "exception": 4}
+        if self.adaptive:
+            limits = {p: max(limits[p], reserved[p]) for p in PIPELINES}
         omitted = []
 
         def fill(queue):
@@ -214,7 +231,10 @@ class Scheduler:
                 optional_skeleton = sum(self.candidates[value].pipeline == "skeleton" for value in new_owners if value not in new_required)
                 per_file = Counter(self.candidates[value].path for value in new_owners
                                    if value not in new_required and self.candidates[value].pipeline == "context")
-                if (len(new_owners) > 32 or new_cost > self.body_budget
+                # Soft overage already reserved for mandatory owners is not a
+                # reason to drop them; optional noise still obeys fixed guidance.
+                if (len(new_owners) > max(32, len(owners) if self.adaptive else 32)
+                        or new_cost > max(self.body_budget, cost if self.adaptive else self.body_budget)
                         or any(new_counts[p] > limits[p] for p in PIPELINES)
                         or max(0, new_reserved["skeleton"] - 16) > borrowed
                         or optional_skeleton > max(0, 16 - original_reserved["skeleton"])

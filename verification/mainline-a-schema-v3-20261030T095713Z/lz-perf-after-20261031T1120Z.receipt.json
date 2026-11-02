@@ -1,0 +1,29 @@
+{
+  "receipt_version": 1,
+  "status": "diagnostic_completed_not_preflight_acceptance",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "client_tool_call_id": "call_d28402c80e768a7ea9c81189",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_lz_perf_20261031.py --label after </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "raw_bytes": 400503,
+  "raw_sha256": "72591246d2859566bd33eda5cdcdff6d5f0c2dc1b677395176ccc9c81a1abdb0",
+  "token_bytes": 19411,
+  "token_sha256": "c015f8b49af57b9d4f92d0e3d36f143a3ce351a3468e85e06b650cd999827349",
+  "compress_seconds": 0.3393657209962839,
+  "inflate_seconds": 0.031422006999491714,
+  "tick_calls": 116627,
+  "elapsed_seconds": 0.4757824330008589,
+  "baseline_receipt": "verification/mainline-a-schema-v3-20261030T095713Z/lz-perf-before-20261031T1117Z.receipt.json",
+  "comparison": {
+    "raw_and_token_bytes_and_hashes_equal": true,
+    "compress_and_inflate_before_seconds": 0.9203976499993587,
+    "compress_and_inflate_after_seconds": 0.3707877279957756,
+    "scope": "两次独立进程的固定内存样本观测；不是完整冷链收益、统计分布或期限保证"
+  },
+  "not_proven": ["完整生产规则回归", "受影响传输及冷链回归", "真实来源容量验收", "三个冷预检", "在线业务", "真实人工审核"],
+  "origin": "真实客户端回执的有界保存；非控制器自动生成，不提供防篡改保证"
+}

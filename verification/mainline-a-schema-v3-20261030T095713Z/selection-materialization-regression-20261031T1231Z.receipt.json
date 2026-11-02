@@ -1,0 +1,103 @@
+{
+  "receipt_version": 1,
+  "status": "targeted_regressions_pass_not_phase4_acceptance",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "session_id": null,
+  "cwd": ".",
+  "change": "共享选择物化仅对已选单元计算祖先映射；保留原单元顺序、包含判断和完整别名扫描。独立选择 Oracle 未在本次修剪中修改。",
+  "implementation_write_call": "call_8b11a762d7693ee3b95f4d59",
+  "baseline": {
+    "client_tool_call_id": "call_2c79a4c997dc0d874e7d5c2a",
+    "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_selection_reuse.SelectionMaterializationReuseTests.test_owner_mapping_does_not_visit_unselected_units </dev/null",
+    "actual_exit_code": 1,
+    "tests_run": 1,
+    "unittest_reported_seconds": 0.065,
+    "expected_assertion": "selection_materialization_unselected_owner_scan",
+    "result": "预期断言失败，定位未选单元祖先扫描；不是门禁通过，也不证明原服务拒绝根因。"
+  },
+  "verification_command_prefix": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v ",
+  "verification_command_suffix": " </dev/null",
+  "command_construction": "每组实际命令为 prefix + targets + suffix；各组分别串行执行并取得客户端实际退出回执。",
+  "groups": [
+    {
+      "targets": "test_schema_v3_selection_reuse",
+      "client_tool_call_id": "call_4ec5755b8a4d6dc0e42e8fad",
+      "actual_exit_code": 0,
+      "tests_run": 5,
+      "unittest_reported_seconds": 0.228,
+      "output_summary": "OK；完整 POST、别名、守卫、身份独立差分、四维义务、视图隔离、来源变化、取消和已选单元映射断言通过。"
+    },
+    {
+      "targets": "test_mainline_a_scouting",
+      "client_tool_call_id": "call_2917f7300b6286ef66695269",
+      "actual_exit_code": 0,
+      "tests_run": 27,
+      "unittest_reported_seconds": 5.000,
+      "output_summary": "OK；既有选择、完整正文、精确 POST、条件、解析复用及隔离网关捕获回归通过。"
+    },
+    {
+      "targets": "test_schema_v3_scouting",
+      "client_tool_call_id": "call_06f80bd33775162c053aa4b6",
+      "actual_exit_code": 0,
+      "tests_run": 20,
+      "unittest_reported_seconds": 15.872,
+      "output_summary": "OK；V3 生产选择与独立 Oracle 完整差分、身份及篡改负控通过。"
+    },
+    {
+      "targets": "test_schema_v3_preparation",
+      "client_tool_call_id": "call_3a4b5de0d067ca4b51690a41",
+      "actual_exit_code": 0,
+      "tests_run": 14,
+      "unittest_reported_seconds": 0.148,
+      "output_summary": "OK；冻结选择、完整 POST、来源变化、取消、授权范围、操作内解析及公开视图边界通过。"
+    },
+    {
+      "targets": "test_schema_v3_stdio.ServiceBoundaryTests test_schema_v3_stdio.StdioIntegrationTests",
+      "client_tool_call_id": "call_b2ef128fece37b7b9d80b764",
+      "actual_exit_code": 0,
+      "tests_run": 6,
+      "unittest_reported_seconds": 0.473,
+      "output_summary": "OK；服务边界和隔离真实 stdio、完整消费、分片及自然退出回归通过。"
+    },
+    {
+      "targets": "test_schema_v3_cold_reuse test_schema_v3_cold_retry test_schema_v3_cold_chain.ColdChainTests",
+      "client_tool_call_id": "call_95da0189513ea8ccf8a648c5",
+      "actual_exit_code": 0,
+      "tests_run": 14,
+      "unittest_reported_seconds": 1.819,
+      "output_summary": "OK；隔离冷链双消费、六份保存、自然退出、操作内复用、取消、输入冲突及失败现场回归通过。"
+    },
+    {
+      "targets": "test_schema_v3_lz_cold_chain",
+      "client_tool_call_id": "call_dbc60139242eb3d7d92c502f",
+      "actual_exit_code": 0,
+      "tests_run": 11,
+      "unittest_reported_seconds": 3.351,
+      "output_summary": "OK；显式 LZ 隔离冷链、独立完整表示、双消费、六份保存、协商绑定及失败负控通过。"
+    },
+    {
+      "targets": "test_live_v2",
+      "client_tool_call_id": "call_23183f725802de19c4282c5a",
+      "actual_exit_code": 0,
+      "tests_run": 18,
+      "unittest_reported_seconds": 0.219,
+      "output_summary": "OK；共享选择物化的旧在线调用方隔离回归通过，不是本实例真实在线业务。"
+    }
+  ],
+  "tests_run": 115,
+  "failures": 0,
+  "errors": 0,
+  "reported_skips": 0,
+  "timing_scope": "各数值为 unittest 自报测试耗时，不是外部进程总耗时；未据此计算真实冷链收益或宣称削减 1.5 秒。",
+  "receipt_origin": "依据已返回的真实客户端命令回执保存的有界摘要；非控制器生成，不提供程序防篡改保证。完整终端输出位于对应客户端回执，本文件不冒充完整原始日志。",
+  "not_proven": [
+    "本次修剪的真实来源秒数收益",
+    "原服务拒绝根因及原自然退出",
+    "三个真实冷预检及逐样本六份原字节凭证和审计",
+    "唯一在线业务准入及执行",
+    "真实人工语义审核及最终治理闭环"
+  ]
+}

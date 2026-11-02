@@ -1,0 +1,36 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_1851c1dc843b8f4f72a94cf5",
+  "command": "printf '%s\\n' '重验此前失败的 6 项新增 V3 服务／客户端门禁：准备链已保留精确 POST 字段顺序；仅运行原失败组，不重跑前序已通过单测、不访问网关、不执行来源。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_stdio.ServiceBoundaryTests test_schema_v3_stdio.StdioIntegrationTests </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "0.516",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 6 tests in 0.516s; OK",
+  "status": "pass",
+  "preceding_failure": {
+    "tool_result_id": "call_48482d3328300a4c5a7447ae",
+    "exit_code": 1,
+    "tests_run": 6,
+    "errors": 3,
+    "key_output": "v3_task_frozen_post_or_source_conflict; stdout_eof_before_v3_manifest; FAILED (errors=3)",
+    "correction": "共用准备链隔离维度及扫描报告时保留字段顺序，不以规范键排序改变精确 POST 原字节；未放宽任务认证或测试断言。"
+  },
+  "proof_scope": "新增显式 V3 服务注册及旧入口拒绝、离线服务构建与独立发布认证、单次接纳与取消、错误版本／范围／能力建连前拒绝、真实 stdio 分片调用、生产与独立消费比较、投递字节回执及服务自然退出。仅隔离夹具。",
+  "not_proven": [
+    "六份必需冷预检证据的完整调用链保存及原字节复读。",
+    "真实 27 秒内部截止与 30 秒进程退出长期限负控。",
+    "共用准备链完整定向测试入口的通过回执。",
+    "阶段 2／3 全范围对账、三次实际来源冷预检、在线业务、真实人工及宿主加载。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；控制器覆盖未证明，本文件仅为有界验证证据。"
+}

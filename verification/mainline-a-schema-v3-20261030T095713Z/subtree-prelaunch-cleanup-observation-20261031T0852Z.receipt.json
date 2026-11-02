@@ -1,0 +1,24 @@
+{
+  "receipt_version": 1,
+  "status": "point_in_time_no_matching_service_observed",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "attempt_id": "subtree-v3-2-20261031T0848Z",
+  "client_tool_call_id": "call_26b8d2618347809dfed93fdd",
+  "command": "timeout -s KILL 15s /bin/bash -o pipefail -c 'ps -eo pid=,ppid=,comm=,args= | awk '\''$3 ~ /^python/ && /-m solo_distill[.]server_v3( |$)/ { print \"observed_v3_pid=\" $1 \" ppid=\" $2; n++ } END { print \"observed_v3_process_count=\" (n+0) }'\''' </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "observed_v3_process_count": 0,
+  "key_output": "observed_v3_process_count=0",
+  "scope": "仅检查时点的进程列表，未观察到匹配的 V3 服务；不是历史自然退出或持续隔离证明",
+  "historical_service_natural_exit": "not_proven",
+  "historical_failures": "原失败、请求及现场保留，不重分类",
+  "operations": {
+    "process_termination": 0,
+    "gateway_start_or_restart": 0,
+    "business_post": 0
+  },
+  "not_proven": ["当前绑定网关健康", "新表示真实来源容量", "三个真实冷预检", "唯一在线业务", "人工语义审核", "宿主加载"],
+  "controller_coverage": "未获证明，进度仅使用平台任务记录及真实回执"
+}

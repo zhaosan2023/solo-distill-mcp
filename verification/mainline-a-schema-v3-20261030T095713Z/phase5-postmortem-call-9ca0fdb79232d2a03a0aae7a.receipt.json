@@ -1,0 +1,83 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "evidence_kind": "record_of_actual_client_command_result",
+  "tool_result_id": "call_9ca0fdb79232d2a03a0aae7a",
+  "command": "PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_live_postmortem_20261101.py </dev/null",
+  "cwd": ".",
+  "actual_diagnostic_exit_code": 0,
+  "diagnostic_scope": "仅离线对账已保存的失败现场、原字节摘要、物理容量及唯一接纳标记；诊断成功不是在线业务通过。",
+  "current_task_state": "BLOCKED",
+  "actual_online_command_result_id": "call_5333cce8d2784d77b596e7db",
+  "actual_online_outer_exit_code": 2,
+  "online_receipt_path": "verification/mainline-a-schema-v3-20261030T095713Z/phase5-live-20261101.receipt.json",
+  "online_receipt_sha256_from_original_save_result": "da12997fc28c974e6f1b6e48b20f6638921b6d77061dea90bdb3124ea787a138",
+  "online_command_reported_elapsed_seconds": 15.90841671799717,
+  "gateway_observation": {
+    "http_status": 200,
+    "elapsed_seconds": 2.210978,
+    "raw_sse_bytes": 102,
+    "raw_sse_sha256": "5ce43bd191847e8a2216c08f8ac1b3cbce4d5906b50caa538db241032c6fa34d",
+    "finish_reason": null,
+    "done_marker": false,
+    "outer_replays": 0,
+    "client_auto_retries": 0,
+    "supplier_internal_sends": "unknown"
+  },
+  "saved_sse_error": {
+    "message": "Upstream stream ended before completion",
+    "type": "upstream_stream_error"
+  },
+  "trace_failures": [
+    {"kind": "blocked", "reason": "upstream_stream_error"}
+  ],
+  "original_driver_failure": "ValueError:phase5_complete_sse_capture",
+  "model_output_count": 0,
+  "physical_measurements": {
+    "post_bytes": 132486,
+    "body_utf8_bytes": 98298,
+    "decoded_bytes": 757048,
+    "transfer_bytes": 1059576,
+    "max_frame_bytes": 21993,
+    "request_bytes_including_lf": 54638,
+    "physical_frames": 50,
+    "notification_chunks": 49
+  },
+  "physical_capacity_pass": true,
+  "capacity_scope": "失败响应的物理传输容量及独立重组通过；不证明成功生成输出的容量或可信双层消费。",
+  "asset_original_bytes_readback": {
+    "request": {"bytes": 54532, "sha256": "5b3fd5ae4ec87a730a6836bfbbf7edf3849cc1568da4c6084c1d997b5c2137d3"},
+    "stdio": {"bytes": 1059576, "sha256": "2c45d1ee11606c0d38fc0b8f43dbbd42b14bd3f7ad38a0af4bbe567e45b0446c"},
+    "request_wire": {"bytes": 54638, "sha256": "631a5cf387015fa7da0dd4eb8d462cff5b8a71819b7b6ed5188c5d3509c26cbe"},
+    "trace": {"bytes": 5467005, "sha256": "db2199236e7aa49b0f0f8955d4ad5384bac168e3f3b1491f411300a18959ab0f"},
+    "post": {"bytes": 132486, "sha256": "ebe35943ad29da3414f21b301ad560655de5540aab17eadd02353d70f283b58f"},
+    "model_outputs": {"bytes": 2, "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"},
+    "candidate": {"bytes": 45, "sha256": "ed90cbeb5922a2296b85a6287896de86e165c78781a997b012a87542534acf4c"},
+    "sse": {"bytes": 102, "sha256": "5ce43bd191847e8a2216c08f8ac1b3cbce4d5906b50caa538db241032c6fa34d"},
+    "delivery": {"bytes": 252, "sha256": "2d7812c473f16f47cc11de26b305f4b8c970e66dfaf6779967af184c64850e9b"},
+    "admission": {"bytes": 93, "sha256": "5d164f27844f1b6663b11df67e619fa9369faffd9abfdb0fa444a1d5e8b1cba9"}
+  },
+  "service_exit_code": 0,
+  "service_cleanup": "confirmed_natural_exit",
+  "soft_target_seconds": 180,
+  "process_hard_seconds": 240,
+  "soft_target_met": true,
+  "soft_overrun_seconds": 0,
+  "listener_inodes_unchanged": true,
+  "unique_admission_consumed": true,
+  "automatic_replay": false,
+  "diagnostic_network_operations": 0,
+  "cold_preflight_runs": 0,
+  "prior_test_runs": 0,
+  "upstream_root_cause": "不足以从已保存网关错误确定更深层原因。",
+  "remaining_required_gates": [
+    "成功在线生成及完整正常 SSE 结束证据",
+    "独立可信双层消费",
+    "四维及 13 项参考锚点核验",
+    "真实人工逐结论源码复读",
+    "治理蓝图生成、预算及引用验收",
+    "全部必需门禁通过后的 ADR 转正及安全归档"
+  ],
+  "retention": "原在线失败回执、现场资产及唯一接纳标记全部保留；不重发、不重启网关、不推进失败依赖；ADR 保持 PROPOSED，活动计划不归档。",
+  "source_note": "本文件是实际客户端诊断回执的有限摘录，不是新的进度账本，不宣称控制器覆盖、宿主加载或程序防篡改保证；不写入项目事实基线。"
+}

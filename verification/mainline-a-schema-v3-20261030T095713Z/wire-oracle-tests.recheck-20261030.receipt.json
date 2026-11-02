@@ -1,0 +1,28 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_0ce12611810fbdff044514ca",
+  "command": "printf '%s\\n' '重验已有 Wire V3 独立负控资产；仅运行离线夹具，不访问网关、不执行来源、不安装依赖；保留旧回执。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_wire_oracle </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 15,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "0.476",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 15 tests in 0.476s; OK",
+  "status": "pass",
+  "prior_receipt": "wire-oracle-tests.receipt.json",
+  "prior_receipt_preserved": true,
+  "proof_scope": "本次真实重验独立 Wire V3 单帧、手工分片、四项容量边界、版本与身份、任务状态及来源绑定、篡改负控、包外原始生成对象与失败记录对账、取消及期限回调传播。",
+  "limitations": [
+    "不证明完整进程耗时或 27/30 秒冷预检物理门禁。",
+    "不证明在线发送、宿主加载、人工语义或完整阶段通过。",
+    "与生产结构共享标准库 AST，保留共同失效风险。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅为局部测试证据，不是进度副本或控制器保证。"
+}

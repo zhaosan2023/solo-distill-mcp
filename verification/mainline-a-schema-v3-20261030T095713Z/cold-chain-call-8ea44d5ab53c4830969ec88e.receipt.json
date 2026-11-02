@@ -1,0 +1,28 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_8ea44d5ab53c4830969ec88e",
+  "command": "printf '%s\n' '执行已登记且尚无通过回执的 4 项冷预检完整调用链门禁：仅隔离来源、真实离线 stdio、独立选择及双消费、六份原字节保存复读与失败现场；不重跑前序已通过组，不占用真实三样本，不访问网关、不执行来源。控制器覆盖未证明，使用串行前台、封闭输入和 30 秒进程级硬期限。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_cold_chain.ColdChainTests </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 4,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "1.374",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 4 tests in 1.374s; OK",
+  "status": "pass",
+  "proof_scope": "隔离夹具中的完整冷预检调用链：独立冻结选择、真实离线 stdio、生产与独立消费比较、六份必需证据保存与复读、服务自然退出；取消和既有样本建连前拒绝、独立消费失败及保存失败不登记成功。",
+  "not_proven": [
+    "真实 27 秒保存超限负控。",
+    "真实 30 秒外层进程期限负控及实际退出取证。",
+    "阶段 2／3 全范围对账。",
+    "实际来源三次冷预检、健康绑定、在线业务、人工语义及宿主加载。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；控制器覆盖未证明，本文件仅为验证证据，不是进度账本。"
+}

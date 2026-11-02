@@ -1,0 +1,31 @@
+{
+  "receipt_version": 1,
+  "status": "pass_independent_oracle_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 15,
+  "adr_revision": 14,
+  "session_id": null,
+  "source_client_receipt": "call_37f464f6e431164ea67a23ce",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_selection_coverage_oracle test_schema_v3_selection_oracle -v </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 35,
+  "runner_elapsed_seconds": 6.388,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "key_output": "Ran 35 tests in 6.388s; OK",
+  "scope": "新选择版本独立正负控及旧版独立选择回归；真实客户端命令回执，不是生产实现或在线验收证据。",
+  "assets": [
+    "tests/schema_v3_selection_oracle.py",
+    "tests/test_schema_v3_selection_coverage_oracle.py",
+    "tests/test_schema_v3_selection_oracle.py"
+  ],
+  "limitations": [
+    "生产选择、准备、服务及可信消费的新版本传播尚未完成或验证。",
+    "不证明新版本冷预检、在线生成、四维及13项锚点、人工审核、治理或归档通过。",
+    "标准库AST及公开规则的共同失效风险仍存在。",
+    "控制器覆盖未证明；当前进度仅使用平台任务记录及真实回执。"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "subtree_isolated_service_and_real_offline_stdio_fixture_tests_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "wire_encoding": "dictionary-columnar-v3-2",
+  "client_tool_call_id": "call_58819b617887c9d36b2bb713",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_subtree_wire.SubtreeServiceTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 2,
+  "reported_test_seconds": 0.447,
+  "reported_test_seconds_scope": "unittest_report_not_total_command_elapsed",
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "key_output": "Ran 2 tests in 0.447s; OK; both listed tests reported ok",
+  "assets": [
+    "tests/test_schema_v3_subtree_wire.py",
+    "src/solo_distill/service_v3.py",
+    "src/solo_distill/client.py",
+    "src/solo_distill/consumer_v3.py"
+  ],
+  "verified_controls": [
+    "invalid_encoding_rejected_before_preparation",
+    "service_tool_schema_advertises_explicit_new_encoding",
+    "real_offline_stdio_and_production_independent_full_publications_equal",
+    "chunked_delivery_received_by_client",
+    "owned_service_natural_exit_zero_and_empty_stderr",
+    "fixture_trace_has_no_gateway_requests",
+    "trace_core_matches_authenticated_publication",
+    "delivery_written_bytes_equal_complete_received_transport",
+    "fixture_source_original_bytes_unchanged"
+  ],
+  "not_proven": [
+    "cold_chain_six_artifact_integration_for_new_encoding",
+    "all_affected_predecessor_and_default_json_regressions",
+    "real_source_capacity",
+    "three_real_cold_preflights",
+    "online_business",
+    "human_semantic_review",
+    "host_loading"
+  ],
+  "dependency_advancement": "registered_affected_predecessor_and_default_json_regressions_may_proceed; real_cold_preflight_and_online_dependencies_remain_blocked",
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "historical_failures": "retained_without_reclassification",
+  "hard_limits_and_deadlines": "unchanged"
+}

@@ -1,0 +1,40 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_595fef5d2adc5a13ca8213e5",
+  "command": "printf '%s\\n' '定向验证 V3 生产发布、分片重组及消费者与独立期望的差分，覆盖容量、身份、任务状态、篡改拒绝、取消传播、真实管道投递与线程清理，以及旧 V2 入口拒绝 V3；仅使用离线夹具，不访问网关、不执行来源、不安装依赖。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_wire.ProductionWireTests </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 25,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "1.475",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 25 tests in 1.475s; OK",
+  "status": "pass",
+  "proof_scope": "本命令实际执行的离线夹具：显式 V3 发布、单帧与分片正控、生产重组与独立接收器比较、四项实测容量边界、响应及任务身份、任务状态保留、发布端原始生成对象及外部失败冲突拒绝、取消回调传播、非阻塞真实管道完整写入、写入器禁止重用、读取线程退出，以及现有 V2 发布和消费入口拒绝 V3。",
+  "coverage_accounting": "25 项包含继承的 15 项独立接收测试，与已有 wire-oracle 测试重叠，不累加为 40 项独立覆盖。测试数量也不代表全部调用链门禁完成。",
+  "inspection_limitations": [
+    "继承测试的 accept 先执行独立接收器；独立接收器在负控上抛出异常时，生产消费者尚未调用。因此这些继承负控的通过不能单独证明生产消费者也拒绝全部重算摘要后的篡改、外部输入变化或未知协议；需要直接调用生产消费者的定向负控补足。",
+    "1.475 秒为 unittest 报告的测试耗时，不是完整进程耗时；回调期限测试不证明 27 秒内部落盘或 30 秒严格物理退出门禁。",
+    "管道成功只证明本次文件描述符写入及夹具接收，不证明网关发送、Roo 加载、真实业务语义或任意宿主背压行为。"
+  ],
+  "common_failure_risk": "生产结构实现与独立结构期望共享 Python 标准库 AST；通过不消除解析器共同失效风险。",
+  "not_proven": [
+    "生产消费者全部外部输入及重算摘要篡改负控的直接拒绝证据",
+    "V1/V2 正向回归及完整服务入口和客户端调用链兼容性",
+    "问题与四维义务驱动的选择独立性",
+    "秘密检查、来源前后变化拒绝及保存复读的完整调用链",
+    "27 秒内部落盘与 30 秒实际进程退出门禁",
+    "治理生成器路径、预算、引用及旧输出兼容验收",
+    "网关健康身份与三次串行冷预检",
+    "本实例唯一在线业务及真实 POST、完整 SSE、stdio、投递与退出清理证据",
+    "真实人工逐结论源码复读与 13 项锚点证据",
+    "治理蓝图交付、最终对账、ADR 转正与活动计划安全归档"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅保存局部测试证据，不是第二份进度账本，不证明控制器覆盖或程序防篡改。"
+}

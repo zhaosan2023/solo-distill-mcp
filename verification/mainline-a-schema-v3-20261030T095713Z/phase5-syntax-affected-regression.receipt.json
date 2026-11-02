@@ -1,0 +1,49 @@
+{
+  "receipt_role": "四组受影响回归的真实运行证据，不是当前进度账本，不证明真实新窗口准入、在线验收或全计划完成",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 16,
+  "execution_contract_revision": 17,
+  "cwd": ".",
+  "tool_results": ["call_5fbf6a333a56eff1b920423b", "call_cece91ae8bb45c6f1e7406e2", "call_451ea9b767240e27c5dc2dcf", "call_571e8d74ccc4dcc3a6c462fe"],
+  "actual_exit_code": 0,
+  "tests_run": 191,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runs": [
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_candidate_classification test_schema_v3_candidate_admission.CandidateAdmissionTests test_schema_v3_candidate_recovery.CandidateRecoveryTests test_schema_v3_candidate_driver.CandidateDriverTests </dev/null",
+      "tool_result": "call_5fbf6a333a56eff1b920423b",
+      "actual_exit_code": 0,
+      "tests_run": 21,
+      "key_output": "Ran 21 tests in 2.215s; OK"
+    },
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_task test_schema_v3_task_oracle test_schema_v3_publish_api test_schema_v3_decode_reuse test_schema_v3_minimal_gateway </dev/null",
+      "tool_result": "call_cece91ae8bb45c6f1e7406e2",
+      "actual_exit_code": 0,
+      "tests_run": 44,
+      "key_output": "Ran 44 tests in 3.392s; OK"
+    },
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_minimal_recovery.MinimalRecoveryTests test_schema_v3_minimal_recovery.MinimalDriverTests test_schema_v3_coverage_recovery.CoverageRecoveryTests test_schema_v3_coverage_driver.CoverageDriverTests test_schema_v3_live_retry test_schema_v3_extended_driver test_schema_v3_online_failure_preservation </dev/null",
+      "tool_result": "call_451ea9b767240e27c5dc2dcf",
+      "output_artifact": "cmd-1793613385193.txt",
+      "actual_exit_code": 0,
+      "tests_run": 74,
+      "key_output": "Ran 74 tests in 3.510s; OK"
+    },
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_live_failure_evidence test_schema_v3_stdio.ServiceBoundaryTests test_schema_v3_stdio.StdioIntegrationTests test_schema_v3_runtime_gates.RuntimeBoundaryTests test_schema_v3_runtime_gates.ClientStreamBoundaryTests </dev/null",
+      "tool_result": "call_571e8d74ccc4dcc3a6c462fe",
+      "output_artifact": "cmd-1793613420324.txt",
+      "actual_exit_code": 0,
+      "tests_run": 52,
+      "key_output": "Ran 52 tests in 5.281s; OK"
+    }
+  ],
+  "coverage": ["候选来源分类、旧候选接纳与恢复兼容边界", "任务构建、独立预期、可信包外输入、发布与解码复用", "固定生成参数、旧恢复命名空间、共享重试期限与失败证据保护", "服务输入、取消、期限、真实隔离stdio子进程及客户端流边界"],
+  "limits": "191为四次运行报告的测试执行次数，包含导入或继承导致的重复执行，不代表191个独立用例。测试成功不证明真实网关或当前新窗口通过；仍须复核绑定契约、完整历史资产、当前来源及独占准入，再单独执行唯一获准窗口。人工门禁未证明。",
+  "controller_coverage": "not_proven_platform_task_record_used"
+}

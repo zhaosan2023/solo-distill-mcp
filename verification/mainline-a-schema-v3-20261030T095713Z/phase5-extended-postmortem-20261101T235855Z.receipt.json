@@ -1,0 +1,110 @@
+{
+  "status": "failure_evidence_verified_not_online_acceptance",
+  "evidence_kind": "record_of_actual_client_results_and_bounded_saved_asset_inspection",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "adr_revision": 12,
+  "execution_contract_revision": 13,
+  "session_id": null,
+  "online_acceptance": "blocked",
+  "online_result": {
+    "client_result_id": "call_b8316ae6f0d1d0d8344d2473",
+    "command": "env PYTHONPATH=src:tests timeout -s KILL 600s python3 -B -S verification/.scratch/mainline_a_schema_v3_online_20261101.py live --extended </dev/null",
+    "cwd": ".",
+    "resolved_cwd": "/home/ecs-user/project/solo-distill-mcp",
+    "actual_exit_code": 2,
+    "reported_elapsed_seconds": 316.81020432300284,
+    "service_exit_code": 0,
+    "service_cleanup": "confirmed_natural_exit",
+    "original_receipt": "verification/mainline-a-schema-v3-20261030T095713Z/phase5-live-extended-20261101T233105Z.receipt.json",
+    "original_receipt_bytes": 11851,
+    "original_receipt_sha256": "f164fc7e0c858001e13bf389c4826ebe686dcae616fc97d7d76596ef3c51d433",
+    "original_receipt_exact_readback": true,
+    "failure": "ValueError:phase5_gateway_failed:upstream_error"
+  },
+  "inspection_result": {
+    "client_result_id": "call_169920dea383dc62c0fd2cb3",
+    "command": "env PYTHONPATH=src:tests timeout -s KILL 15s python3 -B -S verification/.scratch/mainline_a_extended_postmortem_20261101.py </dev/null",
+    "cwd": ".",
+    "actual_exit_code": 0,
+    "status": "failure_evidence_verified_not_online_acceptance",
+    "business_posts_by_inspection": 0,
+    "success_consumption_gates_run": 0,
+    "note": "检查退出0仅证明本次失败证据核验完成，不覆盖在线退出2或业务失败。"
+  },
+  "business_call_attempts": 1,
+  "actual_http_attempts": 2,
+  "client_auto_retries": 1,
+  "gateway_observations": [
+    {
+      "attempt_index": 1,
+      "http_status": 200,
+      "error_reason": "upstream_stream_error",
+      "upstream_error_type": "upstream_stream_error",
+      "elapsed_seconds": 2.172532,
+      "ttft_seconds": null,
+      "raw_sse_bytes": 102,
+      "finish_reason": null,
+      "done_marker": false,
+      "raw_done_markers": 0
+    },
+    {
+      "attempt_index": 2,
+      "http_status": 200,
+      "error_reason": "upstream_error",
+      "upstream_error_type": "upstream_timeout",
+      "elapsed_seconds": 300.006669,
+      "ttft_seconds": 9.415329,
+      "raw_sse_bytes": 274363,
+      "finish_reason": null,
+      "done_marker": false,
+      "raw_done_markers": 0,
+      "raw_error_message_utf8_bytes": 28,
+      "raw_error_message_terms": ["deadline", "exceeded"]
+    }
+  ],
+  "interpretation": {
+    "first_attempt": "明确上游流错误，按获准分类立即重试一次。",
+    "second_attempt": "约300.007秒后收到上游超时错误；现行契约只允许upstream_stream_error重试，该错误不在许可集合，因此未进行第三次发送。",
+    "local_deadline": "本次报告的宿主窗口和进程硬上限均为600秒；180秒只观测，外层操作约316.81秒退出，未触及600秒本地硬限。",
+    "root_cause": "not_proven",
+    "gateway_configuration": "本次观测不能证明哪一上游层施加超时，也不能证明网关统一配置为300秒或600秒。",
+    "partial_stream": "有原始SSE不等于合法成功输出；没有stop或DONE，成功model_outputs为空，不将失败片段拼接或追认为成功候选。"
+  },
+  "saved_evidence": {
+    "verified_asset_count": 15,
+    "verified_asset_bytes": 8349141,
+    "verified_asset_names": [
+      "admission", "candidate", "delivery", "model_outputs", "post",
+      "request", "request_wire", "sse", "sse_attempt_1", "sse_attempt_2",
+      "stderr", "stdio", "trace", "transport_attempt_1", "transport_attempt_2"
+    ],
+    "all_listed_asset_lengths_and_sha256_verified": true,
+    "exact_post_bytes": 132486,
+    "exact_post_matches_frozen": true,
+    "attempts_share_post_and_absolute_deadline": true,
+    "prior_evidence_preserved": true,
+    "new_admission_consumed": true,
+    "saved_delivery_matches_received_stdio": true,
+    "model_outputs_count": 0,
+    "source_writes_reported": 0,
+    "gateway_restart_operations_reported": 0,
+    "outer_replays_reported": 0,
+    "listener_after": ["11253"],
+    "success_physical_limits_acceptance": "not_proven"
+  },
+  "boundary": "不重发、不重置或删除接纳标记、不创建下一恢复窗口、不改错误许可集合、不重跑阶段1—4。当前失败阻塞成功消费、四维和13锚点、人工、治理及闭环依赖。",
+  "unfinished_gates": [
+    "合法非空输出、正常stop和完整DONE及成功物理验收",
+    "成功资产的包外可信独立双消费",
+    "四维及13项锚点对账",
+    "真实人工逐结论源码复读及锚点审核",
+    "独立主线A治理蓝图与相关验收",
+    "全部必需门禁通过后的最终对账、对应ADR转正及安全归档"
+  ],
+  "adr_status": "PROPOSED",
+  "archive": "not_performed",
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "progress_authority": "平台任务记录；本文件仅为失败证据，不镜像任务进度或另建账本。"
+}

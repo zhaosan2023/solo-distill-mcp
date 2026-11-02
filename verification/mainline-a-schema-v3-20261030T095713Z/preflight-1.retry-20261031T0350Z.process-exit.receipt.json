@@ -1,0 +1,23 @@
+{
+  "receipt_version": 1,
+  "status": "blocked",
+  "sample_id": "preflight-1",
+  "attempt_id": "retry-20261031T0350Z",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "actual_exit_code": 2,
+  "external_time_seconds": 27.60,
+  "external_time_precision": "two_decimal_observation",
+  "client_result_reference": "call_f851ae467f140ff890b205fc",
+  "command": "env PYTHONPATH=src:tests time -f 'preflight_1_retry_process_elapsed_seconds=%e actual_exit_code=%x' timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_phase4_20261031.py launch --sample preflight-1 </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "reported_error": "ClientError",
+  "reported_reason": "client_deadline_exhausted",
+  "classification": "client_internal_deadline_reached_not_outer_30_second_timeout",
+  "request_evidence": "verification/mainline-a-schema-v3-20261030T095713Z/preflight-1.retry-20261031T0350Z.request.json",
+  "six_artifact_acceptance": "not_obtained",
+  "service_cleanup": "not_yet_independently_verified",
+  "next_samples_started": false,
+  "online_started": false,
+  "preservation": "retain_original_and_retry_failures_no_overwrite_no_automatic_replay",
+  "limits_relaxed": false
+}

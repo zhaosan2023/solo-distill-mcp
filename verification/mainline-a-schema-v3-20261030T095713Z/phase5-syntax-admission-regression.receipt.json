@@ -1,0 +1,28 @@
+{
+  "receipt_role": "语法恢复独占接纳隔离回归证据，不是当前进度账本，不证明真实在线准入或业务验收",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 16,
+  "execution_contract_revision": 17,
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_candidate_syntax_admission.CandidateSyntaxAdmissionTests </dev/null",
+  "cwd": ".",
+  "tool_results": ["call_cff5ce873c2a2fac5ffe1780"],
+  "actual_exit_code": 0,
+  "tests_run": 6,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "reported_test_seconds": 1.188,
+  "key_output": "Ran 6 tests in 1.188s; OK",
+  "earlier_failure": {
+    "tool_result": "call_7230f14de223a8f901f668f4",
+    "actual_exit_code": 1,
+    "tests_run": 6,
+    "failed": 2,
+    "finding": "删除原恢复标记未阻止隔离夹具创建新槽，暴露原接纳链复核缺口。",
+    "correction": "仅新语法接纳先调用最小恢复的显式只读复核，验证历史绑定及保存资产，不重建旧槽；保留原默认持久接纳行为。"
+  },
+  "coverage": ["新槽独占与已退出候选窗口回链", "全部夹具历史绑定资产缺失或变化时停止且不创建新槽", "真实外层及服务退出字段和类型化诊断必需", "冻结输入与历史标记冲突停止", "历史候选接纳只读复核不重建旧槽", "显式新请求和选择版本以及较短调用方绝对窗口"],
+  "limits": "全部操作仅在临时夹具目录，历史HTTP被模拟；不证明真实工作区新接纳、在线驱动、真实stdio投递、人工审核或全计划完成。服务实现变化后，受影响旧证据仍须定向重验。",
+  "controller_coverage": "not_proven_platform_task_record_used"
+}

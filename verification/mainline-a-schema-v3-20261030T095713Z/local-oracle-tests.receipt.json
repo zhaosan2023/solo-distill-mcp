@@ -1,0 +1,52 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "adr_revision": 2,
+  "session_id": null,
+  "status": "pass",
+  "command": "PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_local </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "result_source": "client execute_command result call_cf5b636587a3c5c5b6f425a0",
+  "exit_code": 0,
+  "tests_run": 9,
+  "skipped": 0,
+  "unittest_reported_seconds": 0.243,
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 9 tests in 0.243s; OK",
+  "verified_scope": [
+    "包外给定核心清单对应的完整局部语法期望",
+    "显式 V2 局部兼容见证与生产 API 差分",
+    "外层守卫来源、完整正文及真实包含别名",
+    "BOM、CRLF、Latin-1、装饰器及源码坐标",
+    "24 组生成夹具的局部控制分支与绑定属性",
+    "局部表、正文、核心遗漏、身份及引用篡改负控",
+    "跨快照、完整正文容量与取消拒绝",
+    "可信夹具逐文件独立解析，不执行来源代码或访问网关"
+  ],
+  "prior_failed_attempt": {
+    "result_source": "client execute_command result call_a945862f4e50d1483315595e",
+    "exit_code": 1,
+    "tests_run": 9,
+    "failures": 2,
+    "unittest_reported_seconds": 0.247,
+    "causes": [
+      "手工夹具将裸装饰器名称误计为调用，实际显式调用为 factory、target、ValueError 三个位点",
+      "坐标负控将本来为 0 的 raw_start 改为 0，未发生实际篡改"
+    ],
+    "correction_result_source": "client apply_diff result call_6d0a0fb5d6ec6963bebf89ab",
+    "corrections": [
+      "按真实 AST 调用数核对三个位点，并新增完整表达式集合及裸装饰器正文保全断言",
+      "将 raw_start 改为 1，并对各负控新增原值与替换值必须不同的断言"
+    ]
+  },
+  "limitations": [
+    "本回执不证明核心选择独立性；该门禁尚未完成",
+    "本回执不证明 Schema 3.0 完整生产入口、封印、传输或消费者调用链兼容",
+    "本回执不代表完整离线门禁、三次冷预检或真实在线业务通过",
+    "共享标准库 AST 的共同失效风险仍存在",
+    "本回执不替代四维语义、真实人工审核或宿主运行时证据",
+    "未证明控制器覆盖；当前进度权威仍为平台任务记录及真实客户端回执"
+  ]
+}

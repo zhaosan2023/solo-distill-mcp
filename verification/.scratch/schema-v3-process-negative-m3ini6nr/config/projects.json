@@ -1,0 +1,1 @@
+{"config_version": 1, "projects": {"fixture": {"root": "/home/ecs-user/project/solo-distill-mcp/verification/.scratch/schema-v3-process-negative-m3ini6nr/source", "include": ["."], "exclude": [".git", "__pycache__"], "max_entries": 1000, "max_file_bytes": 1048576, "max_total_bytes": 16777216, "max_seconds": 10, "return_bytes": 24576}}}

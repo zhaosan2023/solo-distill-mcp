@@ -1,8 +1,10 @@
 """Fixed loopback model transport. No SDK retries, redirects or target imports."""
 from __future__ import annotations
 
+import base64
 import http.client
 import json
+import hashlib
 import socket
 import threading
 import time
@@ -11,7 +13,7 @@ from typing import Any
 MODEL = "gpt-6-sol"
 ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions"
 MAX_MESSAGE_BYTES = 384 * 1024
-# Delivery size is enforced by the local Pin, not by cutting the model stream.
+# Delivery size remains local; generation controls are an explicit recovery policy.
 
 
 class GatewayError(Exception):
@@ -44,9 +46,52 @@ def candidate_json(text: str) -> Any:
     return strict_json(stripped)
 
 
+class InvalidCandidateSyntax(ValueError):
+    """仅显式新恢复窗口消费的候选 JSON 文法拒收，不修补原输出。"""
+    reason = "invalid_candidate_json_syntax"
+
+    def __init__(self, output: str, error: json.JSONDecodeError):
+        super().__init__(self.reason)
+        self.output = output
+        self.details = {
+            "error_type": "JSONDecodeError", "message": error.msg,
+            "position": error.pos, "line": error.lineno, "column": error.colno,
+            "parsed_text_characters": len(error.doc),
+        }
+
+
+def recovery_candidate_json(output: str) -> Any:
+    """保留旧解析入口；仅候选文法错误类型化，其他硬门禁原样传播。"""
+    if type(output) is not str or not output.strip():
+        raise ValueError("nonempty_candidate_text_required")
+    stripped = output.strip()
+    if stripped.startswith("```"):
+        lines = stripped.splitlines()
+        if len(lines) < 2 or lines[0] not in {"```", "```json"} or lines[-1] != "```":
+            raise ValueError("incomplete_or_unknown_fence")
+    try:
+        return candidate_json(output)
+    except json.JSONDecodeError as error:
+        raise InvalidCandidateSyntax(output, error) from error
+
+
+def encode_request(messages: list[dict[str, str]], *,
+                   generation_controls: bool = False) -> bytes:
+    """Exact request encoding; preserve legacy bytes unless explicitly enabled."""
+    if type(generation_controls) is not bool:
+        raise ValueError("generation_controls_boolean_required")
+    payload = {"model": MODEL, "messages": messages, "stream": True}
+    if generation_controls:
+        payload.update(temperature=0.2, max_tokens=3072)
+    return json.dumps(payload, ensure_ascii=False, allow_nan=False,
+                      separators=(",", ":")).encode("utf-8")
+
+
 class Gateway:
     """One HTTP request per call; upstream recovery belongs to the existing gateway."""
-    def __init__(self):
+    def __init__(self, *, capture_stream: bool = False, absolute_timeout: bool = False):
+        self.capture_stream = capture_stream
+        self.absolute_timeout = absolute_timeout is True
         self._lock = threading.Lock()
         self._connection: http.client.HTTPConnection | None = None
         self._socket: socket.socket | None = None
@@ -66,7 +111,8 @@ class Gateway:
             connection.close()
 
     def generate(self, messages: list[dict[str, str]], deadline: float,
-                 cancelled: threading.Event) -> tuple[str, dict[str, Any]]:
+                 cancelled: threading.Event, *,
+                 generation_controls: bool = False) -> tuple[str, dict[str, Any]]:
         started = time.monotonic()
         observation: dict[str, Any] = {
             "endpoint": ENDPOINT, "request_model": MODEL,
@@ -84,16 +130,17 @@ class Gateway:
             if value <= 0:
                 raise GatewayError("gateway_deadline_exhausted", observation)
             return value
-        payload = json.dumps({"model": MODEL, "messages": messages, "stream": True}, ensure_ascii=False,
-                             allow_nan=False, separators=(",", ":")).encode("utf-8")
+        payload = encode_request(messages, generation_controls=generation_controls)
         observation["message_bytes"] = len(payload)
+        observation["message_sha256"] = hashlib.sha256(payload).hexdigest()
         if len(payload) > MAX_MESSAGE_BYTES:
             raise GatewayError("message_budget_exhausted", observation)
         connection = http.client.HTTPConnection("127.0.0.1", 8080,
-                                               timeout=min(10.0, remaining()))
+                                               timeout=remaining() if self.absolute_timeout else min(10.0, remaining()))
         with self._lock:
             self._connection = connection
         answer: list[str] = []
+        captured = bytearray() if self.capture_stream else None
         try:
             remaining()
             connection.request("POST", "/v1/chat/completions", body=payload,
@@ -104,7 +151,7 @@ class Gateway:
                 self._socket = transport_socket
             remaining()
             if transport_socket is not None:
-                transport_socket.settimeout(min(30.0, remaining()))
+                transport_socket.settimeout(remaining() if self.absolute_timeout else min(30.0, remaining()))
             response = connection.getresponse()
             observation["http_status"] = response.status
             if response.status != 200:
@@ -129,8 +176,15 @@ class Gateway:
                     terminal = True
                     return
                 value = strict_json(data.decode("utf-8"))
-                if not isinstance(value, dict) or value.get("error"):
-                    raise GatewayError("upstream_stream_error", observation)
+                if not isinstance(value, dict):
+                    raise GatewayError("invalid_sse_object", observation)
+                if "error" in value:
+                    error = value["error"]
+                    kind = error.get("type") if type(error) is dict else None
+                    observation["upstream_error_type"] = kind if type(kind) is str else None
+                    reason = (kind if type(kind) is str and kind in {
+                        "upstream_stream_error", "upstream_timeout"} else "upstream_error")
+                    raise GatewayError(reason, observation)
                 reported = value.get("model")
                 if isinstance(reported, str) and reported not in observation["reported_models"]:
                     observation["reported_models"].append(reported)
@@ -167,9 +221,11 @@ class Gateway:
                     observation["finish_reason"] = finish
             while not terminal:
                 if transport_socket is not None:
-                    transport_socket.settimeout(min(60.0, remaining()))
+                    transport_socket.settimeout(remaining() if self.absolute_timeout else min(60.0, remaining()))
                 remaining()
                 chunk = response.read1(65536)
+                if captured is not None:
+                    captured.extend(chunk)
                 remaining()
                 if not chunk:
                     raise GatewayError("stream_ended_without_done", observation)
@@ -183,8 +239,9 @@ class Gateway:
                     elif line.startswith(b"data:"):
                         event.append(line[5:].lstrip(b" "))
                     elif line.startswith(b"event:"):
-                        if line[6:].strip() == b"error":
-                            raise GatewayError("upstream_stream_error", observation)
+                        # Event labels alone cannot classify a retryable upstream
+                        # failure. Parse its complete data object at the boundary.
+                        pass
                     elif not line.startswith((b":", b"id:", b"retry:")):
                         raise GatewayError("invalid_sse_field", observation)
                     if terminal:
@@ -203,6 +260,10 @@ class Gateway:
             raise GatewayError(reason, observation) from exception
         finally:
             observation["elapsed_seconds"] = round(time.monotonic() - started, 6)
+            if captured is not None:
+                observation["raw_sse_base64"] = base64.b64encode(captured).decode("ascii")
+                observation["raw_sse_bytes"] = len(captured)
+                observation["raw_sse_sha256"] = hashlib.sha256(captured).hexdigest()
             connection.close()
             with self._lock:
                 self._connection = None

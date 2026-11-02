@@ -1,0 +1,30 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_205d280d18ecae458ae395ab",
+  "command": "# 执行已登记串行验证的第四组：完整独立选择 Oracle 的源码信号、核心义务、选择身份及篡改负控；仅离线夹具，保留 30 秒硬期限。\nPYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_selection_oracle </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 16,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "6.050",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 16 tests in 6.050s; OK",
+  "status": "pass",
+  "proof_scope": "已登记串行验证第四组的完整独立选择 Oracle 测试，覆盖源码信号、四维直接义务、完整正文及真实包含别名、编码及预算边界、有界探索、问题及输入身份、重新签名篡改拒绝、取消，以及独立依赖闭包不导入生产模块。仅证明本组离线夹具通过，不替代生产服务调用链或人工语义验收。",
+  "coverage_accounting": "16 为本命令实际执行数；与生产选择测试的继承用例有重叠，不相加宣称独立测试总数。",
+  "historical_failure": "selection-graph-initial-timeout.receipt.json 原样保留；历史汇总退出 137 不改写为通过。",
+  "not_proven": [
+    "其余四组完整重验通过。",
+    "完整显式 V3 服务、客户端、来源秘密检查、前后变化拒绝及保存复读调用链。",
+    "软 SLO 与 27/30 秒硬期限的完整阶段门禁。",
+    "阶段 2 或阶段 3 完成；后续健康绑定、三次冷预检或在线依赖可推进。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅保存有界验证证据，不另建进度账本。"
+}

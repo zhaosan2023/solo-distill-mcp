@@ -1,0 +1,17 @@
+test_cancellation_is_propagated_from_build_and_validation (test_schema_v3_production_macro.ProductionMacroTests.test_cancellation_is_propagated_from_build_and_validation) ... ok
+test_complete_manual_fixture_matches_independent_oracle (test_schema_v3_production_macro.ProductionMacroTests.test_complete_manual_fixture_matches_independent_oracle) ... ok
+test_condition_branches_and_pattern_bindings (test_schema_v3_production_macro.ProductionMacroTests.test_condition_branches_and_pattern_bindings) ... ok
+test_empty_bom_crlf_latin1_and_required_metadata_are_preserved (test_schema_v3_production_macro.ProductionMacroTests.test_empty_bom_crlf_latin1_and_required_metadata_are_preserved) ... ok
+test_evaluation_phases_and_lexical_class_boundary (test_schema_v3_production_macro.ProductionMacroTests.test_evaluation_phases_and_lexical_class_boundary) ... ok
+test_every_required_field_and_denominator_is_authenticated (test_schema_v3_production_macro.ProductionMacroTests.test_every_required_field_and_denominator_is_authenticated) ... ok
+test_generated_binding_and_aggregation_properties (test_schema_v3_production_macro.ProductionMacroTests.test_generated_binding_and_aggregation_properties) ... ok
+test_invalid_source_and_identity_inputs_fail_closed (test_schema_v3_production_macro.ProductionMacroTests.test_invalid_source_and_identity_inputs_fail_closed) ... ok
+test_order_and_result_detachment (test_schema_v3_production_macro.ProductionMacroTests.test_order_and_result_detachment) ... ok
+test_project_snapshot_and_content_are_bound (test_schema_v3_production_macro.ProductionMacroTests.test_project_snapshot_and_content_are_bound) ... ok
+test_relative_import_and_nonclass_base (test_schema_v3_production_macro.ProductionMacroTests.test_relative_import_and_nonclass_base) ... ok
+test_source_is_only_parsed_and_independent_oracle_is_not_called (test_schema_v3_production_macro.ProductionMacroTests.test_source_is_only_parsed_and_independent_oracle_is_not_called) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.336s
+
+OK

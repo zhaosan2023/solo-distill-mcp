@@ -1,0 +1,51 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "subtree_isolated_cold_chain_fixture_tests_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "wire_encoding": "dictionary-columnar-v3-2",
+  "client_tool_call_id": "call_22dc9c389234b7dc31999dca",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_subtree_cold_chain.SubtreeColdChainTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 9,
+  "reported_test_seconds": 3.177,
+  "reported_test_seconds_scope": "unittest_report_not_total_command_elapsed",
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "key_output": "Ran 9 tests in 3.177s; OK; all 9 listed tests reported ok",
+  "assets": [
+    "tests/test_schema_v3_subtree_cold_chain.py",
+    "tests/test_schema_v3_representation_cold_chain.py",
+    "verification/.scratch/mainline_a_schema_v3_cold_chain_20261030.py"
+  ],
+  "verified_controls": [
+    "explicit_encoding_and_complete_external_selection_witness",
+    "real_offline_stdio_and_complete_publication_dual_consumption",
+    "six_original_byte_artifacts_saved_and_read_back",
+    "saved_core_package_task_and_exact_post_agree_with_authenticated_publication",
+    "actual_delivery_bytes_and_unchanged_fixture_source_bytes",
+    "notifications_and_unique_final_manifest_bind_new_encoding",
+    "owned_service_natural_exit_zero",
+    "no_gateway_requests",
+    "cancellation_and_existing_sample_rejected_before_launch",
+    "independent_failure_and_encoding_conflicts_do_not_save_success",
+    "save_failure_retains_scene_without_success_receipt"
+  ],
+  "not_proven": [
+    "remaining_affected_cold_chain_regressions",
+    "real_source_capacity",
+    "three_real_cold_preflights",
+    "online_business",
+    "human_semantic_review",
+    "host_loading"
+  ],
+  "dependency_advancement": "registered_affected_cold_chain_regressions_may_proceed; real_cold_preflight_and_online_dependencies_remain_blocked",
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "historical_failures": "retained_without_reclassification",
+  "hard_limits_and_deadlines": "unchanged"
+}

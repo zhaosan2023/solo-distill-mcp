@@ -15,7 +15,9 @@ from .syntax_v2 import Coordinates, identity
 DEFINITIONS = (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)
 
 
-def extract_relations(package: dict, raw_files: dict[str, bytes]) -> list[dict]:
+def extract_relations(package: dict, raw_files: dict[str, bytes], *, tick=None) -> list[dict]:
+    tick = tick if tick is not None else (lambda: None)
+    tick()
     units = package["units"]
     routes = {(unit["file"], tuple(unit["syntax_path"])): index for index, unit in enumerate(units)}
     module_files = defaultdict(list)
@@ -26,7 +28,9 @@ def extract_relations(package: dict, raw_files: dict[str, bytes]) -> list[dict]:
     file_records = {}
     records = []
     for file_index, file in enumerate(package["files"]):
-        tree = ast.parse(Coordinates(raw_files[file["path"]]).text, feature_version=(3, 12))
+        tick()
+        from .snapshot_v2 import parsed_tree
+        tree = parsed_tree(raw_files[file["path"]], file["path"])
         scopes = {(): {"parent": None, "counts": Counter(), "bindings": {}, "unsafe": set()}}
         records_for_file = []
 
@@ -39,6 +43,7 @@ def extract_relations(package: dict, raw_files: dict[str, bytes]) -> list[dict]:
                 item["unsafe"].add(name)
 
         def walk(node, route, scope, owner, conditional=False):
+            tick()
             public = routes.get((file_index, tuple(route)))
             if public is not None:
                 owner = public
@@ -139,8 +144,14 @@ def extract_relations(package: dict, raw_files: dict[str, bytes]) -> list[dict]:
             return binding[1], None
         return None, reason or "import_target_not_selected"
 
+    condition_prefixes = defaultdict(list)
+    for index, condition in enumerate(package["conditions"]):
+        file_index = units[condition["unit"]]["file"]
+        prefix = tuple(condition["syntax_path"] + [condition["field"]])
+        condition_prefixes[file_index, prefix].append(index)
     relations = []
     for file_index, node, route, scope, owner in records:
+        tick()
         target, reason = None, "dynamic_attribute_dispatch"
         layer = "call" if isinstance(node, ast.Call) else "import"
         if isinstance(node, ast.Call):
@@ -169,20 +180,19 @@ def extract_relations(package: dict, raw_files: dict[str, bytes]) -> list[dict]:
                 "end": [node.end_lineno, node.end_col_offset], "expression": text}
         conditions = list(units[owner]["conditions"])
         # Calls inside a selected complete unit inherit lexical branch origins.
-        for index, condition in enumerate(package["conditions"]):
-            origin = units[condition["unit"]]
-            if origin["file"] != file_index:
-                continue
-            branch_route = condition["syntax_path"] + [condition["field"]]
-            if route[:len(branch_route)] == branch_route and index not in conditions:
-                conditions.append(index)
+        matched = set()
+        for length in range(len(route) + 1):
+            matched.update(condition_prefixes.get((file_index, tuple(route[:length])), ()))
+        conditions.extend(index for index in sorted(matched) if index not in conditions)
         relation = {"id": identity("relation-v2", [units[owner]["id"], site, layer,
                      None if target is None else units[target]["id"], conditions, reason]),
                     "from_unit": owner, "to_unit": target, "layer": layer,
                     "direction": "caller_to_dependency", "conditions": conditions,
                     "sources": [owner], "reason": reason, "site": site}
         relations.append(relation)
-    return sorted(relations, key=lambda item: item["id"])
+    result = sorted(relations, key=lambda item: item["id"])
+    tick()
+    return result
 
 
 def determined_graph(package: dict, *, layer: str = "call") -> dict[str, set[str]]:

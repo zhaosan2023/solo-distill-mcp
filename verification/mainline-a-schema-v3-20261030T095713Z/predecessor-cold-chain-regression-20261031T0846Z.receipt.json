@@ -1,0 +1,43 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "predecessor_representation_isolated_cold_chain_regression_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "wire_encoding": "dictionary-columnar-v3-1",
+  "client_tool_call_id": "call_9cd94eb248cad2856f98a6f5",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_representation_cold_chain.RepresentationColdChainTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 7,
+  "reported_test_seconds": 1.845,
+  "reported_test_seconds_scope": "unittest_report_not_total_command_elapsed",
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "key_output": "Ran 7 tests in 1.845s; OK; all 7 listed tests reported ok",
+  "verified_controls": [
+    "explicit_encoding_and_complete_external_selection_witness",
+    "real_offline_stdio_and_complete_publication_dual_consumption",
+    "six_original_byte_artifacts_saved_and_read_back",
+    "saved_original_objects_and_actual_delivery_bytes_agree",
+    "owned_service_natural_exit_zero_and_no_gateway_requests",
+    "fixture_source_original_bytes_unchanged",
+    "cancellation_and_existing_sample_rejected_before_launch",
+    "independent_failure_and_encoding_conflict_do_not_save_success",
+    "save_failure_retains_scene_without_success_receipt"
+  ],
+  "not_proven": [
+    "remaining_default_cold_chain_retry_and_reuse_regressions",
+    "real_source_capacity_for_new_encoding",
+    "three_real_cold_preflights",
+    "online_business",
+    "human_semantic_review",
+    "host_loading"
+  ],
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "historical_failures": "retained_without_reclassification",
+  "hard_limits_and_deadlines": "unchanged"
+}

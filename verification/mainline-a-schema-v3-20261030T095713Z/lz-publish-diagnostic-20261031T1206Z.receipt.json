@@ -1,0 +1,57 @@
+{
+  "receipt_version": 1,
+  "status": "diagnostic_completed_not_preflight_acceptance",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "session_id": null,
+  "client_tool_call_id": "call_554ed08cc3986021c2033659",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_lz_publish_diagnostic_20261031.py </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "observed_elapsed_seconds": 13.095758324998314,
+  "frozen_file_count": 81,
+  "parse_calls": 81,
+  "indexed_files": 81,
+  "structure_builds": 1,
+  "stages_seconds": {
+    "binding": 0.0013972489978186786,
+    "prepare": 9.317580025002826,
+    "task": 0.28304169498733245,
+    "publish": 3.4290491639985703,
+    "source_verify": 0.02522155299084261
+  },
+  "preparation_stage_seconds": {
+    "authenticate": 0.5920805000059772,
+    "build": 2.337379057004,
+    "encode": 0.27026157900399994,
+    "index": 0.7106762370094657,
+    "read": 0.19275139999808744,
+    "scan": 1.0520455509977182,
+    "selection": 3.573963022005046,
+    "source_verify": 0.016225030994974077
+  },
+  "operations": {
+    "chunks": {"calls": 1, "completed_calls": 1, "seconds": 0.2560558300028788},
+    "compress": {"calls": 1, "completed_calls": 1, "seconds": 2.0062094969907776},
+    "encode": {"calls": 2, "completed_calls": 2, "seconds": 2.4297942260163836},
+    "lz_budget_inspect": {"calls": 2, "completed_calls": 2, "seconds": 0.3780730459984625},
+    "publication": {"calls": 1, "completed_calls": 1, "seconds": 0.740498672996182}
+  },
+  "measurements": {
+    "compression_input_bytes": 1493243,
+    "compression_token_bytes": 567596,
+    "decoded_response_bytes": 757033,
+    "decoded_limit_bytes": 1048576,
+    "transfer_bytes": 1060707
+  },
+  "gateway_requests": 0,
+  "service_processes_started": 0,
+  "preflight_samples_started": 0,
+  "online_admissions": 0,
+  "conclusion": "当前单进程生产准备与完整 LZ 发布诊断退出 0，完整帧及累计传输测量低于对应硬限；本操作逐来源解析复用已观察到。真实冷链还包含父进程准备、独立选择、服务启动、双消费及保存，不能据本结果判其通过。",
+  "timing_scope": "包含测量开销，嵌套操作计时不能相加，不证明稳定收益。",
+  "not_proven": ["原服务拒绝根因及自然退出", "三次真实冷预检及六份原字节凭证", "唯一在线业务", "人工语义审核", "治理验收与最终闭环"],
+  "receipt_origin": "依据真实客户端回执保存；非控制器生成，不提供程序防篡改保证。"
+}

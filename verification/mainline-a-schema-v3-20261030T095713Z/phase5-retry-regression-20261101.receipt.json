@@ -1,0 +1,22 @@
+{
+  "status": "pass",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 10,
+  "execution_contract_revision": 11,
+  "session_id": null,
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_live_retry test_distillation.GatewayTransportTests test_mainline_a_scouting.GatewayCaptureTests test_schema_v3_stdio.ServiceBoundaryTests test_schema_v3_stdio.StdioIntegrationTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 30,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_test_seconds": 3.547,
+  "output_summary": "Ran 30 tests in 3.547s; OK",
+  "source_receipt": "client execute_command result call_4c51c41e8501cf9b5098ed81",
+  "scope": "隔离 HTTP 重试分类、共享期限、三次失败第四次成功、耗尽、取消、片段隔离、相同 POST、独占恢复标记、旧网关兼容及受影响 V3 服务和真实离线 stdio。",
+  "not_proven": ["真实在线恢复", "独立可信在线双消费", "四维和13项锚点", "真实人工语义", "治理和全计划闭环", "Roo宿主加载"],
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "receipt_kind": "assistant_record_of_actual_client_result_not_controller_attestation"
+}

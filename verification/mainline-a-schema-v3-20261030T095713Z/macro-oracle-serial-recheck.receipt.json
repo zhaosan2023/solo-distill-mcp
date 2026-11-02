@@ -1,0 +1,29 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_715130f35800c91225e77de9",
+  "command": "# 执行已登记串行验证的第三组：完整独立宏观 Oracle 的符号、三图、身份、计量及篡改负控；仅离线夹具，保留 30 秒硬期限。\nPYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_macro </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 13,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "0.082",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 13 tests in 0.082s; OK",
+  "status": "pass",
+  "proof_scope": "已登记串行验证第三组的完整独立宏观 Oracle 测试：规范符号和文档、三类拓扑、求值阶段、未知目标、位点聚合及计量、文件和快照身份、编码与空文件、字段篡改及取消负控。仅证明本组离线夹具通过，不替代生产宏观差分、完整调用链或阶段门禁。",
+  "historical_failure": "selection-graph-initial-timeout.receipt.json 原样保留；历史汇总退出 137 不改写为通过。",
+  "not_proven": [
+    "其余五组完整重验通过。",
+    "完整显式 V3 服务、客户端、来源秘密检查、前后变化拒绝及保存复读调用链。",
+    "软 SLO 与 27/30 秒硬期限的完整阶段门禁。",
+    "阶段 2 或阶段 3 完成；后续健康绑定、三次冷预检或在线依赖可推进。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅保存有界验证证据，不另建进度账本。"
+}

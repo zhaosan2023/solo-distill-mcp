@@ -1,0 +1,57 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "production_subtree_codec_rules_and_independent_cross_decoding_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "wire_encoding": "dictionary-columnar-v3-2",
+  "client_tool_call_id": "call_4ffdfdac60cb6d6b621f49c9",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_production_subtree.ProductionSubtreeTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 30,
+  "reported_test_seconds": 14.456,
+  "reported_test_seconds_scope": "unittest_report_not_total_command_elapsed",
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "bounded_generated_samples": {
+    "inherited_json_samples": 160,
+    "inherited_repeated_container_samples": 180,
+    "independent_encoding_and_cross_decoding_samples": 200
+  },
+  "key_output": "Ran 30 tests in 14.456s; OK; all 30 listed tests reported ok",
+  "assets": [
+    "src/solo_distill/subtree_v3.py",
+    "tests/test_schema_v3_production_subtree.py"
+  ],
+  "verified_controls": [
+    "all_inherited_subtree_rule_controls_exercised_against_production_codec",
+    "complete_canonical_encoding_difference_checks_against_independent_codec",
+    "both_cross_decoders_preserve_complete_original_values",
+    "original_occurrence_count_and_deterministic_reference_table",
+    "reference_graph_and_noncanonical_rejection",
+    "expanded_bytes_nodes_and_logical_depth_limits",
+    "physical_syntax_limits_and_reference_hop_guard",
+    "mutable_view_isolation",
+    "codec_implementation_separation",
+    "cancellation_checks_and_invalid_tick_rejection"
+  ],
+  "not_proven": [
+    "complete_source_publication_transport_integration",
+    "actual_transport_four_hard_limits_for_new_encoding",
+    "service_client_negotiation",
+    "cold_chain_integration",
+    "real_source_capacity",
+    "three_real_cold_preflights",
+    "online_business",
+    "human_semantic_review",
+    "host_loading"
+  ],
+  "dependency_advancement": "authorized_wire_and_caller_integration_may_proceed; real_preflight_and_online_dependencies_remain_blocked",
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "historical_failures": "retained_without_reclassification",
+  "hard_limits_and_deadlines": "unchanged"
+}

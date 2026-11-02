@@ -98,15 +98,22 @@ def canonical_package(package):
     value["failures"].sort(key=lambda item: (item["kind"], item["reason"]))
     # E2 relation identities include positional condition references. Re-derive
     # that coordinate-dependent identity after table remapping, not the syntax.
+    # Index the same lexical predicates once. Sorted matches preserve the old
+    # condition-table order exactly, including inherited-condition precedence.
+    condition_prefixes = {}
+    for index, condition in enumerate(value["conditions"]):
+        file_index = value["units"][condition["unit"]]["file"]
+        branch = tuple(condition["syntax_path"] + [condition["field"]])
+        condition_prefixes.setdefault((file_index, branch), []).append(index)
     for relation in value["relations"]:
         origin = value["units"][relation["from_unit"]]
         active = list(origin["conditions"])
-        route = relation["site"]["syntax_path"]
-        for index, condition in enumerate(value["conditions"]):
-            unit = value["units"][condition["unit"]]
-            branch = condition["syntax_path"] + [condition["field"]]
-            if unit["file"] == origin["file"] and route[:len(branch)] == branch and index not in active:
-                active.append(index)
+        route = tuple(relation["site"]["syntax_path"])
+        matched = set()
+        for length in range(len(route) + 1):
+            matched.update(condition_prefixes.get((origin["file"], route[:length]), ()))
+        inherited = set(active)
+        active.extend(index for index in sorted(matched) if index not in inherited)
         relation["conditions"] = active
         target = None if relation["to_unit"] is None else value["units"][relation["to_unit"]]["id"]
         relation["id"] = digest("relation-v2", [origin["id"], relation["site"],
@@ -306,7 +313,7 @@ def authenticate_seal(core, raw_files, *, policy_id=None):
 
 
 def form_core(package, raw_files, *, required_sources=None, optional_groups=(),
-              policy_id="lifecycle-v2-1", wire_encoding="json"):
+              policy_id="lifecycle-v2-1", wire_encoding="json", telemetry=None):
     """Reserve the worst admitted ID and observations BEFORE stable optional selection."""
     from .wire_v2 import reserved_size
     validate_package(package, raw_files)
@@ -330,6 +337,30 @@ def form_core(package, raw_files, *, required_sources=None, optional_groups=(),
     for table, reference in roots + [ref for _, refs in groups for ref in refs]:
         if table not in TABLES or reference not in by_id[table]:
             raise ValueError("unknown_slice_root")
+    from .telemetry import POLICY
+    if policy_id == POLICY:
+        # The new policy changes representation/transport, never the denominator.
+        # Preserve every registry, relation, failure and obligation, including
+        # records not reached by the legacy source-only slicing roots.
+        if wire_encoding != "json" or package["scenario"] != "A":
+            raise ValueError("adaptive_core_requires_explicit_json_transport_A")
+        if not package["sources"]:
+            raise CoreBlocked("minimum_required_sources_missing")
+        from .graph_v2 import extract_relations
+        expected_relations = extract_relations(package, raw_files)
+        if ({item["id"]: item for item in package["relations"]}
+                != {item["id"]: item for item in expected_relations}
+                or len(package["relations"]) != len(expected_relations)):
+            raise CoreBlocked("adaptive_relationship_denominator_incomplete")
+        authenticated = make_seal(package, raw_files, policy_id, wire_encoding=wire_encoding)
+        if telemetry is not None:
+            telemetry.core_bytes = len(authenticated.payload)
+            telemetry.coverage = "complete_structural_registry_not_semantic_proof"
+            if reserved_size(authenticated) > LIMITS[package["scenario"]]:
+                telemetry.warn("required_core_over_soft_frame_target",
+                               reserved_size(authenticated), LIMITS[package["scenario"]],
+                               stage="encode")
+        return authenticated
     selected = _slice_validated_package(package, roots)
     if not selected["sources"]:
         raise CoreBlocked("minimum_required_sources_missing")

@@ -1,0 +1,31 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "仅操作内冷链复用定向回归",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "client_tool_call_id": "call_d3cef6fba63fbfdefc782ea0",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_cold_reuse.ColdReuseTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 5,
+  "reported_test_seconds": 0.498,
+  "reported_test_seconds_scope": "单测报告耗时，不是命令总耗时",
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "key_output": "Ran 5 tests in 0.498s; OK; 所列五项测试均为 ok",
+  "verified_controls": [
+    "独立快照与未缓存完整核心相等且可变视图隔离",
+    "独立树键绑定路径及原字节，失败后作用域释放",
+    "父进程与服务逐源码解析复用且保留双消费",
+    "生产派生结构复用保留完整比较与隔离视图",
+    "失败构建不缓存，失败后结构作用域释放"
+  ],
+  "not_proven": ["新表示真实来源容量", "阶段四新绑定支撑回归", "三个真实冷预检", "唯一在线业务", "真实人工语义审核", "宿主加载"],
+  "controller_coverage": "未获证明，临时以平台任务记录引用真实回执",
+  "historical_failures": "保留，不重分类",
+  "hard_limits_and_deadlines": "不变"
+}

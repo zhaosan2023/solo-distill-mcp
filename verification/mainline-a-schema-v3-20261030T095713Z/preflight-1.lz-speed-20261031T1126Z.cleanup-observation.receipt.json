@@ -1,0 +1,21 @@
+{
+  "receipt_version": 1,
+  "status": "point_in_time_no_matching_service_observed",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "attempt_id": "lz-speed-20261031T1126Z",
+  "sample_id": "preflight-1",
+  "client_tool_call_id": "call_6c6d1e2d98a098d642348893",
+  "command": "timeout -s KILL 15s /bin/bash -o pipefail -c 'ps -eo pid=,ppid=,comm=,args= | awk '\''$3 ~ /^python/ && /-m solo_distill[.]server_v3( |$)/ { print \"observed_v3_pid=\" $1 \" ppid=\" $2; n++ } END { print \"observed_v3_process_count=\" (n+0) }'\''' </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "observed_v3_process_count": 0,
+  "key_output": "observed_v3_process_count=0",
+  "scope": "仅核对失败命令退出后的时点进程列表，不证明原服务自然退出、退出码、失败原因或持续隔离。",
+  "service_natural_exit": "not_proven",
+  "sample_acceptance": "blocked",
+  "process_termination_operations": 0,
+  "preservation": "保留本次及历史失败和现场，不启动后续样本或在线业务，不追认通过。",
+  "controller_coverage": "not_proven_platform_task_record_used"
+}

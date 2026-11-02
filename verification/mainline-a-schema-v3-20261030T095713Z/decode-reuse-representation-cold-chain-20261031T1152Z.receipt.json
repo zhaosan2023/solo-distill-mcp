@@ -1,0 +1,23 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "session_id": null,
+  "client_tool_call_id": "call_799791568bfe9f3a8caed978",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_representation_cold_chain.RepresentationColdChainTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 7,
+  "reported_unittest_seconds": 2.635,
+  "failures": 0,
+  "errors": 0,
+  "skipped_tests": 0,
+  "key_output": "Ran 7 tests in 2.635s; OK",
+  "scope": "解码复用修改后的既有字典列式表示隔离冷链回归：完整双消费、六份原字节保存复读、协商及包外见证、失败现场保留和真实离线 stdio 自然退出。",
+  "not_proven": ["剩余受影响默认冷链及复用边界回归", "优化后的三次真实冷预检及各六份原字节凭证和审计", "唯一在线业务", "真实人工语义审核", "治理验收与最终归档"],
+  "phase4_status": "BLOCKED_pending_remaining_affected_verification_and_real_preflight_evidence",
+  "receipt_origin": "依据真实客户端回执保存；不是控制器自动生成或程序防篡改证明。"
+}

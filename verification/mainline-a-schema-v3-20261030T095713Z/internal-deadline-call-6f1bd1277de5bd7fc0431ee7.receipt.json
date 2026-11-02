@@ -1,0 +1,35 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_6f1bd1277de5bd7fc0431ee7",
+  "command": "printf '%s\\n' '执行已登记的真实 27 秒内部落盘期限负控，单独运行本组：使用真实单调时钟延迟保存段，断言超限阻塞、失败现场保留且无成功回执；仅隔离夹具，不运行前序已通过组、不占用真实三样本、不联网或执行来源。控制器覆盖未证明，沿用前台同步、封闭输入和 30 秒进程级硬期限。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_cold_chain.RealInternalDeadlineTests </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "27.089",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 1 test in 27.089s; OK",
+  "status": "pass",
+  "control_observation": {
+    "control": "real_internal_save_deadline",
+    "status": "pass",
+    "elapsed_seconds": 27.0202917730021,
+    "required_limit_seconds": 27,
+    "success_receipt_absent": true,
+    "failure_scene_retained": true
+  },
+  "proof_scope": "隔离夹具完整冷预检链使用真实单调时钟，在 fsync 保存段注入实际等待；超过 27 秒后内部门禁拒绝成功，保留部分现场，未产生成功回执。测试命令实际退出 0，证明预期拒绝断言通过，不将被测超限操作登记为成功冷预检。",
+  "not_proven": [
+    "真实 30 秒外层超时触发、强杀与目标进程退出负控。",
+    "阶段 2／3 全范围对账。",
+    "实际来源三次冷预检、健康绑定、在线业务、人工语义及宿主加载。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；控制器覆盖未证明，本文件仅为验证证据，不是进度账本。"
+}

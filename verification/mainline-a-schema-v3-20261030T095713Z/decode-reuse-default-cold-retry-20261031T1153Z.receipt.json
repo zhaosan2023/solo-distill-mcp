@@ -1,0 +1,22 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "session_id": null,
+  "client_tool_call_id": "call_523c4ce4806d15ffcfe63fe9",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_cold_chain.ColdChainTests test_schema_v3_cold_retry.ColdRetryTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 9,
+  "reported_unittest_seconds": 1.667,
+  "failures": 0,
+  "errors": 0,
+  "skipped_tests": 0,
+  "key_output": "Ran 9 tests in 1.667s; OK",
+  "scope": "解码复用修改后的默认隔离冷链及重试边界：完整双消费、六份原字节保存复读、包外选择见证、请求预算、失败现场保留及服务自然退出。",
+  "not_proven": ["剩余操作内复用边界回归", "新尝试支撑与健康绑定", "优化后的三次真实冷预检及各六份原字节凭证和审计", "唯一在线业务", "真实人工语义审核", "治理验收与最终归档"],
+  "receipt_origin": "依据真实客户端回执保存；非控制器自动生成，不提供程序防篡改保证。"
+}

@@ -1,0 +1,18 @@
+test_complete_signatures_documentation_and_hierarchy (test_schema_v3_macro.MacroOracleTests.test_complete_signatures_documentation_and_hierarchy) ... ok
+test_definition_evaluation_not_misassigned_to_function_body (test_schema_v3_macro.MacroOracleTests.test_definition_evaluation_not_misassigned_to_function_body) ... ok
+test_duplicate_sites_are_aggregated_not_lost (test_schema_v3_macro.MacroOracleTests.test_duplicate_sites_are_aggregated_not_lost) ... ok
+test_encoding_empty_file_and_long_required_metadata (test_schema_v3_macro.MacroOracleTests.test_encoding_empty_file_and_long_required_metadata) ... ok
+test_identity_bound_to_project_snapshot_and_raw_bytes (test_schema_v3_macro.MacroOracleTests.test_identity_bound_to_project_snapshot_and_raw_bytes) ... ok
+test_import_alias_denominator_and_inheritance_resolution (test_schema_v3_macro.MacroOracleTests.test_import_alias_denominator_and_inheritance_resolution) ... ok
+test_independent_full_field_tamper_controls (test_schema_v3_macro.MacroOracleTests.test_independent_full_field_tamper_controls) ... ok
+test_manually_counted_complete_denominators (test_schema_v3_macro.MacroOracleTests.test_manually_counted_complete_denominators) ... ok
+test_method_body_does_not_inherit_class_lexical_bindings (test_schema_v3_macro.MacroOracleTests.test_method_body_does_not_inherit_class_lexical_bindings) ... ok
+test_redefinitions_are_distinct_and_not_known_targets (test_schema_v3_macro.MacroOracleTests.test_redefinitions_are_distinct_and_not_known_targets) ... ok
+test_relative_imports_annotations_and_nonclass_bases (test_schema_v3_macro.MacroOracleTests.test_relative_imports_annotations_and_nonclass_bases) ... ok
+test_tick_failure_is_not_converted_to_success (test_schema_v3_macro.MacroOracleTests.test_tick_failure_is_not_converted_to_success) ... ok
+test_trusted_input_zero_match_and_invalid_source_fail_closed (test_schema_v3_macro.MacroOracleTests.test_trusted_input_zero_match_and_invalid_source_fail_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.073s
+
+OK

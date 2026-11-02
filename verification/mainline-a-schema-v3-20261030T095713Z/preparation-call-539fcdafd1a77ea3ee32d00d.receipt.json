@@ -1,0 +1,32 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_539fcdafd1a77ea3ee32d00d",
+  "command": "printf '%s\\n' '复验当前失败的共用准备链 14 项：修复测试首次导入捕获临时模拟对象的问题，保留全部断言；不重跑前序已通过组，不联网、不执行来源。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_preparation </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "0.141",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 14 tests in 0.141s; OK",
+  "status": "pass",
+  "preceding_failure": {
+    "tool_result_id": "call_87534843cb4d04de5d7f7d70",
+    "output_artifact_id": "cmd-1793378503413.txt",
+    "exit_code": 1,
+    "tests_run": 14,
+    "failures": 9,
+    "key_output": "AssertionError: must reject before opening source; FAILED (failures=9)",
+    "correction": "在负控补丁生效前导入准备链，避免模块首次导入永久绑定临时 open_root 模拟对象；保留全部断言。"
+  },
+  "proof_scope": "隔离来源的共用准备链、独立选择和核心差分、操作内解析复用、精确 POST 顺序回归、取消及期限、来源变化和秘密检查、外部冻结选择及授权范围、公开视图隔离。",
+  "not_proven": ["完整冷预检六份证据调用链门禁", "真实 27 秒保存及 30 秒退出负控", "阶段 2／3 全范围对账", "在线业务、人工语义及宿主加载"],
+  "progress_authority": "平台任务记录及真实工具回执；控制器覆盖未证明，本文件不是进度账本。"
+}

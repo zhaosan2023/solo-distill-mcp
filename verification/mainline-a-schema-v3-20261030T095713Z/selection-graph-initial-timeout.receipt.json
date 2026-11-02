@@ -1,0 +1,30 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_5ece59a4f87efe37b130e042",
+  "output_artifact_id": "cmd-1793370501969.txt",
+  "summary_readback_tool_result_id": "call_bd268f7931817422dca2dfed",
+  "command": "# 执行已登记的选择差分及受影响关系调用方定向离线回归；禁止联网、来源执行和业务预检。\nPYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_macro test_schema_v3_selection_oracle test_schema_v3_scouting test_mainline_a_scouting test_schema_v3_production_local test_v2_contract test_v2_consumer test_v2_scheduler </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 137,
+  "process_elapsed_seconds": null,
+  "tests_run": null,
+  "failures": null,
+  "errors": null,
+  "skipped": null,
+  "status": "blocked",
+  "key_output": "test_high_outdegree_reports_incomplete_exploration (test_mainline_a_scouting.QuestionViewTests.test_high_outdegree_reports_incomplete_exploration) ... Killed",
+  "proof_scope": "30 秒汇总命令非零退出，未取得完整运行汇总；此前单项 ok 不构成整组通过或阶段完成证据。",
+  "diagnostic_boundary": "输出表明终止时正在运行旧选择高出度用例，不能据此断言该单项独自耗时超过 30 秒，也不能确认所有耗时根因。源码检查发现独立调用旧选择时未建立操作内 AST 复用范围；修复后必须重新取得实际通过回执。",
+  "not_proven": [
+    "修复后的选择差分及受影响关系调用方回归通过。",
+    "完整显式 V3 服务、客户端、来源秘密检查、前后变化拒绝及保存复读调用链。",
+    "软 SLO 与 27/30 秒硬期限的完整阶段门禁。",
+    "阶段 2 或阶段 3 完成；任何后续冷预检或在线依赖可推进。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅保留失败证据，不另建进度账本。"
+}

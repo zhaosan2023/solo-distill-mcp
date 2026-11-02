@@ -1,0 +1,18 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "attempt_id": "structure-20261031T0454Z",
+  "sample_id": "preflight-1",
+  "status": "point_in_time_no_matching_service_observed",
+  "client_result_reference": "call_9c7ee874c5b2f911bc550582",
+  "actual_exit_code": 0,
+  "observed_v3_process_count": 0,
+  "observation_command": "timeout -s KILL 15s /bin/bash -o pipefail -c 'git --no-optional-locks status --short; ps -eo pid=,ppid=,comm=,args= | awk '\''$3 ~ /^python/ && /-m solo_distill[.]server_v3( |$)/ { print \"observed_v3_pid=\" $1 \" ppid=\" $2; n++ } END { print \"observed_v3_process_count=\" (n+0) }'\''' </dev/null",
+  "cwd": ".",
+  "key_output": "observed_v3_process_count=0",
+  "scope": "point_in_time_process_listing_only_not_service_natural_exit_receipt",
+  "historical_service_natural_exit": "not_proven",
+  "historical_sample_acceptance": "blocked",
+  "preservation": "historical_failure_receipts_and_existing_changes_retained",
+  "dependency_advancement": "requires_new_three_sample_acceptance_before_online"
+}

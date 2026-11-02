@@ -1,0 +1,29 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_54181bfee0451c985f847dcd",
+  "command": "# 执行已登记串行验证的第七组：完整 V2 消费回归，核对受影响关系认证、来源引用及旧版本边界；保留 30 秒硬期限，不访问网关、不执行来源、不安装依赖。\nPYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_v2_consumer </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 18,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "0.369",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 18 tests in 0.369s; OK",
+  "status": "pass",
+  "proof_scope": "已登记串行验证第七组的完整 V2 消费回归：真实管道夹具、独立版本及关系认证、重新签名篡改拒绝、来源与任务命名空间、旧 V1 行为、编码、预算及取消。冻结参考锚点测试仅证明测试资产保留，不证明本次在线结论或真实人工审核。",
+  "historical_failure": "selection-graph-initial-timeout.receipt.json 原样保留；历史汇总退出 137 不改写为通过。",
+  "not_proven": [
+    "剩余 V2 调度组完整重验通过。",
+    "完整显式 V3 服务、客户端、来源秘密检查、前后变化拒绝及保存复读调用链。",
+    "软 SLO 与 27/30 秒硬期限的完整阶段门禁。",
+    "阶段 2 或阶段 3 完成；后续健康绑定、三次冷预检或在线依赖可推进。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅保存有界验证证据，不另建进度账本。"
+}

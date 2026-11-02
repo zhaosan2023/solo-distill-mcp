@@ -1,0 +1,41 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "default_json_service_boundary_and_offline_stdio_regression_after_subtree_integration_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "wire_encoding": "json",
+  "client_tool_call_id": "call_900158babb2b1f9835c1d667",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_stdio.ServiceBoundaryTests test_schema_v3_stdio.StdioIntegrationTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 6,
+  "reported_test_seconds": 0.534,
+  "reported_test_seconds_scope": "unittest_report_not_total_command_elapsed",
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "key_output": "Ran 6 tests in 0.534s; OK; all 6 listed tests reported ok",
+  "assets": ["tests/test_schema_v3_stdio.py", "src/solo_distill/service_v3.py", "src/solo_distill/client.py"],
+  "verified_controls": [
+    "offline_chain_and_independent_publication_without_generation",
+    "single_business_and_cancellation_no_success",
+    "explicit_extension_registration_and_legacy_v3_rejection",
+    "invalid_versions_modes_scope_and_capabilities_rejected_before_preparation",
+    "offline_and_legacy_modes_do_not_grant_live",
+    "real_process_fragmented_call_complete_consumption_and_natural_exit"
+  ],
+  "not_proven": [
+    "new_encoding_cold_chain_six_artifact_integration",
+    "real_source_capacity",
+    "three_real_cold_preflights",
+    "online_business",
+    "human_semantic_review",
+    "host_loading"
+  ],
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "historical_failures": "retained_without_reclassification",
+  "hard_limits_and_deadlines": "unchanged"
+}

@@ -1,0 +1,61 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "新增 lz-json-v3-1 独立编解码规则及内存负控，不是生产集成或真实来源容量验收",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "wire_encoding": "lz-json-v3-1",
+  "session_id": null,
+  "client_tool_call_id": "call_cc97ae2839a30eade20d348e",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_lz.LzOracleTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 28,
+  "generated_document_samples": 300,
+  "failures": 0,
+  "errors": 0,
+  "skipped_tests": 0,
+  "reported_unittest_seconds": 1.142,
+  "timing_scope": "unittest 报告的测试耗时；客户端未提供命令外部总耗时，不冒充冷链耗时",
+  "key_output": "Ran 28 tests in 1.142s; OK; 客户端实际退出码 0",
+  "assets": [
+    "tests/schema_v3_lz_oracle.py",
+    "tests/test_schema_v3_lz.py"
+  ],
+  "source_inspection": {
+    "independent_codec_readback": "call_31dc1ef3541963b66500f23d",
+    "independent_tests_readback": "call_ffd8b0b8fcc5138354467a41",
+    "targeted_fixture_correction_success": "call_d76ff9d0b1f6682576d3f010",
+    "validation_registration_success": "call_e9b3bc946ed0f3bd3b460b61"
+  },
+  "covered": [
+    "手工字面量、重叠复制、最近候选、最长匹配及复制内部位置登记",
+    "128 字节字面量、3 至 130 字节匹配、65536 字节窗口等值及过期",
+    "完整字段、严格标量、Unicode、重复记录及可变容器隔离",
+    "300 个有界生成对象的完整还原、确定编码及令牌可逆性",
+    "原对象字节、深度和节点预算及物理表示和令牌输入预算",
+    "构造 JSON 对象前的深度、节点及词法拒绝",
+    "严格 JSON、摘要、声明长度、规范 Base64 及封闭头部",
+    "令牌截断、非法距离、额外令牌、膨胀和非规范编码拒绝",
+    "取消与期限传播及独立模块不导入生产实现"
+  ],
+  "not_proven": [
+    "生产编解码差分及交叉解码",
+    "完整可信源码发布和双消费集成",
+    "四项实际传输硬限的新版本集成",
+    "服务与客户端真实离线 stdio 及自然退出",
+    "冷链六份证据保存复读",
+    "真实来源容量及耗时",
+    "三个真实冷预检",
+    "唯一在线业务",
+    "历史服务拒绝的根因及自然退出",
+    "真实人工语义审核",
+    "宿主加载"
+  ],
+  "dependency_scope": "独立规则门禁通过，可推进当前获准的新版本生产实现；阶段四容量阻塞及在线前置门禁尚未解除",
+  "preservation_boundary": "现有表示、旧入口、主线 B、历史失败及全部硬限和期限不变；不新建在线接纳实例",
+  "controller_coverage": "未获证明；当前进度仅使用平台任务记录引用真实回执"
+}

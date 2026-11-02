@@ -50,3 +50,61 @@ PYTHONPATH=src timeout --kill-after=2s 30s python3 -B -m unittest discover -s te
 - 至少十个预建跨模块事实锚点、场景 B／A 各三轮完整往返、第二项目复验及 Rust/Go 替换仍待相关阶段授权与证据。
 - 控制器覆盖未证明，当前进度只使用平台任务记录；本文件不是另一套任务账本。
 - 旧 FastCode 安装与其他计划保持独立，不恢复、不修改。当前阶段不转正提案、不创建 ADR、不更新原工作区事实基线、不归档未完成全提案。
+
+## Python 棕地文档 MVP：独立待审核输出
+
+本增量使用[离线文档入口](src/solo_distill/brownfield.py:1)，不改变既有 MCP 服务与模型蒸馏路径，运行时仍然零新增依赖。
+
+- 读取范围由既有服务端配置限定；调用者只能收窄范围，不导入或执行来源代码。
+- 复用 P0 全部导入、P1 全部定义（含方法与嵌套定义）的核心保留；P2/P3 调用按现有优先级和完整帧预算剪枝。
+- 输出三层材料：[项目指引](src/solo_distill/brownfield.py:172)、按模块分页的静态契约和完整溯源。单页不足 150 行且不超过 24,576 UTF-8 字节；该文档分页预算不等于整个项目的上下文预算。
+- 完整结构帧计入嵌套转义与结尾换行，上限为调用者预算与服务端上限的较小值，最多 24,576 字节。核心超限、过期来源或零命中阻塞，不靠文档分页伪装结构帧通过。
+- 输出只允许工程内独立新目录，拒绝已有目标和软链接；保存后复读并生成内容清单。多文件发布不是整体原子事务，失败可能留下不完整目录，不能原地重试覆盖。
+- 输出均为待审核材料，不自动发布到来源项目，不生成猜测的业务不变量、构建命令、已接受 ADR 或另一份活动计划。来源未完成项和剪枝项分别保留；存在覆盖缺口时返回部分审核状态，命令退出 2。
+- 本阶段只闭环 Python 静态结构到三层待审核文档；其他七种语言、模型语义、真实宿主与业务文档人工接受均不在本轮验收范围内。
+
+以下示例在本工程根目录前台、离线执行，只读配置绑定的五文件样本。输出名称必须全新；命令不会安装依赖或请求网关。
+
+```bash
+PYTHONPATH=src timeout --kill-after=2s 30s python3 -B -m solo_distill.brownfield --project-id fastcode-sample --include api.py fastcode/__init__.py fastcode/agent_tools.py fastcode/answer_generator.py fastcode/cache.py --output verification/brownfield-review/python-five-file-review </dev/null
+```
+
+相关验收由[文档特性测试](tests/test_brownfield.py:1)及原有核心交付、背压和协议回归覆盖，测试仅使用离线夹具。
+
+```bash
+PYTHONPATH=src:tests timeout --kill-after=2s 30s python3 -B -m unittest test_brownfield test_priority_delivery test_backpressure test_offline.ExtractorTests test_offline.ProtocolTests -v </dev/null
+```
+
+## 显式动态背压策略
+
+上述固定配额说明适用于旧默认路径。新策略仅由调用者显式选择；旧 V1、旧 V2 默认策略及场景 B 不静默改义。
+
+- [预算遥测](src/solo_distill/telemetry.py:15)记录阶段耗时、唯一正文所有者、骨架、核心、编码、精确单帧及累计字节。32 块、98,304 正文字节、240,000 骨架字节与 22,016 帧字节是软目标，越界产生去重 Warning，不删除必需证据；未测量及宿主消费结果保持未知。
+- [新版选择链](src/solo_distill/live_v2.py:107)完整登记授权范围内的语法单元，再稳定分页；必需组不因 16/12/4 借槽冲突拒绝，核心定义、条件和关系进入限定保护集。可选探索仍受控，静态条件不等于已确认的业务语义。
+- [传输能力](src/solo_distill/adaptive_wire.py:26)必须显式声明单帧、累计传输、解码与分片数量硬上限。大帧在能力允许时完整发布；否则以已声明的通知分片和唯一最终清单交付，不追加多个最终响应。来源、权限、取消、截止、实际写出故障及不完整关系仍是硬门禁。
+- [消费者](src/solo_distill/consumer_v2.py:153)核验完整结构与关系集合；[独立离线接收器](tests/adaptive_receiver.py:35)另行重组并认证来源、非空预期定义和逐调用点覆盖。发送成功不等于真实宿主消费。
+- [棕地入口](src/solo_distill/brownfield.py:80)在显式新策略下从完整认证知识包渲染分页文档与关系，不从旧受限帧投影恢复内容。输出仍为独立待审核材料，不自动发布。
+
+调用新 V2 A 路径或棕地构建接口时，在各自既有请求中明确提供以下字段；能力值由实际调用者确认，不能把示例当宿主能力证明。仅设置传输字段会被旧策略拒绝。
+
+```json
+{
+  "budget_policy": "adaptive-backpressure-v1",
+  "return_bytes": 22016,
+  "transport": {
+    "policy": "adaptive-backpressure-v1",
+    "authority": "caller_explicit",
+    "max_frame_bytes": 22016,
+    "max_transfer_bytes": 8388608,
+    "max_decoded_bytes": 6291456,
+    "max_chunks": 4096,
+    "chunking": true
+  }
+}
+```
+
+[定向测试](tests/test_adaptive_backpressure.py:1)仅使用离线夹具、假网关和托管本地管道，不授权真实模型外发、宿主激活或依赖安装。
+
+```bash
+timeout --signal=TERM --kill-after=2s 30s env PYTHONPATH=src:tests PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_adaptive_backpressure </dev/null
+```

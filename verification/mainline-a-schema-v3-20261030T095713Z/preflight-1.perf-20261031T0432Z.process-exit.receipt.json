@@ -1,0 +1,22 @@
+{
+  "receipt_version": 1,
+  "attempt_id": "perf-20261031T0432Z",
+  "sample_id": "preflight-1",
+  "status": "blocked",
+  "client_result_reference": "call_997c6f9b6d56d19ebd62469f",
+  "actual_exit_code": 2,
+  "external_time_seconds": 27.49,
+  "command": "env PYTHONPATH=src:tests /usr/bin/time -f 'preflight_outer_elapsed_seconds=%e actual_exit_code=%x' timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_phase4_20261031.py launch --sample preflight-1 </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "error": "ClientError",
+  "reason": "stdout_eof_before_v3_manifest",
+  "request_evidence": "verification/mainline-a-schema-v3-20261030T095713Z/preflight-1.perf-20261031T0432Z.request.json",
+  "listener_before": ["12033"],
+  "service_exit_code": null,
+  "service_natural_exit": "not_proven",
+  "six_artifacts_acceptance": "not_proven",
+  "process_hard_timeout_observed": false,
+  "external_time_precision": "two_decimal_observation",
+  "dependent_samples_started": false,
+  "online_started": false
+}

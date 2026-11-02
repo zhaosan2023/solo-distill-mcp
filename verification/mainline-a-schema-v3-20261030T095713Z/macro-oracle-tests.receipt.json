@@ -1,0 +1,26 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "evidence_kind": "client_returned_command_result",
+  "command": "printf '%s\\n' '验证独立宏观 Oracle 的手工期望与篡改负控；仅运行已登记的定向测试，不访问网关、不执行来源项目。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_macro </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "actual_exit_code": 0,
+  "tests_run": 13,
+  "skipped": 0,
+  "unittest_reported_seconds": "0.098",
+  "total_process_seconds": null,
+  "result_summary": "Ran 13 tests in 0.098s; OK；全部列出的测试结果为 ok。",
+  "scope": "独立宏观 Oracle 的手工期望、符号层次、完整元数据、导入与继承、调用求值阶段、未知目标、重定义、位点聚合、编码、身份绑定、字段篡改及取消传播。",
+  "not_proven": [
+    "生产 Schema 3.0 实现及调用链兼容",
+    "局部闭包 Oracle 和选择独立性",
+    "完整定向离线门禁",
+    "三次冷预检及其真实总耗时",
+    "在线业务、四维语义及真实人工复读",
+    "治理生成器及宿主行为",
+    "ADR 转正及安全归档"
+  ],
+  "source_tool_result_id": "call_6b29b7cc166060db2faa173a",
+  "controller_coverage": "尚未证明覆盖当前任务；平台任务记录仍是唯一进度入口",
+  "note": "本文件仅保存已返回的局部测试证据，不是全阶段通过证明或第二份进度账本。"
+}

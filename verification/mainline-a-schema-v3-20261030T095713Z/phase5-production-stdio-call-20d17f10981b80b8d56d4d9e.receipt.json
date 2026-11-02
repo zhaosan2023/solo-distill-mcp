@@ -1,0 +1,23 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 9,
+  "execution_contract_revision": 10,
+  "evidence_kind": "record_of_actual_client_command_result",
+  "tool_result_id": "call_20d17f10981b80b8d56d4d9e",
+  "command": "PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_stdio.ServiceBoundaryTests test_schema_v3_stdio.StdioIntegrationTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 14,
+  "unittest_reported_seconds": 3.447,
+  "unittest_summary": "OK",
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scope": "获准生产入站、服务窗口、隔离假生成、客户端精确入站预算及真实离线 stdio 定向回归",
+  "timing_limit_seconds": 30,
+  "timing_note": "3.447 秒为 unittest 报告值，不是外层进程计时或在线耗时。",
+  "not_proven": ["实际来源入站容量", "唯一在线业务", "真实人工语义", "治理交付", "全计划完工", "宿主加载"],
+  "source_note": "真实退出及完整测试输出来自客户端回执；本文件是该回执的有限摘录，不是控制器核验或第二进度账本。"
+}

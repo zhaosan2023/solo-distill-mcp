@@ -1,0 +1,51 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "subtree_wire_and_independent_full_publication_fixture_tests_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "wire_encoding": "dictionary-columnar-v3-2",
+  "client_tool_call_id": "call_cd5f85725b5aeea8c6e84121",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_subtree_wire.SubtreeWireTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 12,
+  "reported_test_seconds": 1.524,
+  "reported_test_seconds_scope": "unittest_report_not_total_command_elapsed",
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "key_output": "Ran 12 tests in 1.524s; OK; all 12 listed tests reported ok",
+  "assets": [
+    "tests/test_schema_v3_subtree_wire.py",
+    "src/solo_distill/wire_v3.py",
+    "tests/schema_v3_wire_oracle.py"
+  ],
+  "verified_controls": [
+    "single_response_and_manual_chunks_authenticate_complete_source_publication",
+    "production_and_independent_consumers_preserve_full_objects_and_identities",
+    "four_actual_transport_limits_equal_pass_and_one_lower_rejects",
+    "explicit_encoding_bound_to_notifications_and_final_manifest",
+    "new_and_predecessor_encoding_mixes_rejected_without_fallback",
+    "predecessor_and_default_json_keep_exact_previous_response_bytes",
+    "reference_table_tampering_and_noncanonical_json_rejected",
+    "partial_blocked_failed_and_unknown_values_preserved",
+    "external_candidate_and_failure_conflicts_rejected",
+    "cancellation_reaches_decode_and_publication"
+  ],
+  "not_proven": [
+    "real_offline_stdio_service_client_integration_for_new_encoding",
+    "cold_chain_six_artifact_integration",
+    "real_source_capacity",
+    "three_real_cold_preflights",
+    "online_business",
+    "human_semantic_review",
+    "host_loading"
+  ],
+  "dependency_advancement": "registered_isolated_service_tests_may_proceed; real_cold_preflight_and_online_dependencies_remain_blocked",
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "historical_failures": "retained_without_reclassification",
+  "hard_limits_and_deadlines": "unchanged"
+}

@@ -1,0 +1,29 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_554fe66e47ed17fef2e60c1e",
+  "command": "# 执行已登记串行验证中的第一组：完整旧选择回归及新增操作内解析复用、关系遍历取消负控；保留 30 秒硬期限，不运行冷预检或在线业务。\nPYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_mainline_a_scouting </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 27,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "4.383",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 27 tests in 4.383s; OK",
+  "status": "pass",
+  "proof_scope": "已登记串行验证第一组的完整旧选择回归，包括高出度探索、独立关系条件核对、原始发送捕获夹具、每文件每操作解析复用、新字节重验和关系遍历中途取消。",
+  "historical_failure": "selection-graph-initial-timeout.receipt.json 原样保留；该汇总退出 137 未改写为通过。",
+  "not_proven": [
+    "其余七组完整重验通过。",
+    "完整显式 V3 服务、客户端、来源秘密检查、前后变化拒绝及保存复读调用链。",
+    "软 SLO 与 27/30 秒硬期限的完整阶段门禁。",
+    "阶段 2 或阶段 3 完成；后续健康绑定、三次冷预检或在线依赖可推进。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅保存有界验证证据，不另建进度账本。"
+}

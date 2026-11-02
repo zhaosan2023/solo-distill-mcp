@@ -1,0 +1,90 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "新增确定性字节表示的隔离冷链及受影响既有表示、默认冷链、冷重试和操作内复用定向回归；不是阶段四真实来源或在线验收",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "wire_encoding": "lz-json-v3-1",
+  "session_id": null,
+  "cwd": ".",
+  "validation_registration_success": "call_c94a6fa9f5f54c4dc1578103",
+  "asset_save_success": "call_3f4aad402912f631c39c4ade",
+  "asset_native_readback": "call_79b796ad5bfcf1c8644a1384",
+  "groups": [
+    {
+      "client_tool_call_id": "call_1a17951683020af1f1ab0de0",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_lz_cold_chain.LzColdChainTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 11,
+      "reported_unittest_seconds": 3.731,
+      "key_output": "Ran 11 tests in 3.731s; OK"
+    },
+    {
+      "client_tool_call_id": "call_79bc61fa0f146de307e9f602",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_subtree_cold_chain.SubtreeColdChainTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 9,
+      "reported_unittest_seconds": 3.366,
+      "key_output": "Ran 9 tests in 3.366s; OK"
+    },
+    {
+      "client_tool_call_id": "call_6da2c95db65044168482be79",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_representation_cold_chain.RepresentationColdChainTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 7,
+      "reported_unittest_seconds": 2.406,
+      "key_output": "Ran 7 tests in 2.406s; OK"
+    },
+    {
+      "client_tool_call_id": "call_5900702a3a425f6c13de9440",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_cold_chain.ColdChainTests test_schema_v3_cold_retry.ColdRetryTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 9,
+      "reported_unittest_seconds": 1.425,
+      "key_output": "Ran 9 tests in 1.425s; OK"
+    },
+    {
+      "client_tool_call_id": "call_c5ecb89fa69f675d6a42646d",
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_cold_reuse.ColdReuseTests </dev/null",
+      "actual_exit_code": 0,
+      "tests_run": 5,
+      "reported_unittest_seconds": 0.527,
+      "key_output": "Ran 5 tests in 0.527s; OK"
+    }
+  ],
+  "total_test_executions": 41,
+  "counting_scope": "五组真实运行的测试执行数之和；继承规则分别覆盖不同表示，不宣称 41 个互不重复规则",
+  "failures": 0,
+  "errors": 0,
+  "skipped_tests": 0,
+  "timing_scope": "各组 unittest 报告的测试耗时，不是客户端总耗时或真实来源冷预检耗时",
+  "receipt_origin": "依据实际客户端命令回执汇总；不是控制器自动生成或程序防篡改证明",
+  "covered": [
+    "新增表示完整发布与独立编解码表示一致，生产与独立消费者完整对象一致",
+    "六份完整原字节保存复读，核心、知识包及任务证据保留",
+    "显式请求、每个通知和唯一最终清单绑定新表示，错误前版协商拒绝",
+    "隔离真实离线 stdio 的实际投递及服务自然退出 0",
+    "无网关请求及隔离来源原字节不变",
+    "取消、既有样本保护、独立失败和保存失败不生成成功回执并保留现场",
+    "既有列式和子结构表示、默认冷链及冷重试保留全部原断言",
+    "完整外部选择见证、输入预算和选择冲突在服务启动前拒绝",
+    "操作内解析及结构复用保留完整独立期望、可变视图隔离、来源和契约冲突、取消及失败释放"
+  ],
+  "common_failure_risk": "仍共享公开规则和 Python 标准库 AST、JSON、Base64、SHA-256；差分通过不消除此风险",
+  "not_proven": [
+    "阶段四支撑新绑定及真实健康检查",
+    "真实来源容量及耗时",
+    "三个真实新进程冷预检",
+    "本实例唯一在线业务",
+    "历史服务拒绝根因及历史原服务自然退出",
+    "真实人工逐结论源码复读和 13 项锚点审核",
+    "治理蓝图全验收",
+    "宿主加载"
+  ],
+  "dependency_scope": "新增表示及受影响冷链定向门禁通过；可继续获准阶段四支撑绑定适配，尚未解除真实三样本与在线前置门禁",
+  "preservation_boundary": "保留原执行实例、全部旧表示及入口、主线 B、历史失败、硬限和期限；不新建在线接纳，不自动重发",
+  "controller_coverage": "未获证明；当前任务进度仅使用平台任务记录引用真实回执"
+}

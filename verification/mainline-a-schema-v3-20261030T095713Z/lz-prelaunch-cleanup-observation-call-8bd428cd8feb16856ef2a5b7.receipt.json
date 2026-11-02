@@ -1,0 +1,45 @@
+{
+  "receipt_version": 1,
+  "status": "point_in_time_no_matching_service_observed",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "attempt_id": "lz-v3-1-20261031T1047Z",
+  "wire_encoding": "lz-json-v3-1",
+  "session_id": null,
+  "client_tool_call_id": "call_8bd428cd8feb16856ef2a5b7",
+  "command": "timeout -s KILL 15s /bin/bash -o pipefail -c 'ps -eo pid=,ppid=,comm=,args= | awk '\''$3 ~ /^python/ && /-m solo_distill[.]server_v3( |$)/ { print \"observed_v3_pid=\" $1 \" ppid=\" $2; n++ } END { print \"observed_v3_process_count=\" (n+0) }'\''' </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "observed_v3_process_count": 0,
+  "key_output": "observed_v3_process_count=0",
+  "scope": "仅记录实际命令回执中的时点进程观测；未观察到匹配的 V3 服务，不证明持续隔离、历史服务自然退出、历史退出码或异常根因。",
+  "historical_service_natural_exit": "not_proven",
+  "historical_sample_acceptance": "blocked",
+  "operations": {
+    "process_termination": 0,
+    "gateway_start_or_restart": 0,
+    "business_post": 0
+  },
+  "prerequisite_evidence": [
+    "lz-independent-call-cc97ae2839a30eade20d348e.receipt.json",
+    "lz-production-call-a75aa4881b4c5aa98e9e28c2.receipt.json",
+    "lz-wire-service-call-edcee21130a0aa0269caa3b9.receipt.json",
+    "lz-cold-chain-call-c5ecb89fa69f675d6a42646d.receipt.json",
+    "phase4-lz-support-call-87d88c4e75030375d7458b20.receipt.json"
+  ],
+  "prerequisite_scope": "上述新表示定向门禁已有通过回执且已原生复读；不替代真实健康、容量、三个新进程冷预检或在线验收。",
+  "not_proven": [
+    "当前绑定网关健康及模型可用性",
+    "新表示真实来源容量及耗时",
+    "三个真实新进程冷预检",
+    "唯一在线业务",
+    "真实人工逐结论源码复读和 13 项锚点审核",
+    "治理蓝图全验收",
+    "宿主加载"
+  ],
+  "preservation_boundary": "保留原执行实例、唯一在线接纳、全部旧表示及入口、主线 B、历史请求、失败及现场；不追认旧样本通过、不自动重发在线业务。",
+  "receipt_origin": "依据实际客户端命令回执汇总，不是控制器自动生成或程序防篡改证明。",
+  "controller_coverage": "未获证明；当前进度仅使用平台任务记录引用真实回执。"
+}

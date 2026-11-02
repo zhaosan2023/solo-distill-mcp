@@ -1,0 +1,67 @@
+{
+  "receipt_version": 1,
+  "status": "diagnostic_completed_not_preflight_acceptance",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "session_id": null,
+  "client_tool_call_id": "call_6b9c0e830602ebc1a2aea498",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_parent_window_20261031.py </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "request_source": "verification/mainline-a-schema-v3-20261030T095713Z/preflight-1.selection-reuse-20261031T1234Z.request.json",
+  "observed_elapsed_seconds": 13.202420141999028,
+  "stages_seconds": {
+    "binding": 0.0014481910038739443,
+    "parent_prepare": 9.010588607008685,
+    "independent_selection": 4.141506382002262,
+    "source_verify": 0.014956348997657187
+  },
+  "preparation_stage_seconds": {
+    "authenticate": 0.548692418000428,
+    "build": 2.51199581300898,
+    "encode": 0.24611034900590312,
+    "index": 0.6785974860104034,
+    "read": 0.25007908600673545,
+    "scan": 0.7620070770062739,
+    "selection": 3.1576321410102537,
+    "source_verify": 0.015019494996522553
+  },
+  "before_service_launch_observation": {
+    "elapsed_seconds": 13.187306697989698,
+    "remaining_internal_seconds": 13.81269551400328,
+    "service_actually_launched": false
+  },
+  "frozen_file_count": 81,
+  "source_bytes": 1144162,
+  "production_syntax": {
+    "parse_calls": 81,
+    "indexed_files": 81,
+    "structure_builds": 1,
+    "lifetime": "current_operation_only_no_historical_green_state"
+  },
+  "independent_syntax": {
+    "parse_calls": 81,
+    "inventory_builds": 81,
+    "core_builds": 0,
+    "production_expectations_shared": false,
+    "lifetime": "current_operation_only_no_cross_process_cache"
+  },
+  "complete_selection_and_post_equal": true,
+  "source_verification_completed": true,
+  "service_processes_started": 0,
+  "gateway_requests": 0,
+  "preflight_samples_started": 0,
+  "online_admissions": 0,
+  "conclusion": "本次诊断中父进程准备及独立选择已消耗约 13.19 秒，服务启动前仅剩约 13.81 秒；生产和独立各解析 81 次，未观察到各自操作内重复解析。真实冷链还须完成服务准备、发布、双消费和证据保存，需继续检查完整调用链的重复工作，不能仅凭两次不同诊断推算通过或确认原拒绝根因。",
+  "timing_scope": "单进程诊断自测，包含测量开销；不是外部进程总耗时或失败样本的原始分段计时，不与其他运行耗时相加作为验收证据。",
+  "not_proven": [
+    "原服务具体拒绝原因及自然退出",
+    "三次真实冷预检、双消费及逐样本六份原字节验收",
+    "稳定耗时收益",
+    "唯一在线业务、人工语义审核及最终闭环"
+  ],
+  "receipt_origin": "依据真实客户端命令回执保存的有界摘要；非控制器生成，不提供程序防篡改保证。",
+  "boundary": "阶段 4 保持 BLOCKED，不启动后续依赖，不转正 ADR，不归档活动源。"
+}

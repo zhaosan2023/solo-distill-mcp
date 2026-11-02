@@ -1,0 +1,23 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "session_id": null,
+  "client_tool_call_id": "call_f375a005f758974183c57f19",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_subtree_wire.SubtreeWireTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 12,
+  "reported_unittest_seconds": 0.926,
+  "failures": 0,
+  "errors": 0,
+  "skipped_tests": 0,
+  "key_output": "Ran 12 tests in 0.926s; OK",
+  "scope": "解码复用修改后的既有子结构表示传输回归：共用重组和双消费、单帧和分片、原字节、包外可信输入、四项硬限、篡改及版本混合拒绝和取消。",
+  "not_proven": ["剩余受影响服务及旧表示调用方回归", "优化后的三次真实冷预检及各六份原字节凭证和审计", "唯一在线业务", "真实人工语义审核", "治理验收与最终归档"],
+  "phase4_status": "BLOCKED_pending_remaining_affected_verification_and_real_preflight_evidence",
+  "receipt_origin": "依据真实客户端回执保存；不是控制器自动生成或程序防篡改证明。"
+}

@@ -1,0 +1,36 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_96d96a9df4e6513ed089231d",
+  "command": "printf '%s\\n' '重验治理生成器：已将路由记录改为契约允许的 JSON 数组；覆盖新蓝图固定树、薄指针、引用、预算及隔离保存，同时回归未修改的旧治理 API。仅离线夹具，不访问网关、不安装依赖、不发布实际蓝图。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_governance test_brownfield </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 24,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "2.008",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 24 tests in 2.008s; OK",
+  "status": "pass",
+  "proof_scope": "10 项新治理候选测试及 14 项旧治理 API 回归：固定目录和六个治理模块、单一任务薄指针、完整认证发布及传输保留、路径白名单、相对引用、文档及入口预算、隔离独占保存、实际保存字节及清单摘要、源码和旧蓝图保护、符号链接父目录拒绝、失败保留及取消传播。仅证明此次离线夹具范围。",
+  "preceding_failure": {
+    "tool_result_id": "call_a8d0240827188acb0932b2e0",
+    "output_artifact_id": "cmd-1793367620517.txt",
+    "exit_code": 1,
+    "tests_run": 10,
+    "errors": 9,
+    "key_output": "Ran 10 tests in 0.169s; FAILED (errors=9)",
+    "cause": "路由记录使用 tuple，与严格规范 JSON 的数组类型要求冲突。",
+    "repair": "仅将 routes.append((path, name)) 改为 routes.append([path, name])；未修改断言或降低门禁。"
+  },
+  "limitations": [
+    "未发布本实例实际来源的治理蓝图；夹具保存成功不等于阶段 6 交付验收。",
+    "不证明完整 V3 服务及客户端调用链、生产选择独立性、秘密检查或冷预检物理截止。",
+    "不证明在线业务、人工语义、宿主加载或来源项目安装。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅为局部测试证据，不是进度副本或控制器保证。"
+}

@@ -1,0 +1,37 @@
+{
+  "receipt_version": 1,
+  "status": "blocked",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "attempt_id": "decode-reuse-20261031T1154Z",
+  "sample_id": "preflight-1",
+  "session_id": null,
+  "client_tool_call_id": "call_98f572a9ae000cf7889c6c91",
+  "command": "env PYTHONPATH=src:tests /usr/bin/time -f 'external_time_seconds=%e actual_exit_code=%x' timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_phase4_20261031.py launch --sample preflight-1 </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 2,
+  "external_time_seconds": 27.62,
+  "external_time_precision_note": "外部两位小数观测，不是内部耗时或绝对实时保证。",
+  "reported_error": "ClientError",
+  "reported_reason": "v3_service_call_rejected",
+  "request_evidence": {
+    "path": "verification/mainline-a-schema-v3-20261030T095713Z/preflight-1.decode-reuse-20261031T1154Z.request.json",
+    "bytes": 1697,
+    "sha256": "b5809dbbf7a0826b2945f8b4f3b98c011db6c5f78f6cb177c66656927d0ddc7e",
+    "exact_readback": true
+  },
+  "listener_before": ["12033"],
+  "key_output": [
+    "{\"status\": \"blocked\", \"error\": \"ClientError\", \"reason\": \"v3_service_call_rejected\"}",
+    "Command exited with non-zero status 2",
+    "external_time_seconds=27.62 actual_exit_code=2"
+  ],
+  "service_failure_cause": "not_verified_pending_trace_inspection",
+  "service_cleanup": "not_verified_pending_evidence",
+  "acceptance": "not_passed",
+  "boundary": "首样本失败，不启动第二、第三样本或唯一在线业务；保留历史失败及现场，不转正 ADR，不归档活动源。",
+  "receipt_origin": "依据真实客户端回执保存；非控制器自动生成，不提供程序防篡改保证。"
+}

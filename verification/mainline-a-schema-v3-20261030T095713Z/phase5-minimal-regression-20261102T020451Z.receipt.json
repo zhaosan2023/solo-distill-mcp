@@ -1,0 +1,75 @@
+{
+  "status": "pass_from_actual_client_command_results_not_online_acceptance",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 13,
+  "execution_contract_revision": 14,
+  "session_id": null,
+  "actual_exit_code": 0,
+  "tests_run": 159,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "cwd": ".",
+  "groups": [
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_minimal_recovery.MinimalRecoveryTests test_schema_v3_minimal_recovery.MinimalDriverTests test_schema_v3_live_retry test_schema_v3_extended_driver test_schema_v3_online_failure_preservation -v </dev/null",
+      "client_tool_result_id": "call_bd300b5c1f1631ce2a43c2ae",
+      "output_artifact": "cmd-1793585754782.txt",
+      "actual_exit_code": 0,
+      "tests_run": 63,
+      "reported_test_seconds": 2.647,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "key_output": "Ran 63 tests in 2.647s; OK",
+      "registration_boundary": "本组先于当前入口登记执行；引用真实结果，不追认为事先登记。"
+    },
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_minimal_gateway test_schema_v3_task test_schema_v3_task_oracle test_schema_v3_publish_api test_schema_v3_decode_reuse -v </dev/null",
+      "client_tool_result_id": "call_1391761940d5c840b8164d98",
+      "output_artifact": null,
+      "output_location": "客户端该工具回执的完整输出",
+      "actual_exit_code": 0,
+      "tests_run": 44,
+      "reported_test_seconds": 2.548,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "key_output": "Ran 44 tests in 2.548s; OK"
+    },
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_live_failure_evidence test_schema_v3_stdio.ServiceBoundaryTests test_schema_v3_stdio.StdioIntegrationTests test_schema_v3_runtime_gates.RuntimeBoundaryTests test_schema_v3_runtime_gates.ClientStreamBoundaryTests -v </dev/null",
+      "client_tool_result_id": "call_b9202855474c6cf755599675",
+      "output_artifact": "cmd-1793585987233.txt",
+      "actual_exit_code": 0,
+      "tests_run": 52,
+      "reported_test_seconds": 4.861,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "key_output": "Ran 52 tests in 4.861s; OK",
+      "negative_control_output": "取消负控输出 failed_not_business_acceptance；相应测试断言通过，不是实际在线失败或成功证据。"
+    }
+  ],
+  "counting_boundary": "159 是三次实际测试运行的累计命中数，包含导入和继承导致的重复执行；不宣称159个唯一测试。",
+  "scope": [
+    "显式生成参数与默认编码原字节保留",
+    "封闭POST认证及参数、类型、来源、非规范编码篡改负控",
+    "明确上游流错误及超时的串行重试、第四次成功和耗尽",
+    "同一绝对期限、返回余量、取消及本地期限不重试",
+    "旧窗口资产保护及新独占关联接纳",
+    "逐次失败证据保存及失败片段不拼接",
+    "隔离假生成可信双消费、相关服务与真实离线stdio边界"
+  ],
+  "not_proven": [
+    "本次真实在线恢复及正常stop/DONE",
+    "当前真实来源和网关准入",
+    "真实在线产物包外可信双消费",
+    "四维及13项锚点对账和真实人工审核",
+    "治理交付、ADR转正及安全归档",
+    "采样参数解决复读根因或令牌上限保证墙钟耗时"
+  ],
+  "controller_coverage": "未证明；平台任务记录引用真实客户端回执为当前进度唯一入口。",
+  "persistence_boundary": "本文件整理已返回的真实命令结果；原生写入成功与准入读取核验须另取回执，不预先宣称保存复读成功。"
+}

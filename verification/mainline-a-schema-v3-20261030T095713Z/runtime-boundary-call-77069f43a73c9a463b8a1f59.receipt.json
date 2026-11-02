@@ -1,0 +1,79 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "status": "pass_for_bounded_runtime_controls_not_full_phase",
+  "initial_run": {
+    "tool_result_id": "call_51ab9e8606bb97e85df87a9a",
+    "command": "printf '%s\\n' '执行已保存的阶段 3 剩余运行边界门禁：仅新增测试模块，覆盖隔离假生成的 180 秒窗口与有界写入、真实管道取消和 EOF、客户端坏流及不合作服务线程的独立进程退出。控制器覆盖未证明，采用前台同步、封闭输入和 30 秒进程级硬期限；不重跑前序通过组、不访问网关、不执行来源、不占用实际冷预检样本。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_runtime_gates </dev/null",
+    "cwd": "/home/ecs-user/project/solo-distill-mcp",
+    "actual_exit_code": 1,
+    "tests_run": 9,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "reported_test_seconds": 1.238,
+    "failed_test": "RuntimeBoundaryTests.test_fast_fake_live_keeps_180_window_and_bounded_writer",
+    "failure_output": "AssertionError: b'' is not true : pipe_eof_before_expected_frame",
+    "observed_passes_retained_without_rerun": [
+      "ClientStreamBoundaryTests.test_client_rejects_early_eof_unexpected_notification_and_response",
+      "ClientStreamBoundaryTests.test_client_rejects_extra_manifest_and_partial_or_oversized_frame",
+      "ClientStreamBoundaryTests.test_diagnostic_overflow_deadline_and_upstream_cancel_fail_closed",
+      "ClientStreamBoundaryTests.test_fragmented_syscall_reads_complete_exact_transfer",
+      "UncooperativeProcessTests.test_service_owned_worker_forces_nonzero_exit_within_declared_window"
+    ],
+    "uncooperative_process_observation": {
+      "control": "v3_uncooperative_service_worker",
+      "exit_code": 2,
+      "elapsed_seconds": 0.9818440810013271,
+      "declared_window_seconds": 1,
+      "success_response_absent": true,
+      "proof_scope": "short_real_service_window_not_30_second_outer_control"
+    },
+    "whole_command_pass": false
+  },
+  "repair": {
+    "tool_result_id": "call_1297d2d2d7b4db35c12e872e",
+    "file": "src/solo_distill/server_v3.py",
+    "line": 75,
+    "change": "业务发布期限取宿主期限、业务期限与当前单调时钟加 30 秒的最小值；不修改共享 FrameWriter，不缩短原 180 秒业务期限。",
+    "source_basis": "FrameWriter.send 拒绝超过 30 秒的单次写入期限；原服务直接传入尚余约 180 秒的业务期限。",
+    "preserved": "V1/V2 原入口、共享写入器、已通过前序组及其他既有改动。"
+  },
+  "affected_revalidation": {
+    "tool_result_id": "call_77069f43a73c9a463b8a1f59",
+    "command": "printf '%s\\n' '验证已成功保存的 V3 写入期限修复：仅运行受影响的 4 项新增服务运行边界测试，核对 180 秒业务窗口不被缩短、单次写入不超过 30 秒以及 EOF 和取消边界。此前已通过的客户端坏流、不合作进程及前序测试组不重跑。控制器覆盖未证明；使用串行前台、封闭输入及 30 秒进程级硬期限，不访问网关、不执行来源、不推进真实三样本或在线业务。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_runtime_gates.RuntimeBoundaryTests </dev/null",
+    "cwd": "/home/ecs-user/project/solo-distill-mcp",
+    "actual_exit_code": 0,
+    "tests_run": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "reported_test_seconds": 0.195,
+    "process_elapsed_seconds": null,
+    "observed_passes": [
+      "test_eof_during_preparation_cancels_worker_and_saves_no_success",
+      "test_explicit_cancel_during_publication_blocks_delivery_receipt",
+      "test_fast_fake_live_keeps_180_window_and_bounded_writer",
+      "test_wrong_typed_cancel_does_not_stop_publication"
+    ],
+    "key_output": "Ran 4 tests in 0.195s; OK",
+    "negative_control_diagnostics": "EOF 和显式取消负控各输出：V3 发布、期限或证据保存失败；未登记通过。测试断言通过，不表示被取消操作成功。"
+  },
+  "proof_scope": [
+    "新增服务边界的 4 项受影响测试在修复后实际退出 0。",
+    "初次命令中未受此写入期限修改影响的 4 项客户端接收边界及 1 项不合作进程退出断言保留原始逐项通过证据；不把初次命令退出 1 改写为整组通过。",
+    "180 秒声明采用隔离假生成，真实管道写入受 30 秒单次期限约束；不是实际在线生成证据。"
+  ],
+  "not_proven": [
+    "阶段 2／3 全范围对账。",
+    "实际来源三次冷预检及其完整硬期限证据。",
+    "健康绑定、唯一实际在线业务、独立四维业务消费、真实人工语义和治理交付。",
+    "Roo 宿主加载及权限执行。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；控制器覆盖未证明。本文件仅保存验证证据，不是第二份进度账本。"
+}

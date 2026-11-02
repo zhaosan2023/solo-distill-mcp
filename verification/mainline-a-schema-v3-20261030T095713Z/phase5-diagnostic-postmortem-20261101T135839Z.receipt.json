@@ -1,0 +1,70 @@
+{
+  "receipt_kind": "assistant_record_of_actual_client_results_not_controller_attestation",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 11,
+  "execution_contract_revision": 12,
+  "session_id": null,
+  "online_acceptance": "blocked",
+  "online_result": {
+    "source_receipt": "client execute_command result call_3794564846aecf7b68a7dd52",
+    "command": "env PYTHONPATH=src:tests timeout -s KILL 240s python3 -B -S verification/.scratch/mainline_a_schema_v3_online_20261101.py live --diagnostic < /dev/null",
+    "cwd": ".",
+    "actual_exit_code": 2,
+    "reported_elapsed_seconds": 228.9066126550024,
+    "service_exit_code": 0,
+    "service_cleanup": "confirmed_natural_exit",
+    "original_receipt": "verification/mainline-a-schema-v3-20261030T095713Z/phase5-live-diagnostic-20261101T133705Z.receipt.json",
+    "original_receipt_bytes": 7939,
+    "original_receipt_sha256": "55324d15371c24888cb67da6a32b914d5cb2d997430033ad626abb729cd5df51",
+    "original_local_failures": ["ValueError:phase5_complete_sse_capture", "FileExistsError:[Errno 17] File exists: 'phase5-live-diagnostic-20261101T133705Z.admission.json'"],
+    "original_receipt_rewritten": false
+  },
+  "audit_result": {
+    "source_receipt": "client execute_command result call_a7f8686d2f3b61ccb9db5388",
+    "command": "timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_diagnostic_audit_20261101T135252Z.py < /dev/null",
+    "cwd": ".",
+    "actual_exit_code": 0,
+    "status": "audit_completed_not_online_acceptance",
+    "actual_http_attempts": 2,
+    "client_auto_retries": 1,
+    "attempts": [
+      {"attempt_index": 1, "http_status": 200, "error_reason": "upstream_stream_error", "upstream_error_type": "upstream_stream_error", "elapsed_seconds": 1.592472, "raw_sse_bytes": 102, "finish_reason": null, "done_marker": false},
+      {"attempt_index": 2, "http_status": 200, "error_reason": "gateway_deadline_exhausted", "upstream_error_type": null, "elapsed_seconds": 214.248347, "raw_sse_bytes": 211920, "finish_reason": null, "done_marker": false}
+    ],
+    "post_bytes_per_attempt": 132486,
+    "post_sha256_per_attempt": "ebe35943ad29da3414f21b301ad560655de5540aab17eadd02353d70f283b58f",
+    "one_absolute_deadline": true,
+    "same_frozen_post": true,
+    "old_admission_trace_marker_and_receipt_unchanged": true,
+    "verified_asset_count": 16,
+    "model_outputs_count": 0,
+    "trace_failures": [{"kind": "blocked", "reason": "gateway_deadline_exhausted"}],
+    "listener_after": ["11253"],
+    "no_network_or_replay": true
+  },
+  "source_inspection": {
+    "actual_failure": "第一次明确上游流错误后确实自动重试；第二次发送耗尽共享网关期限且未取得 stop 或 DONE，不能认定正常在线完成。",
+    "deadline_boundary": "服务网关期限为调用方期限减去既有 return_reserve_seconds=15；本次未修改该返回余量或共享240秒窗口，不把保留余量误报为240秒进程强杀。",
+    "diagnostic_defects": ["失败流不设置成功专用 response_bytes，旧驱动先校验该字段导致掩盖真实网关错误；修复为先核验已捕获字节，再报告真实错误，成功路径完整性要求不变。", "失败保存路径已独占保存 admission，旧 finally 再次独占写入导致 FileExistsError；修复为仅对同次调用已登记资产做原字节及摘要复核，不覆盖已有文件。"],
+    "scope": "仅在线驱动和隔离回归测试；未修改网关、服务重试策略、冻结来源、契约或历史在线回执。"
+  },
+  "repair_regression": {
+    "source_receipt": "client execute_command result call_02ba411ffc9fb6dda3a739cd",
+    "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_online_failure_preservation.FailurePreservationTests < /dev/null",
+    "cwd": ".",
+    "actual_exit_code": 0,
+    "tests_run": 10,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_test_seconds": 0.162,
+    "output_summary": "Ran 10 tests in 0.162s; OK",
+    "scope": "真实错误分类、失败片段完整性、成功终止及计量负控、已保存接纳复用及篡改拒绝、独占保存与既有失败证据边界。",
+    "not_proven": "修复后未再次执行在线业务；离线回归不追认此前在线失败为成功。"
+  },
+  "authorization_boundary": "已授权的一次诊断窗口已实际退出并消耗新标记；不重置标记、不延长旧窗口、不自动创建下一在线窗口。",
+  "unmet_required_gates": ["正常在线 stop/DONE 及合法业务输出", "成功在线独立可信双消费", "四维与13项锚点对账", "真实人工逐结论源码复读及锚点审核", "后续治理输出及最终门禁", "满足门禁后对应ADR转正及安全归档"],
+  "preserved": "原实例、原失败和恢复标记及回执；不操作Git、不修改工作区外全局规则、不写项目事实基线。",
+  "limitations": "旧已退出恢复缺失的错误现场及发送次数仍未知；供应商内部发送、费用和Roo宿主加载未证明。"
+}

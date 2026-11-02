@@ -1,0 +1,32 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_9ae0488bc0cbc02df02bd8cc",
+  "command": "printf '%s\\n' '定向验证新结构包、双层独立 Oracle 及宏观/局部接口边界：检查完整字段、可信分母、版本拒绝、篡改负控与取消传播；仅解析测试夹具，不访问网关、不执行来源、不安装依赖。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_package test_schema_v3_macro test_schema_v3_production_macro test_schema_v3_local test_schema_v3_production_local </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 57,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "1.072",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 57 tests in 1.072s; OK; 全部列出的测试结果为 ok。",
+  "status": "pass",
+  "proof_scope": "新结构包与宏观及局部语法的定向夹具、独立差分、可信外部分母、版本拒绝、完整字段篡改负控和取消传播",
+  "common_failure_risk": "两层生产与独立实现共享 Python 标准库 AST；通过不消除解析器共同失效风险。",
+  "not_proven": [
+    "包外核心选择独立性及问题证据充分性",
+    "完整 V3 封印、任务证据、发布、分片、入口和消费者调用链",
+    "完整定向离线门禁及旧协议兼容回归",
+    "27 秒证据保存与复读、30 秒实际进程截止",
+    "三次冷预检及现有网关健康身份",
+    "唯一在线业务、真实 POST 及流式接收",
+    "四维业务语义、13 项参考锚点和真实人工审核",
+    "治理生成器、蓝图保存复读及宿主加载",
+    "最终对账、ADR 转正及活动计划归档"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅保存局部测试证据，不是另一份进度账本。"
+}

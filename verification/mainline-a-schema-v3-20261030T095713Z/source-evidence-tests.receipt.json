@@ -1,0 +1,18 @@
+{
+  "receipt_version": 1,
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "target": "V3 来源冻结、秘密检查、变化拒绝、取消与期限边界；不证明完整服务或阶段通过",
+  "command": "PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_evidence </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "actual_exit_code": 0,
+  "provenance": "client_execute_command_result_call_0778467cade9e83a01bce9e1",
+  "tests_run": 18,
+  "required_skips": 0,
+  "reported_test_seconds": 0.062,
+  "stdout_stderr_tool_output": "test_cancel_after_read_is_not_recorded_as_complete (test_schema_v3_evidence.V3EvidenceTests.test_cancel_after_read_is_not_recorded_as_complete) ... ok\ntest_cancelled_before_inventory_returns_no_sources (test_schema_v3_evidence.V3EvidenceTests.test_cancelled_before_inventory_returns_no_sources) ... ok\ntest_cancelled_final_verify_and_unread_source_verify_are_blocked (test_schema_v3_evidence.V3EvidenceTests.test_cancelled_final_verify_and_unread_source_verify_are_blocked) ... ok\ntest_complete_scope_raw_bytes_and_empty_file_without_legacy_package (test_schema_v3_evidence.V3EvidenceTests.test_complete_scope_raw_bytes_and_empty_file_without_legacy_package) ... ok\ntest_deadline_equality_and_overrun_block_before_read (test_schema_v3_evidence.V3EvidenceTests.test_deadline_equality_and_overrun_block_before_read) ... ok\ntest_mismatched_trusted_scan_context_is_rejected (test_schema_v3_evidence.V3EvidenceTests.test_mismatched_trusted_scan_context_is_rejected) ... ok\ntest_narrow_authorized_scan_is_preserved_without_expansion (test_schema_v3_evidence.V3EvidenceTests.test_narrow_authorized_scan_is_preserved_without_expansion) ... ok\ntest_new_file_after_inventory_blocks_directory_identity (test_schema_v3_evidence.V3EvidenceTests.test_new_file_after_inventory_blocks_directory_identity) ... ok\ntest_parse_failure_and_zero_python_hits_are_blocked (test_schema_v3_evidence.V3EvidenceTests.test_parse_failure_and_zero_python_hits_are_blocked) ... ok\ntest_post_inventory_content_change_blocks_final_verification (test_schema_v3_evidence.V3EvidenceTests.test_post_inventory_content_change_blocks_final_verification) ... ok\ntest_repeated_inventory_does_not_bypass_source_freshness (test_schema_v3_evidence.V3EvidenceTests.test_repeated_inventory_does_not_bypass_source_freshness) ... ok\ntest_returned_scope_and_report_are_isolated (test_schema_v3_evidence.V3EvidenceTests.test_returned_scope_and_report_are_isolated) ... ok\ntest_same_size_source_change_is_not_accepted (test_schema_v3_evidence.V3EvidenceTests.test_same_size_source_change_is_not_accepted) ... ok\ntest_secret_in_any_authorized_file_blocks_entire_inventory (test_schema_v3_evidence.V3EvidenceTests.test_secret_in_any_authorized_file_blocks_entire_inventory) ... ok\ntest_source_change_between_scan_and_read_blocks (test_schema_v3_evidence.V3EvidenceTests.test_source_change_between_scan_and_read_blocks) ... ok\ntest_symlink_replacement_is_not_followed (test_schema_v3_evidence.V3EvidenceTests.test_symlink_replacement_is_not_followed) ... ok\ntest_top_level_source_stays_data (test_schema_v3_evidence.V3EvidenceTests.test_top_level_source_stays_data) ... ok\ntest_unrelated_unsupported_asset_is_disclosed_not_parsed (test_schema_v3_evidence.V3EvidenceTests.test_unrelated_unsupported_asset_is_disclosed_not_parsed) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.062s\n\nOK\n",
+  "gateway_access": "none_in_authorized_test_scope",
+  "source_business_execution": "none_in_authorized_test_scope",
+  "phase_gate": "not_full_phase_gate"
+}

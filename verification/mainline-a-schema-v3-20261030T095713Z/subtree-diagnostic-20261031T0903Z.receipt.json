@@ -1,0 +1,71 @@
+{
+  "receipt_version": 1,
+  "status": "blocked",
+  "proof_scope": "当前新子结构表示的单进程生产发布诊断；不是原服务异常复现或冷预检验收",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "wire_encoding": "dictionary-columnar-v3-2",
+  "session_id": null,
+  "client_tool_call_id": "call_c6843aee9880ef8f8e88c0db",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_subtree_diagnostic_20261031.py </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 2,
+  "failure_stage": "publish",
+  "reported_error": "ValueError",
+  "reported_reason": "v3_transport_decode_budget",
+  "frozen_file_count": 81,
+  "measurements": {
+    "publication_bytes": 1493240,
+    "represented_json_bytes": 1126789,
+    "decoded_response_bytes": 1155215,
+    "decoded_limit_bytes": 1048576,
+    "decoded_over_limit_bytes": 106639,
+    "dictionary_strings": 8610,
+    "dictionary_schemas": 21,
+    "subtree_entries": 1,
+    "subtree_pack_seconds": 2.407022354003857
+  },
+  "stages_seconds": {
+    "binding": 0.0011991990031674504,
+    "prepare": 9.448783607003861,
+    "task": 0.2617529179988196,
+    "publish": 3.3006143950042315
+  },
+  "preparation_stage_seconds": {
+    "authenticate": 0.5618693709984655,
+    "build": 2.4101764390070457,
+    "encode": 0.260729679997894,
+    "index": 0.6548252369975671,
+    "read": 0.177732632990228,
+    "scan": 0.9064216679980746,
+    "selection": 3.623795034000068,
+    "source_verify": 0.015160236012889072
+  },
+  "reported_internal_elapsed_seconds": 13.086547821003478,
+  "timing_scope": "诊断内部观测，包含测量开销；不是命令总耗时或真实冷链耗时",
+  "source_verification_scope": "准备链内来源复核有耗时记录；发布失败，发布后的 source_verify 阶段未执行",
+  "diagnostic_conclusion": "本次完整实际 JSON-RPC 帧超过原硬限 106639 字节，生产发布以容量错误拒绝；未报告内部期限错误。不能将该单进程结果追认为此前真实服务通用拒绝的唯一根因。",
+  "key_output": "status=blocked; failure_stage=publish; reason=v3_transport_decode_budget; decoded_response_bytes=1155215; decoded_limit_bytes=1048576",
+  "reported_operation_counts": {
+    "gateway_requests": 0,
+    "service_processes_started": 0,
+    "preflight_samples_started": 0,
+    "online_admissions": 0
+  },
+  "not_proven": [
+    "原服务拒绝的具体异常及退出码",
+    "原服务自然退出",
+    "新表示真实冷链容量验收",
+    "三个真实冷预检",
+    "独立业务消费及六份证据保存",
+    "唯一在线业务",
+    "真实人工语义审核",
+    "宿主加载"
+  ],
+  "dependency_advancement": "阶段四保持 BLOCKED；不得启动第二、第三样本或唯一在线业务",
+  "preservation": "本次及历史失败、请求与现场保留，不改写旧证据",
+  "hard_limits_and_deadlines": "全部保持不变",
+  "controller_coverage": "未获证明，当前进度仅使用平台任务记录引用真实回执"
+}

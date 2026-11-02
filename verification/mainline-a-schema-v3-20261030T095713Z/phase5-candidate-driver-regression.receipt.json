@@ -1,0 +1,83 @@
+{
+  "status": "affected_regressions_pass_online_not_executed",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_id": "mainline-a-v2-scenario-a-20261029",
+  "plan_contract_version": 6,
+  "adr_revision": 15,
+  "execution_contract_revision": 16,
+  "session_id": null,
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 198,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "tool_results": [
+    "call_3dbeeec27e54e5aa0d8941a4",
+    "call_9764414d09ab284b1aeea033",
+    "call_6b0f7af49f994d712097ae14",
+    "call_a2aae6b414ab24bf6b23c52f",
+    "call_fa32b161af587938f5e4da21"
+  ],
+  "runs": [
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_candidate_oracle.CandidateOracleTests test_schema_v3_candidate_classification.CandidateClassificationTests </dev/null",
+      "tool_result": "call_3dbeeec27e54e5aa0d8941a4",
+      "actual_exit_code": 0,
+      "tests_run": 13,
+      "elapsed_seconds_reported_by_unittest": 0.203,
+      "summary": "Ran 13 tests in 0.203s; OK"
+    },
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_candidate_admission.CandidateAdmissionTests test_schema_v3_candidate_recovery.CandidateRecoveryTests test_schema_v3_candidate_driver.CandidateDriverTests </dev/null",
+      "tool_result": "call_9764414d09ab284b1aeea033",
+      "actual_exit_code": 0,
+      "tests_run": 15,
+      "elapsed_seconds_reported_by_unittest": 2.193,
+      "summary": "Ran 15 tests in 2.193s; OK"
+    },
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_task test_schema_v3_task_oracle test_schema_v3_publish_api test_schema_v3_decode_reuse test_schema_v3_minimal_gateway </dev/null",
+      "tool_result": "call_6b0f7af49f994d712097ae14",
+      "actual_exit_code": 0,
+      "tests_run": 44,
+      "elapsed_seconds_reported_by_unittest": 2.429,
+      "summary": "Ran 44 tests in 2.429s; OK"
+    },
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_minimal_recovery.MinimalRecoveryTests test_schema_v3_minimal_recovery.MinimalDriverTests test_schema_v3_coverage_recovery.CoverageRecoveryTests test_schema_v3_coverage_driver.CoverageDriverTests test_schema_v3_live_retry test_schema_v3_extended_driver test_schema_v3_online_failure_preservation </dev/null",
+      "tool_result": "call_a2aae6b414ab24bf6b23c52f",
+      "output_artifact": "cmd-1793606343907.txt",
+      "actual_exit_code": 0,
+      "tests_run": 74,
+      "elapsed_seconds_reported_by_unittest": 3.290,
+      "summary": "Ran 74 tests in 3.290s; OK"
+    },
+    {
+      "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_live_failure_evidence test_schema_v3_stdio.ServiceBoundaryTests test_schema_v3_stdio.StdioIntegrationTests test_schema_v3_runtime_gates.RuntimeBoundaryTests test_schema_v3_runtime_gates.ClientStreamBoundaryTests </dev/null",
+      "tool_result": "call_fa32b161af587938f5e4da21",
+      "output_artifact": "cmd-1793606379225.txt",
+      "actual_exit_code": 0,
+      "tests_run": 52,
+      "elapsed_seconds_reported_by_unittest": 5.170,
+      "summary": "Ran 52 tests in 5.170s; OK"
+    }
+  ],
+  "prior_failed_run": {
+    "tool_result": "call_3060af8252e2b28542ec3e5c",
+    "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_candidate_admission.CandidateAdmissionTests test_schema_v3_candidate_recovery.CandidateRecoveryTests test_schema_v3_candidate_driver.CandidateDriverTests </dev/null",
+    "actual_exit_code": 1,
+    "tests_run": 15,
+    "failed": 0,
+    "errors": 1,
+    "elapsed_seconds_reported_by_unittest": 2.184,
+    "failure": "test_mixed_attempts_verify_original_stream_and_whole_rejection: KeyError: raw_sse_base64",
+    "repair": "隔离驱动测试显式启用流捕获，保留原始事件流断言；未降低断言。",
+    "repair_tool_result": "call_a15d5d997ffd8890ae287491",
+    "passing_rerun_tool_result": "call_9764414d09ab284b1aeea033"
+  },
+  "evidence_scope": "198为五次成功运行报告的测试执行总数，包含继承测试及重复执行，不表示198个去重用例。仅证明所列受影响隔离回归；不证明新在线请求、真实外层600秒运行、当前来源复核、可信双消费、四维及13项锚点、人工审核、治理或全计划完成。",
+  "execution_constraints": "所列命令串行、前台、标准输入封闭，均收到真实退出0回执；每次采用30秒进程级硬期限。未启动或重启真实网关，未安装依赖，未操作Git，未运行来源业务。",
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "receipt_role": "固定回归证据引用，不是另建的当前进度账本；保存成功及复读须等待实际工具回执。"
+}

@@ -1,0 +1,19 @@
+test_cancel_before_scan_and_expired_deadline_do_not_read (test_schema_v3_preparation.SnapshotPreparationTests.test_cancel_before_scan_and_expired_deadline_do_not_read) ... ok
+test_cancel_during_scan_blocks_preparation (test_schema_v3_preparation.SnapshotPreparationTests.test_cancel_during_scan_blocks_preparation) ... ok
+test_complete_chain_matches_independent_selection_and_core (test_schema_v3_preparation.SnapshotPreparationTests.test_complete_chain_matches_independent_selection_and_core) ... ok
+test_exact_external_selection_is_required_when_supplied (test_schema_v3_preparation.SnapshotPreparationTests.test_exact_external_selection_is_required_when_supplied) ... ok
+test_external_guard_is_checked_before_source_access (test_schema_v3_preparation.SnapshotPreparationTests.test_external_guard_is_checked_before_source_access) ... ok
+test_invalid_deadlines_and_guard_contract_are_rejected (test_schema_v3_preparation.SnapshotPreparationTests.test_invalid_deadlines_and_guard_contract_are_rejected) ... ok
+test_operation_local_parse_reuse_and_no_historical_metrics (test_schema_v3_preparation.SnapshotPreparationTests.test_operation_local_parse_reuse_and_no_historical_metrics) ... ok
+test_preparation_does_not_import_independent_expectation_assets (test_schema_v3_preparation.SnapshotPreparationTests.test_preparation_does_not_import_independent_expectation_assets) ... ok
+test_public_messages_reencode_exact_post_with_caller_field_order (test_schema_v3_preparation.SnapshotPreparationTests.test_public_messages_reencode_exact_post_with_caller_field_order) ... ok
+test_public_views_do_not_mutate_frozen_preparation (test_schema_v3_preparation.SnapshotPreparationTests.test_public_views_do_not_mutate_frozen_preparation) ... ok
+test_scope_cannot_expand_project_authorization (test_schema_v3_preparation.SnapshotPreparationTests.test_scope_cannot_expand_project_authorization) ... ok
+test_secret_and_required_zero_hits_never_produce_core (test_schema_v3_preparation.SnapshotPreparationTests.test_secret_and_required_zero_hits_never_produce_core) ... ok
+test_source_changes_and_cancellation_block_final_reverification (test_schema_v3_preparation.SnapshotPreparationTests.test_source_changes_and_cancellation_block_final_reverification) ... ok
+test_source_drift_rejects_previous_frozen_selection (test_schema_v3_preparation.SnapshotPreparationTests.test_source_drift_rejects_previous_frozen_selection) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.134s
+
+OK

@@ -1,0 +1,39 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_result",
+  "tool_result_id": "call_8374545b4454e7541177807d",
+  "output_artifact_id": "cmd-1793367827887.txt",
+  "summary_readback_tool_result_id": "call_b0ecbb2fb27f49a88b9885ec",
+  "command": "printf '%s\\n' '汇总阶段 2 已实现资产的定向回归：结构、任务、独立 Wire、显式发布、治理生成器及旧传输和治理路径；仅离线夹具，不运行阶段 3 冷预检或在线业务，不访问网关、不执行来源、不安装依赖。' && PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_macro test_schema_v3_production_macro test_schema_v3_local test_schema_v3_production_local test_schema_v3_package test_schema_v3_core test_schema_v3_task_oracle test_schema_v3_task test_schema_v3_wire_oracle test_schema_v3_wire.ProductionWireTests test_schema_v3_publish_api test_schema_v3_governance test_brownfield test_v2_wire test_adaptive_backpressure </dev/null",
+  "cwd": "/home/ecs-user/project/solo-distill-mcp",
+  "exit_code": 0,
+  "tests_run": 203,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "runner_elapsed_seconds": "10.782",
+  "process_elapsed_seconds": null,
+  "key_output": "Ran 203 tests in 10.782s; OK",
+  "status": "pass",
+  "proof_scope": "本命令明确列出的已实现资产及相关旧路径的离线夹具回归；包括完整结构认证、任务证据、独立及生产传输消费、显式 publish_v3、真实默认分片、治理生成器及隔离保存。不作为活动计划阶段 2 全范围或阶段 3 完成证明。",
+  "coverage_accounting": "203 是本命令实际执行数；部分继承用例和历史回执重叠，不与历史 69、52、15、30 或 24 相加作为独立测试总数。",
+  "source_inspection_scope": [
+    "src/solo_distill/server_v2.py 的现有工程服务只声明并接纳 V2 工具。",
+    "src/solo_distill/client.py 的现有客户端只选择 V1/V2 服务，其普通接收逻辑不构成 V3 分片调用链证明。",
+    "src/solo_distill/scouting_v2.py 的现有问题选择输入为 V2 语法包；未取得生产 V3 选择与独立选择 Oracle 对照的通过证据。",
+    "verification 目录的定向检索未发现本实例显式 V3 服务或阶段门禁入口；零命中仅是该检索范围的证据，不证明其他位置不存在实现。"
+  ],
+  "not_proven": [
+    "完整显式 V3 工具、服务、客户端、生产选择及消费的集成调用链。",
+    "独立选择 Oracle 与生产 V3 选择的差分门禁；本命令未包含独立选择测试模块。",
+    "完整来源秘密检查、快照前后变化拒绝及运行证据保存复读调用链。",
+    "软 SLO 不阻断与 27/30 秒硬期限严格阻断的完整阶段门禁。",
+    "实际来源治理蓝图交付、健康绑定、三次串行冷预检、唯一在线业务、真实人工复读及宿主加载。"
+  ],
+  "stage_boundary": "计划 v6、执行契约 Revision 3 与 ADR 修订 2 已原生读取；ADR 保持 PROPOSED。当前用户明确授权优先于 ADR 内保留的旧文档刷新授权，不混用旧计划版本。",
+  "progress_authority": "平台任务记录及真实工具回执；本文件仅保存有界测试证据，不另建进度账本，不宣称控制器覆盖或程序防篡改保证。"
+}

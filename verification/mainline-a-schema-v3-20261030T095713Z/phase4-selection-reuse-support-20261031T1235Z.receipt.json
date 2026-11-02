@@ -1,0 +1,31 @@
+{
+  "receipt_version": 1,
+  "status": "isolated_support_tests_pass_not_actual_preflight",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "attempt_id": "selection-reuse-20261031T1234Z",
+  "session_id": null,
+  "client_tool_call_id": "call_9bd422b0448f3a9687235ad0",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_phase4_support.Phase4SupportTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 11,
+  "unittest_reported_seconds": 0.195,
+  "failures": 0,
+  "errors": 0,
+  "reported_skips": 0,
+  "key_output": "Ran 11 tests in 0.195s; OK",
+  "scope": "隔离夹具验证当前绑定、四项资源硬限、显式协商、前序样本依赖、非零外层退出及原字节变化负控；启动使用模拟，不访问网关、不启动真实冷预检或在线业务。",
+  "implementation_write_call": "call_7a6721dd713560d5fe0db8e8",
+  "contract_write_call": "call_390c5875c5c8d134743252e0",
+  "timing_scope": "耗时为 unittest 自报值，不是外部进程总耗时或真实冷链收益。",
+  "not_proven": [
+    "当前健康端点及监听 inode",
+    "当前历史残留进程清理边界",
+    "三个真实冷预检及六份原字节凭证和逐样本审计",
+    "唯一在线业务及人工语义验收"
+  ],
+  "receipt_origin": "依据真实客户端回执保存的有界摘要；非控制器生成，不提供程序防篡改保证。历史失败与诊断保持独立，不追认为通过。"
+}

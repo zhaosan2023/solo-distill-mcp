@@ -1,0 +1,26 @@
+{
+  "status": "targeted_core_regression_pass_driver_and_online_pending",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "adr_revision": 15,
+  "execution_contract_revision": 16,
+  "session_id": null,
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_candidate_admission.CandidateAdmissionTests test_schema_v3_candidate_recovery.CandidateRecoveryTests </dev/null",
+  "cwd": ".",
+  "tool_result": "call_83e02edf976f6242d95b8110",
+  "actual_exit_code": 0,
+  "tests_run": 9,
+  "elapsed_test_seconds": 1.384,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "previous_failed_tool_result": "call_f477d6f8829b713f3461de53",
+  "previous_failure": "隔离测试错误复用了已保存的覆盖传输资产；改用尚未发送的独立覆盖夹具，不删除旧资产、不降低断言。修复后本组完整重验通过。",
+  "scope": "固定候选恢复独占接纳、旧现场保护、类型化候选整份拒收、混合传输与候选共享四次发送、耗尽不发布、非重试形状错误、保存失败及取消/期限停止、合法产物包外可信双消费的隔离回归。",
+  "limitations": [
+    "本组使用隔离夹具及模拟HTTP，不消耗真实在线接纳。",
+    "必要驱动适配、其他受影响调用方回归及真实准入和在线仍未完成。",
+    "不证明真实来源当前状态、实际在线成功、四维或13项锚点语义、真实人工、治理、ADR转正或归档。",
+    "控制器覆盖未证明；平台任务记录仍为唯一进度入口，本文件仅保存实际回归证据。"
+  ]
+}

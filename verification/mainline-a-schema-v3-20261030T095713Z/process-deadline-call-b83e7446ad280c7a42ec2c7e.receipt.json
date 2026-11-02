@@ -1,0 +1,52 @@
+{
+  "receipt_version": 1,
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 3,
+  "adr_revision": 2,
+  "evidence_source": "client_execute_command_results",
+  "status": "negative_control_pass",
+  "not_a_successful_preflight": true,
+  "timeout_execution": {
+    "tool_result_id": "call_b83e7446ad280c7a42ec2c7e",
+    "command": "printf '%s\\n' '执行修正并已登记的真实外层 30 秒负控：env 显式传递环境，外部 time 记录耗时；隔离冷预检完成真实离线服务及双消费后，保存段故意不响应内部期限。预期强杀并非零退出，取得回执后另窗复核进程退出及失败现场；不重跑前序通过组、不占用真实三样本、不联网、不执行来源。' && env PYTHONPATH=src:tests time -f 'outer_negative_process_elapsed_seconds=%e' timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_process_deadline_20261030.py --worker </dev/null",
+    "cwd": "/home/ecs-user/project/solo-distill-mcp",
+    "exit_code": 137,
+    "termination_signal": 9,
+    "external_time_elapsed_seconds_display": "30.00",
+    "elapsed_precision_note": "外部 time 的两位小数显示，不证明调度或测量零误差。",
+    "key_output": "Command terminated by signal 9; outer_negative_process_elapsed_seconds=30.00",
+    "worker_pid": 234727,
+    "fixture": "verification/.scratch/schema-v3-process-negative-m3ini6nr",
+    "guard_started_monotonic": 21579.844721183,
+    "entered_save_monotonic": 21580.183380566,
+    "injection": "first_preflight_save_fsync_then_noncooperative_wait"
+  },
+  "post_exit_verification": {
+    "tool_result_id": "call_5e240e16c9a8646ea620a028",
+    "command": "printf '%s\\n' '复核已返回退出码 137、信号 9、耗时 30.00 秒的外层期限负控：只读检查该回执唯一夹具、目标进程不存在、来源未变、失败现场保留且无成功回执；不重跑调用链、不清理现场、不访问网关。' && env PYTHONPATH=src:tests timeout -s KILL 15s python3 -B -S verification/.scratch/mainline_a_schema_v3_process_deadline_20261030.py --verify verification/.scratch/schema-v3-process-negative-m3ini6nr </dev/null",
+    "cwd": "/home/ecs-user/project/solo-distill-mcp",
+    "exit_code": 0,
+    "worker_pid_absent": true,
+    "source_unchanged": true,
+    "success_receipt_absent": true,
+    "failure_scene_retained": true,
+    "gateway_requests": 0,
+    "required_artifacts_present": [],
+    "key_output": "post_timeout_scene_verified_requires_command_exit_receipt; worker_pid_absent=true; success_receipt_absent=true; failure_scene_retained=true"
+  },
+  "preceding_command_failure": {
+    "tool_result_id": "call_157cf1e973effdbaefc87ccf",
+    "exit_code": 127,
+    "key_output": "time: cannot run PYTHONPATH=src:tests: No such file or directory",
+    "correction": "改用 env 显式传递环境与外部 time；该次失败没有执行负控 worker，不登记通过。"
+  },
+  "proof_scope": "隔离冷预检完成真实离线服务调用和双消费并确认服务退出后，保存段注入不响应内部检查的等待。实际外层 30 秒进程级期限以信号 9 终止 worker；独立后续探测退出 0，确认该 PID 不存在、来源未变、保留失败目录且没有成功回执。退出 137 是被测负控预期的拒绝结果，只有配对退出复核构成此项负控通过，不计为成功冷预检。",
+  "not_proven": [
+    "V3 服务内部不合作业务线程的强制退出行为；本负控阻塞冷预检驱动保存段，服务在注入前已退出。",
+    "任何其他进程或环境的绝对实时调度保证。",
+    "阶段 2／3 全范围完成。",
+    "真实来源三次冷预检、健康绑定、唯一在线、四维及人工语义、治理交付和宿主加载。"
+  ],
+  "progress_authority": "平台任务记录及真实工具回执；控制器覆盖未证明，本文件只保存配对负控证据，不建立进度账本。"
+}

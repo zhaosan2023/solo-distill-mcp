@@ -25,7 +25,11 @@ class ClientError(Exception):
 
 
 class StdioClient:
-    def __init__(self, root: Path, *, online: bool, deadline: float, v2: bool = False):
+    def __init__(self, root: Path, *, online: bool, deadline: float, v2: bool = False,
+                 v3: bool = False):
+        if v2 and v3:
+            raise ClientError("exclusive_service_version_required")
+        self.v3 = v3
         if v2 and not online:
             raise ClientError("v2_requires_explicit_online_authorization")
         self.raw_responses: dict[str, bytes] = {}
@@ -41,10 +45,13 @@ class StdioClient:
         self.cleanup = "not_started"
         self.selector = selectors.DefaultSelector()
         command = [sys.executable, "-B", "-S", "-m",
+                   "solo_distill.server_v3" if v3 else
                    "solo_distill.server_v2" if v2 else "solo_distill.server",
                    "--config", str(root / "config" / "projects.json")]
-        if online:
+        if online or v3:
             command.extend(["--distillation-config", str(root / "config" / "distillation.json")])
+        if online and v3:
+            command.append("--online")
         environment = {"PATH": os.defpath, "PYTHONPATH": str(root / "src"),
                        "PYTHONDONTWRITEBYTECODE": "1", "PYTHONNOUSERSITE": "1"}
         try:
@@ -134,6 +141,113 @@ class StdioClient:
         self.send({"jsonrpc": "2.0", "id": 2, "method": "tools/list"})
         return self.receive(2)
 
+    def receive_v3(self, arguments, *, rpc_id=3, tick=None):
+        """发送显式 V3 请求并保存完整传输；接收不代表知识或语义认证。"""
+        from .adaptive_wire import TransportCapabilities
+        from .wire_v3 import Admission, METHOD
+        from .selection_ingress_v3 import live_wire_arguments, resolve_selection
+        if not self.v3 or self.negotiated_protocol != "2024-11-05":
+            raise ClientError("explicit_v3_service_and_protocol_required")
+        admission = Admission(self.negotiated_protocol, arguments["scenario"], rpc_id,
+            arguments["return_bytes"], TransportCapabilities.from_dict(arguments["transport"]),
+            wire_encoding=arguments.get("wire_encoding", "json"))
+        caps = admission.transport
+        upstream_tick = tick
+
+        def check():
+            if time.monotonic() >= self.deadline:
+                raise ClientError("client_deadline_exhausted")
+            if upstream_tick is not None:
+                upstream_tick()
+
+        check()
+        wire_arguments = arguments
+        if arguments.get("operation") == "live":
+            selection = resolve_selection(arguments, tick=check)
+            wire_arguments, _ = live_wire_arguments(
+                arguments, selection, rpc_id=rpc_id, tick=check)
+            # 保留已验证包装规则；生产入站字段使用本次明确指定的名称。
+            wire_arguments["compressed_frozen_selection"] = wire_arguments.pop("frozen_selection_lz")
+        message = {"jsonrpc": "2.0", "id": rpc_id, "method": "tools/call", "params": {
+            "name": "solo_distill_knowledge_v3", "arguments": wire_arguments}}
+        request_raw = json.dumps(message, ensure_ascii=False, allow_nan=False,
+                                 separators=(",", ":")).encode("utf-8") + b"\n"
+        if len(request_raw) > 65536:
+            raise ClientError("request_wire_budget")
+        self.last_request_bytes = request_raw
+        check()
+        self.send(message)
+        transfer = bytearray()
+        count = 0
+        final = False
+        while not final:
+            check()
+            events = self.selector.select(max(0, self.deadline - time.monotonic()))
+            if not events:
+                raise ClientError("client_deadline_exhausted")
+            for selected, _ in events:
+                check()
+                chunk = os.read(selected.fileobj.fileno(), min(admission.budget + 1, 22017))
+                if not chunk:
+                    self.selector.unregister(selected.fileobj)
+                    if selected.data == "stdout":
+                        raise ClientError("stdout_eof_before_v3_manifest")
+                    continue
+                if selected.data == "stderr":
+                    self.stderr.extend(chunk)
+                    if len(self.stderr) > MAX_DIAGNOSTIC_BYTES:
+                        raise ClientError("diagnostic_budget_exhausted")
+                    continue
+                self.stdout.extend(chunk)
+                while b"\n" in self.stdout:
+                    check()
+                    line, _, tail = self.stdout.partition(b"\n")
+                    self.stdout = bytearray(tail)
+                    raw = bytes(line) + b"\n"
+                    if final or len(raw) > admission.budget:
+                        raise ClientError("extra_or_oversized_v3_frame")
+                    transfer.extend(raw)
+                    count += 1
+                    if len(transfer) > caps.max_transfer_bytes or count > caps.max_chunks + 1:
+                        raise ClientError("v3_transfer_or_chunk_budget")
+                    value = strict_json(line.decode("utf-8"))
+                    if type(value) is not dict or value.get("jsonrpc") != "2.0":
+                        raise ClientError("stdout_protocol_pollution")
+                    if "id" not in value:
+                        if value.get("method") != METHOD or not caps.chunking:
+                            raise ClientError("unexpected_v3_notification")
+                    else:
+                        if type(value["id"]) is not type(rpc_id) or value["id"] != rpc_id:
+                            raise ClientError("unexpected_v3_response_identity")
+                        if "error" in value:
+                            raise ClientError("v3_service_call_rejected")
+                        final = True
+                if len(self.stdout) >= admission.budget or (final and self.stdout):
+                    raise ClientError("unterminated_or_extra_v3_frame")
+        self.last_frame = bytes(transfer)
+        return self.last_frame
+
+    def call_v3(self, arguments, *, raw_files, candidate, observations=None, rpc_id=3,
+                **trusted):
+        """完整接收后认证；所有期望仍由调用方的包外可信输入提供。"""
+        from .adaptive_wire import TransportCapabilities
+        from .consumer_v3 import consume_frame
+        from .wire_v3 import Admission
+        upstream_tick = trusted.pop("tick", None)
+
+        def check():
+            if time.monotonic() >= self.deadline:
+                raise ClientError("client_deadline_exhausted")
+            if upstream_tick is not None:
+                upstream_tick()
+
+        raw = self.receive_v3(arguments, rpc_id=rpc_id, tick=check)
+        admission = Admission(self.negotiated_protocol, arguments["scenario"], rpc_id,
+            arguments["return_bytes"], TransportCapabilities.from_dict(arguments["transport"]),
+            wire_encoding=arguments.get("wire_encoding", "json"))
+        return consume_frame(raw, raw_files, admission=admission,
+            candidate=candidate, observations=observations, tick=check, **trusted)
+
     def close(self) -> None:
         process = self.process
         if process is not None:
@@ -143,17 +257,23 @@ class StdioClient:
                 except OSError:
                     pass
             try:
-                self.exit_code = process.wait(timeout=12)
+                self.exit_code = process.wait(timeout=max(0, self.deadline - time.monotonic())
+                                              if self.v3 else 12)
                 self.cleanup = "confirmed_natural_exit" if self.exit_code == 0 else "confirmed_nonzero_exit"
             except subprocess.TimeoutExpired:
-                process.terminate()
-                try:
-                    self.exit_code = process.wait(timeout=2)
-                    self.cleanup = "forced_termination_not_gate_pass"
-                except subprocess.TimeoutExpired:
+                if self.v3:
                     process.kill()
                     self.exit_code = process.wait(timeout=2)
                     self.cleanup = "forced_kill_not_gate_pass"
+                else:
+                    process.terminate()
+                    try:
+                        self.exit_code = process.wait(timeout=2)
+                        self.cleanup = "forced_termination_not_gate_pass"
+                    except subprocess.TimeoutExpired:
+                        process.kill()
+                        self.exit_code = process.wait(timeout=2)
+                        self.cleanup = "forced_kill_not_gate_pass"
             for stream in (process.stdout, process.stderr):
                 if stream is not None and not stream.closed:
                     try:

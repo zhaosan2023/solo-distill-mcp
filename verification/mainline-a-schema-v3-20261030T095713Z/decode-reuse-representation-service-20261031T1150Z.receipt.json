@@ -1,0 +1,23 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "session_id": null,
+  "client_tool_call_id": "call_0045db94e2b0ccfd49c6717e",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_representation_wire.RepresentationServiceTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 2,
+  "reported_unittest_seconds": 0.356,
+  "failures": 0,
+  "errors": 0,
+  "skipped_tests": 0,
+  "key_output": "Ran 2 tests in 0.356s; OK",
+  "scope": "解码复用修改后的既有字典列式表示服务回归：非法协商在准备前拒绝，真实隔离离线 stdio、生产与独立消费及服务自然退出。",
+  "not_proven": ["剩余受影响默认服务及冷链回归", "优化后的三次真实冷预检及各六份原字节凭证和审计", "唯一在线业务", "真实人工语义审核", "治理验收与最终归档"],
+  "phase4_status": "BLOCKED_pending_remaining_affected_verification_and_real_preflight_evidence",
+  "receipt_origin": "依据真实客户端回执保存；不是控制器自动生成或程序防篡改证明。"
+}

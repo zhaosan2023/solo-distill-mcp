@@ -1,0 +1,23 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "session_id": null,
+  "client_tool_call_id": "call_035a39f5a9b7dfcd7e3da07d",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_wire test_schema_v3_publish_api </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 45,
+  "reported_unittest_seconds": 1.845,
+  "failures": 0,
+  "errors": 0,
+  "skipped_tests": 0,
+  "key_output": "Ran 45 tests in 1.845s; OK",
+  "scope": "解码复用修改后的默认 JSON 生产传输及发布 API 回归：公开重组双返回值、完整包外可信输入认证、视图隔离、真实管道、取消、容量及旧入口拒绝新版本。测试数量包含模块导入的独立 Oracle 测试，不宣称为 45 项互不重叠的新验证。",
+  "not_proven": ["剩余受影响旧表示及服务调用方回归", "优化后的三次真实冷预检及各六份原字节凭证和审计", "唯一在线业务", "真实人工语义审核", "治理验收与最终归档"],
+  "phase4_status": "BLOCKED_pending_remaining_affected_verification_and_real_preflight_evidence",
+  "receipt_origin": "依据真实客户端回执保存；不是控制器自动生成或程序防篡改证明。"
+}

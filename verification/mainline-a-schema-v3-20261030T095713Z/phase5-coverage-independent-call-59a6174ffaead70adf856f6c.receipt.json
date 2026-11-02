@@ -1,0 +1,27 @@
+{
+  "receipt_version": 1,
+  "status": "pass_independent_selection_regression_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 15,
+  "adr_revision": 14,
+  "session_id": null,
+  "source_client_receipt": "call_59a6174ffaead70adf856f6c",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest test_schema_v3_selection_coverage_oracle test_schema_v3_selection_oracle -v </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 35,
+  "runner_elapsed_seconds": 6.519,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "key_output": "Ran 35 tests in 6.519s; OK",
+  "scope": "独立新选择子义务正负控及旧选择行为、预算、完整正文、身份、取消与独立依赖边界回归。",
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "limitations": [
+    "真实客户端命令退出回执证明本组回归通过；文件持久化与复读仍须相应文件工具回执。",
+    "不证明新覆盖恢复的独占接纳、在线驱动或真实冷预检通过。",
+    "不证明新在线产物、四维及原13项锚点对账或真实人工审核通过。",
+    "阶段5验收仍阻塞，阶段6/7未准入，ADR保持PROPOSED。"
+  ]
+}

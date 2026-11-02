@@ -1,0 +1,55 @@
+{
+  "receipt_version": 1,
+  "status": "pass",
+  "proof_scope": "independent_subtree_representation_rules_only",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 5,
+  "adr_revision": 4,
+  "wire_encoding": "dictionary-columnar-v3-2",
+  "client_tool_call_id": "call_b248a113351c7f1ad8dff7ef",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S -m unittest -v test_schema_v3_subtree.SubtreeOracleTests </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "tests_run": 26,
+  "reported_test_seconds": 3.399,
+  "reported_test_seconds_scope": "unittest_report_not_total_command_elapsed",
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "bounded_generated_samples": {
+    "inherited_json_samples": 160,
+    "repeated_container_samples": 180
+  },
+  "key_output": "Ran 26 tests in 3.399s; OK; all 26 listed tests reported ok",
+  "assets": [
+    "tests/schema_v3_subtree_oracle.py",
+    "tests/test_schema_v3_subtree.py"
+  ],
+  "verified_controls": [
+    "manual_candidate_threshold_and_nested_reference_expectations",
+    "original_occurrence_count_and_deterministic_table_order",
+    "complete_original_values_and_predecessor_dictionary_preservation",
+    "reference_type_range_backward_constraints_and_noncanonical_rejection",
+    "original_expansion_bytes_nodes_and_logical_depth",
+    "physical_syntax_budgets_and_reference_hop_guard",
+    "mutable_view_isolation",
+    "cancellation_checks",
+    "bounded_generated_roundtrips"
+  ],
+  "not_proven": [
+    "production_subtree_codec",
+    "production_independent_cross_decoding",
+    "real_source_capacity",
+    "actual_transport_four_hard_limits",
+    "service_client_integration",
+    "three_real_cold_preflights",
+    "online_business",
+    "human_semantic_review",
+    "host_loading"
+  ],
+  "dependency_advancement": "production_implementation_may_proceed_under_current_authorization; real_preflight_and_online_dependencies_remain_blocked",
+  "controller_coverage": "not_proven_platform_task_record_used",
+  "historical_failures": "retained_without_reclassification",
+  "hard_limits_and_deadlines": "unchanged"
+}

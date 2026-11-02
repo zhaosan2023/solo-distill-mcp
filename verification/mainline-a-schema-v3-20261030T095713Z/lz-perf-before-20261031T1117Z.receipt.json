@@ -1,0 +1,31 @@
+{
+  "receipt_version": 1,
+  "status": "diagnostic_completed_not_preflight_acceptance",
+  "execution_instance": "mainline-a-schema-v3-20261030T095713Z",
+  "plan_contract_version": 6,
+  "execution_contract_revision": 6,
+  "adr_revision": 5,
+  "client_tool_call_id": "call_a04adcc782be8dd1fec84312",
+  "command": "env PYTHONPATH=src:tests timeout -s KILL 30s python3 -B -S verification/.scratch/mainline_a_schema_v3_lz_perf_20261031.py --label before </dev/null",
+  "cwd": ".",
+  "actual_exit_code": 0,
+  "raw_bytes": 400503,
+  "raw_sha256": "72591246d2859566bd33eda5cdcdff6d5f0c2dc1b677395176ccc9c81a1abdb0",
+  "token_bytes": 19411,
+  "token_sha256": "c015f8b49af57b9d4f92d0e3d36f143a3ce351a3468e85e06b650cd999827349",
+  "compress_seconds": 0.7421690449991729,
+  "inflate_seconds": 0.17822860500018578,
+  "tick_calls": 1177696,
+  "elapsed_seconds": 1.005271415997413,
+  "historical_trace_observation": {
+    "service_preparation_seconds": 8.269951003007009,
+    "parse_calls": 81,
+    "indexed_files": 81,
+    "structure_builds": 1,
+    "gateway_request_count": 0,
+    "scope": "读取历史失败服务 trace；不证明该失败样本已通过或原服务自然退出"
+  },
+  "conclusion_scope": "固定内存样本存在大量期限回调；当前生产准备链已操作内复用 AST，不支持默认压缩级别或重复生产解析的既定根因断言",
+  "not_proven": ["完整冷链瓶颈归因", "实际样本容量验收", "三个冷预检", "在线业务", "真实人工审核"],
+  "origin": "真实客户端回执的有界保存；非控制器自动生成，不提供防篡改保证"
+}
