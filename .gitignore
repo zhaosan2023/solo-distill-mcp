@@ -1,0 +1,34 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Test and coverage caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Scratch directories, except preserved evidence below
+.scratch/
+**/.scratch/
+
+# Historical assets, receipts and independent blueprints must remain visible.
+# These exceptions prevent ignore rules from hiding untracked evidence;
+# they do not authorize uploading, deleting or rewriting any asset.
+!/_bmad-output/
+!/_bmad-output/**
+!/verification/
+!/verification/**
